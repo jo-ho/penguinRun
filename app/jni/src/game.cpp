@@ -38,17 +38,7 @@ void Game::initSprites() {
                                                    false))
         );
     }
-    player = std::make_shared<Player>(video,
-                                      "penguin-gray.png",
-                                      0,
-                                      Player::PLAYER_WIDTH,
-                                      Player::PLAYER_HEIGHT,
-                                      Player::PLAYER_WIDTH,
-                                      0,
-                                      video.getScreenSizeH() / 2 - Player::PLAYER_HEIGHT / 2,
-                                      false,
-                                      Player::NUM_FRAMES,
-                                      Player::TARGET_FPS);
+    player = std::make_shared<Player>(video);
 
 
 }

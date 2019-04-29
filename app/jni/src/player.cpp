@@ -5,20 +5,19 @@ const int Player::PLAYER_WIDTH = 64;
 const int Player::PLAYER_HEIGHT = 144;
 const int Player::NUM_FRAMES = 3;
 const int Player::TARGET_FPS = 10;
+const char * Player::SPRITE_FILE_NAME = "penguin-gray.png";
 
 
-Player::Player(Video &video,
-               const char *fileName,
-               int imgX,
-               int imgY,
-               int imgWidth,
-               int imgHeight,
-               int initX,
-               int initY,
-               bool colorKey,
-               int numFrames,
-               int targetFps) :
-        AnimatedSprite(video, fileName, imgX, imgY, imgWidth, imgHeight, initX, initY, colorKey, numFrames, targetFps) {
+
+Player::Player(Video &video) :
+        AnimatedSprite(
+                video, SPRITE_FILE_NAME,
+                0, PLAYER_WIDTH,
+                PLAYER_HEIGHT, PLAYER_WIDTH,
+                0,
+                video.getScreenSizeH() / 2 - PLAYER_HEIGHT / 2,
+                false,
+                NUM_FRAMES, TARGET_FPS) {
     playerVelY = 0;
 
 }

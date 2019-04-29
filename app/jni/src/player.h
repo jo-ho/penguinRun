@@ -9,21 +9,8 @@ const static int PLAYER_VELOCITY = 10;
 
 class Player : public AnimatedSprite {
     public:
-        const static int PLAYER_WIDTH;
-        const static int PLAYER_HEIGHT;
-        const static int NUM_FRAMES;
-        const static int TARGET_FPS;
-        Player(Video &video,
-               const char *fileName,
-               int imgX,
-               int imgY,
-               int imgWidth,
-               int imgHeight,
-               int initX,
-               int initY,
-               bool colorKey,
-               int numFrames,
-               int targetFps);
+
+        Player(Video &video);
         void reset();
         void updatePos(int screenSizeY);
         void startMoveDown();
@@ -33,8 +20,12 @@ class Player : public AnimatedSprite {
         bool checkCollision(SDL_Rect collider);
 
 
-
     private:
+        const static int PLAYER_WIDTH;
+        const static int PLAYER_HEIGHT;
+        const static int NUM_FRAMES;
+        const static int TARGET_FPS;
+        const static char * SPRITE_FILE_NAME;
         int playerVelY;
         SDL_Rect getCollider();
 
