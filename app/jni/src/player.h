@@ -3,7 +3,7 @@
 #define PLAYER_H
 
 
-#include "animatedsprite.h"
+#include "AnimatedSprite.h"
 
 const static int PLAYER_VELOCITY = 10;
 

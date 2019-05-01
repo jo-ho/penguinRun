@@ -1,7 +1,9 @@
-#include "pickup.h"
+#include "Pickup.h"
 #include <stdlib.h>
 #include <time.h>
 
+const int Pickup::PICKUP_WIDTH = 66;
+const int Pickup::PICKUP_HEIGHT = 66;
 
 const static int VELOCITY_MIN = 5;
 const static int VELOCITY_OFFSET = 5;
@@ -23,4 +25,14 @@ Pickup::Pickup(Video &video,
 void Pickup::move() {
     x -= velocityX;
 }
+
+SDL_Rect Pickup::getCollider() {
+    SDL_Rect collider;
+    collider.x = x;
+    collider.y = y;
+    collider.w = PICKUP_WIDTH;
+    collider.h = PICKUP_HEIGHT;
+    return collider;
+}
+
 

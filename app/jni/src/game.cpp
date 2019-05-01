@@ -1,7 +1,7 @@
 #include <SDL.h>
 
 
-#include "game.h"
+#include "Game.h"
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
@@ -14,6 +14,7 @@ Game::Game() {
         SDL_Log("SDL_Init error: %s", SDL_GetError());
     }
     video.init();
+    pickupManager = new PickupManager(video);
     initSprites();
     menuLoop();
     srand (time(NULL));
@@ -111,15 +112,10 @@ void Game::gameLoop() {
     std::vector<long long> fingerIDs;
     int lastUpdateTime = SDL_GetTicks();
 
-    scorePickupSpawnTimer.reset();
-
     while (!quit) {
         const int startTime = SDL_GetTicks();
 
-        if (scorePickupSpawnTimer.getTimeElapsedMs() >= ScorePickup::SPAWN_DELAY_MS) {
-            spawnScorePickup();
-            scorePickupSpawnTimer.reset();
-        }
+        pickupManager->spawn();
 
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -162,50 +158,18 @@ void Game::gameLoop() {
 void Game::renderGame() {
     video.clear();
     player->renderSprite(video, 0, player->getY());
-    renderScorePickups();
+    pickupManager->render();
     video.present();
 }
 
 void Game::updateGame(int elapsedTime) {
     player->updatePos(video.getScreenSizeH());
     player->updateSprite(elapsedTime);
-    updateScorePickups();
+    pickupManager->update();
 }
 
-void Game::spawnScorePickup() {
-    int randomY = rand() % (video.getScreenSizeH() - ScorePickup::PICKUP_HEIGHT);
-    std::shared_ptr<ScorePickup> scorePickup =
-            std::make_shared<ScorePickup>(video,
-                                          video.getScreenSizeW(),
-                                          randomY);
-    scorePickups.push_back(scorePickup);
-}
-
-void Game::renderScorePickups() {
-    for (unsigned i = 0; i < scorePickups.size(); i++) {
-        scorePickups.at(i)->renderSprite(video,scorePickups.at(i)->getX(),scorePickups.at(i)->getY());
-    }
-}
-
-void Game::updateScorePickups() {
-    for (unsigned i = 0; i < scorePickups.size(); i++) {
-        scorePickups.at(i)->move();
-        if (scorePickups.at(i)->getX() < 0 - ScorePickup::PICKUP_WIDTH) {
-            scorePickups.at(i).reset();
-            scorePickups.erase(scorePickups.begin() + i);
-
-        }
-    }
-}
 
 void Game::checkCollisions() {
-    for (unsigned i = 0; i < scorePickups.size(); i++) {
-        SDL_Rect collider = scorePickups.at(i)->getCollider();
-        if (player->checkCollision(collider)) {
-            scorePickups.at(i).reset();
-            scorePickups.erase(scorePickups.begin() + i);
-        }
-
-    }
+    pickupManager->checkCollisions(player);
 }
 

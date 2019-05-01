@@ -1,5 +1,4 @@
-
-#include "animatedsprite.h"
+#include "AnimatedSprite.h"
 
 AnimatedSprite::AnimatedSprite(Video &video,
                                const char *fileName,

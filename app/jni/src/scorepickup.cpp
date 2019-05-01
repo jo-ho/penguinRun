@@ -3,8 +3,7 @@
 #include "../SDL2/include/SDL_rect.h"
 
 const int ScorePickup::SPAWN_DELAY_MS = 1000;
-const int ScorePickup::PICKUP_WIDTH = 66;
-const int ScorePickup::PICKUP_HEIGHT = 66;
+
 
 ScorePickup::ScorePickup(Video &video,
                          int initX,
@@ -13,12 +12,4 @@ ScorePickup::ScorePickup(Video &video,
 
 }
 
-SDL_Rect ScorePickup::getCollider() {
-    SDL_Rect collider;
-    collider.x = x;
-    collider.y = y;
-    collider.w = PICKUP_WIDTH;
-    collider.h = PICKUP_HEIGHT;
-    return collider;
-}
 

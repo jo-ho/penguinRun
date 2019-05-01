@@ -1,9 +1,8 @@
-
 #ifndef PICKUP_H
 #define PICKUP_H
 
 
-#include "sprite.h"
+#include "Sprite.h"
 
 class Pickup : public Sprite {
     public:
@@ -17,10 +16,14 @@ class Pickup : public Sprite {
         int initY,
         bool colorKey);
         void move();
+        SDL_Rect getCollider();
+        const static int PICKUP_WIDTH;
+        const static int PICKUP_HEIGHT;
 
 
     private:
         int velocityX;
+
 };
 
 

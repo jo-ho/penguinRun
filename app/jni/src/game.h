@@ -1,18 +1,19 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "sprite.h"
+#include "Sprite.h"
 #include <vector>
 #include <memory>
 
 
 #include <SDL.h>
-#include "video.h"
-#include "button.h"
-#include "animatedsprite.h"
-#include "player.h"
-#include "timer.h"
-#include "scorepickup.h"
+#include "Video.h"
+#include "Button.h"
+#include "AnimatedSprite.h"
+#include "Player.h"
+#include "Timer.h"
+#include "ScorePickup.h"
+#include "PickupManager.h"
 
 const static int GAME_FPS = 60;
 const static int NUM_BUTTONS_MENU = 3;
@@ -24,10 +25,9 @@ class Game {
     private:
         std::vector<std::shared_ptr<Button>>  buttons;
         std::shared_ptr<Player> player;
-        std::vector<std::shared_ptr<ScorePickup>> scorePickups;
 
         Video video;
-        Timer scorePickupSpawnTimer;
+        PickupManager * pickupManager;
 
         enum buttonID { MENU_BUTTON_START, MENU_BUTTON_OPTIONS, MENU_BUTTON_QUIT };
 
@@ -41,9 +41,6 @@ class Game {
         void renderGame();
         void updateGame(int elapsedTime);
 
-        void spawnScorePickup();
-        void renderScorePickups();
-        void updateScorePickups();
         void checkCollisions();
 };
 

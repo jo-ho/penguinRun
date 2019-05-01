@@ -1,5 +1,4 @@
-
-#include "button.h"
+#include "Button.h"
 
 const int Button::BUTTON_WIDTH = 382;
 const int Button::BUTTON_HEIGHT = 192;
@@ -18,10 +17,6 @@ Button::Button(Video &video,
 
 bool Button::checkTouch(float touchPosX, float touchPosY) {
 
-    if ((touchPosX >= x && touchPosX <= (x + srcRect.w)) &&
-        (touchPosY >= y && touchPosY <= (y + srcRect.h))) {
-            return true;
-
-    }
-    return false;
+    return (touchPosX >= x && touchPosX <= (x + srcRect.w)) &&
+           (touchPosY >= y && touchPosY <= (y + srcRect.h));
 }

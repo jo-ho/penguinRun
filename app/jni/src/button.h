@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 
-#include "sprite.h"
+#include "Sprite.h"
 
 class Button : public Sprite {
     public:

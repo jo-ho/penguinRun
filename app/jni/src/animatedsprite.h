@@ -1,8 +1,7 @@
-
 #ifndef ANIMATEDSPRITE_H
 #define ANIMATEDSPRITE_H
 
-#include "sprite.h"
+#include "Sprite.h"
 
 
 class AnimatedSprite : public Sprite {
