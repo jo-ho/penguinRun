@@ -19,12 +19,11 @@ class PickupManager {
         void checkCollisions(std::shared_ptr<Player> player);
     private:
         std::vector<std::shared_ptr<Pickup>> pickups;
-        Timer scorePickupSpawnTimer;
+        Timer scorePickupTimer;
+        Timer speedPickupTimer;
         Video video;
         void spawnScorePickup();
-
-
-
+        void spawnSpeedPickup();
 
 
 

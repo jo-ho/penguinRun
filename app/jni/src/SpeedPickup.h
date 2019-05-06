@@ -2,7 +2,14 @@
 #define SPEEDPICKUP_H
 
 
-class SpeedPickup {
+#include "Pickup.h"
+
+class SpeedPickup : public Pickup {
+    public:
+        const static int SPAWN_DELAY_MS;
+        SpeedPickup(Video & video,
+                int initX,
+                int initY);
 
 };
 

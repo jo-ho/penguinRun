@@ -3,19 +3,25 @@
 #include "PickupManager.h"
 #include "ScorePickup.h"
 #include "Player.h"
+#include "SpeedPickup.h"
 #include <stdlib.h>
 #include <memory>
 
 
 PickupManager::PickupManager(Video &video) {
     this->video = video;
-    scorePickupSpawnTimer.reset();
+    scorePickupTimer.reset();
+    speedPickupTimer.reset();
 }
 
 void PickupManager::spawn() {
-    if (scorePickupSpawnTimer.getTimeElapsedMs() >= ScorePickup::SPAWN_DELAY_MS) {
+    if (scorePickupTimer.getTimeElapsedMs()  >= ScorePickup::SPAWN_DELAY_MS) {
         spawnScorePickup();
-        scorePickupSpawnTimer.reset();
+        scorePickupTimer.reset();
+    }
+    if (speedPickupTimer.getTimeElapsedMs() >= SpeedPickup::SPAWN_DELAY_MS) {
+        spawnSpeedPickup();
+        speedPickupTimer.reset();
     }
 }
 
@@ -27,6 +33,17 @@ void PickupManager::spawnScorePickup() {
                                           randomY);
     pickups.push_back(scorePickup);
 }
+
+
+void PickupManager::spawnSpeedPickup() {
+    int randomY = rand() % (video.getScreenSizeH() - SpeedPickup::PICKUP_HEIGHT);
+    std::shared_ptr<SpeedPickup> speedPickup =
+            std::make_shared<SpeedPickup>(video,
+                                          video.getScreenSizeW(),
+                                          randomY);
+    pickups.push_back(speedPickup);
+}
+
 
 void PickupManager::update() {
     for (unsigned i = 0; i < pickups.size(); i++) {
