@@ -4,6 +4,7 @@
 #include "ScorePickup.h"
 #include "Player.h"
 #include "SpeedPickup.h"
+#include "SlowPickup.h"
 #include <stdlib.h>
 #include <memory>
 
@@ -12,38 +13,23 @@ PickupManager::PickupManager(Video &video) {
     this->video = video;
     scorePickupTimer.reset();
     speedPickupTimer.reset();
+    slowPickupTimer.reset();
 }
 
 void PickupManager::spawn() {
     if (scorePickupTimer.getTimeElapsedMs()  >= ScorePickup::SPAWN_DELAY_MS) {
-        spawnScorePickup();
+        spawnPickup<ScorePickup>();
         scorePickupTimer.reset();
     }
     if (speedPickupTimer.getTimeElapsedMs() >= SpeedPickup::SPAWN_DELAY_MS) {
-        spawnSpeedPickup();
+        spawnPickup<SpeedPickup>();
         speedPickupTimer.reset();
     }
-}
-
-void PickupManager::spawnScorePickup() {
-    int randomY = rand() % (video.getScreenSizeH() - ScorePickup::PICKUP_HEIGHT);
-    std::shared_ptr<ScorePickup> scorePickup =
-            std::make_shared<ScorePickup>(video,
-                                          video.getScreenSizeW(),
-                                          randomY);
-    pickups.push_back(scorePickup);
-}
-
-
-void PickupManager::spawnSpeedPickup() {
-    int randomY = rand() % (video.getScreenSizeH() - SpeedPickup::PICKUP_HEIGHT);
-    std::shared_ptr<SpeedPickup> speedPickup =
-            std::make_shared<SpeedPickup>(video,
-                                          video.getScreenSizeW(),
-                                          randomY);
-    pickups.push_back(speedPickup);
-}
-
+    if (slowPickupTimer.getTimeElapsedMs() >= SlowPickup::SPAWN_DELAY_MS) {
+        spawnPickup<SlowPickup>();
+        slowPickupTimer.reset();
+    }
+ }
 
 void PickupManager::update() {
     for (unsigned i = 0; i < pickups.size(); i++) {
@@ -70,6 +56,17 @@ void PickupManager::checkCollisions(std::shared_ptr <Player> player){
             pickups.erase(pickups.begin() + i);
         }
     }
+
+}
+
+template<class Class>
+void PickupManager::spawnPickup() {
+    int randomY = rand() % (video.getScreenSizeH() - SpeedPickup::PICKUP_HEIGHT);
+    std::shared_ptr<Class> pickup =
+            std::make_shared<Class>(video,
+                                          video.getScreenSizeW(),
+                                          randomY);
+    pickups.push_back(pickup);
 
 }
 

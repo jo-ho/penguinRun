@@ -21,9 +21,9 @@ class PickupManager {
         std::vector<std::shared_ptr<Pickup>> pickups;
         Timer scorePickupTimer;
         Timer speedPickupTimer;
+        Timer slowPickupTimer;
         Video video;
-        void spawnScorePickup();
-        void spawnSpeedPickup();
+        template <class Class> void spawnPickup();
 
 
 
