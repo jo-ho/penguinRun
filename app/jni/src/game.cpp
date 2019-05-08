@@ -8,7 +8,6 @@
 
 
 Game::Game() {
-
     // Initialize SDL2
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         SDL_Log("SDL_Init error: %s", SDL_GetError());
@@ -18,7 +17,6 @@ Game::Game() {
     initSprites();
     menuLoop();
     srand (time(NULL));
-
 }
 
 
@@ -40,18 +38,14 @@ void Game::initSprites() {
         );
     }
     player = std::make_shared<Player>(video);
-
-
 }
 
+// TODO: refactor into different class?
 void Game::menuLoop() {
-
     bool quit = false;
     SDL_Event event;
 
-
     while (!quit) {
-        const int startTime = SDL_GetTicks();
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
                 quit = true;
@@ -69,34 +63,22 @@ void Game::menuLoop() {
                             case buttonID::MENU_BUTTON_QUIT:
                                 quit = true;
                                 break;
-
                         }
                     }
                 }
             }
         }
-
         renderMenu();
-        const int msPerFrame = 1000 / GAME_FPS;
-        const int elapsedTime = SDL_GetTicks() - startTime;
-        if (elapsedTime < msPerFrame) {
-            SDL_Delay(msPerFrame - elapsedTime);
-        }
     }
-
 }
 
 
 void Game::renderMenu() {
-
-
     video.clear();
     for (unsigned i = 0; i < NUM_BUTTONS_MENU; i++) {
         buttons.at(i)->renderSprite(video,buttons.at(i)->getX(),buttons.at(i)->getY());
     }
-
     video.present();
-
 }
 
 void Game::startGame() {
@@ -113,8 +95,6 @@ void Game::gameLoop() {
     int lastUpdateTime = SDL_GetTicks();
 
     while (!quit) {
-        const int startTime = SDL_GetTicks();
-
         pickupManager->spawn();
 
         while (SDL_PollEvent(&event) != 0) {
@@ -135,23 +115,13 @@ void Game::gameLoop() {
                 if (fingerIDs.empty()) {
                     player->stopMove();
                 }
-
             }
-
         }
         const int currentTime = SDL_GetTicks();
-
         updateGame(currentTime - lastUpdateTime);
         lastUpdateTime = currentTime;
         checkCollisions();
         renderGame();
-
-        const int msPerFrame = 1000 / GAME_FPS;
-        const int elapsedTime = SDL_GetTicks() - startTime;
-        if (elapsedTime < msPerFrame) {
-            SDL_Delay(msPerFrame - elapsedTime);
-        }
-
     }
 }
 

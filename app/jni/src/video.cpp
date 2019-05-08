@@ -22,7 +22,7 @@ void Video::init() {
     if (!window) {
         SDL_Log("SDL_CreateWindow error: %s", SDL_GetError());
     }
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     if (!renderer) {
         SDL_Log("SDL_CreateRenderer error: %s", SDL_GetError());
