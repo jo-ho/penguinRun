@@ -36,3 +36,4 @@ SDL_Rect Pickup::getCollider() {
 }
 
 
+

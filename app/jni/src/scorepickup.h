@@ -12,7 +12,7 @@ class ScorePickup : public Pickup {
         ScorePickup(Video& video,
                        int initX,
                        int initY);
-
+        void activateAction(std::shared_ptr<Player> player);
 
 
 };

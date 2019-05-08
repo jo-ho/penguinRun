@@ -52,6 +52,7 @@ void PickupManager::checkCollisions(std::shared_ptr <Player> player){
     for (unsigned i = 0; i < pickups.size(); i++) {
         SDL_Rect collider = pickups.at(i)->getCollider();
         if (player->checkCollision(collider)) {
+            pickups.at(i)->activateAction(player);
             pickups.at(i).reset();
             pickups.erase(pickups.begin() + i);
         }

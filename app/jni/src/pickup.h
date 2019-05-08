@@ -1,8 +1,9 @@
 #ifndef PICKUP_H
 #define PICKUP_H
 
-
+#include <memory>
 #include "Sprite.h"
+#include "player.h"
 
 class Pickup : public Sprite {
     public:
@@ -17,6 +18,7 @@ class Pickup : public Sprite {
         bool colorKey);
         void move();
         SDL_Rect getCollider();
+        virtual void activateAction(std::shared_ptr<Player> player) = 0;
         const static int PICKUP_WIDTH;
         const static int PICKUP_HEIGHT;
 

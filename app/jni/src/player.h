@@ -17,6 +17,8 @@ class Player : public AnimatedSprite {
         void startMoveUp();
         void stopMove();
 
+        void increaseScore(int num);
+
         bool checkCollision(SDL_Rect collider);
 
 
@@ -27,6 +29,7 @@ class Player : public AnimatedSprite {
         const static int TARGET_FPS;
         const static char * SPRITE_FILE_NAME;
         int playerVelY;
+        int score;
         SDL_Rect getCollider();
 
 };

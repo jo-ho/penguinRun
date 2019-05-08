@@ -8,3 +8,6 @@ SlowPickup::SlowPickup(Video &video,
         Pickup(video, "pickups/slow_pickup.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, false){
 
 }
+
+void SlowPickup::activateAction(std::shared_ptr<Player> player) {
+}

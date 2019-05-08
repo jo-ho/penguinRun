@@ -8,3 +8,7 @@ SpeedPickup::SpeedPickup(Video &video,
         Pickup(video, "pickups/speed_pickup.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, false){
 
 }
+
+void SpeedPickup::activateAction(std::shared_ptr<Player> player) {
+
+}

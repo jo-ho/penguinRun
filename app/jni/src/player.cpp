@@ -1,5 +1,6 @@
 #include "player.h"
 #include "../SDL2/include/SDL_rect.h"
+#include <sstream>
 
 const int Player::PLAYER_WIDTH = 64;
 const int Player::PLAYER_HEIGHT = 144;
@@ -19,6 +20,7 @@ Player::Player(Video &video) :
                 false,
                 NUM_FRAMES, TARGET_FPS) {
     playerVelY = 0;
+    score = 0;
 
 }
 
@@ -69,6 +71,12 @@ bool Player::checkCollision(SDL_Rect collider) {
            collider.y < playerCollider.y + playerCollider.h;
 
 }
+
+void Player::increaseScore(int num) {
+    score += num;
+}
+
+
 
 
 
