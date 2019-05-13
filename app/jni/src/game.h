@@ -14,6 +14,7 @@
 #include "Timer.h"
 #include "ScorePickup.h"
 #include "PickupManager.h"
+#include "text.h"
 
 const static int GAME_FPS = 60;
 const static int NUM_BUTTONS_MENU = 3;
@@ -28,6 +29,7 @@ class Game {
 
         Video video;
         PickupManager * pickupManager;
+        Text text;
 
         enum buttonID { MENU_BUTTON_START, MENU_BUTTON_OPTIONS, MENU_BUTTON_QUIT };
 

@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include <string>
+#include <SDL_ttf.h>
 
 class Video {
     public:
@@ -17,6 +18,7 @@ class Video {
         int getScreenSizeH();
 
         SDL_Texture * loadImage(const char * fileName, bool colorKey );
+        SDL_Texture * loadText(TTF_Font *font, const char *text, SDL_Color color);
     private:
         SDL_DisplayMode displayMode;
         SDL_Renderer * renderer;

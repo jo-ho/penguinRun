@@ -5,13 +5,12 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
+#include <SDL_ttf.h>
 
 
-Game::Game() {
-    // Initialize SDL2
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        SDL_Log("SDL_Init error: %s", SDL_GetError());
-    }
+Game::Game() : text(32){
+
     video.init();
     pickupManager = new PickupManager(video);
     initSprites();
@@ -22,6 +21,7 @@ Game::Game() {
 
 Game::~Game() {
     SDL_Quit();
+    TTF_Quit();
 }
 
 void Game::initSprites() {
@@ -128,6 +128,7 @@ void Game::gameLoop() {
 void Game::renderGame() {
     video.clear();
     player->renderSprite(video, 0, player->getY());
+    text.render(video, std::to_string(player->getScore()).c_str(), {0,0,0}, 0, 0);
     pickupManager->render();
     video.present();
 }

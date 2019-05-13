@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 
 #include "video.h"
@@ -37,11 +38,15 @@ void Video::init() {
         SDL_Log("IMG_Init: Failed to init required jpg and png support!\n");
         SDL_Log("IMG_Init: %s\n", IMG_GetError());
     }
+
+
 }
 
 Video::~Video() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+
+    IMG_Quit();
 }
 
 void Video::clear() {
@@ -83,5 +88,12 @@ int Video::getScreenSizeH() {
 
 int Video::getScreenSizeW() {
     return  screenSize.w;
+}
+
+SDL_Texture *Video::loadText(TTF_Font * font, const char *text, SDL_Color color) {
+    SDL_Surface * surface = TTF_RenderText_Solid(font, text, color);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    return texture;
 }
 

@@ -76,6 +76,10 @@ void Player::increaseScore(int num) {
     score += num;
 }
 
+int Player::getScore() {
+    return score;
+}
+
 
 
 

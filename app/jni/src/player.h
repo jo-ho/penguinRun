@@ -20,6 +20,7 @@ class Player : public AnimatedSprite {
         void increaseScore(int num);
 
         bool checkCollision(SDL_Rect collider);
+        int getScore();
 
 
     private:
