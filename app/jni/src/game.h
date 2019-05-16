@@ -1,19 +1,19 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Sprite.h"
+#include "sprite.h"
 #include <vector>
 #include <memory>
 
 
 #include <SDL.h>
-#include "Video.h"
-#include "Button.h"
-#include "AnimatedSprite.h"
-#include "Player.h"
-#include "Timer.h"
-#include "ScorePickup.h"
-#include "PickupManager.h"
+#include "video.h"
+#include "button.h"
+#include "animated_sprite.h"
+#include "player.h"
+#include "timer.h"
+#include "score_pickup.h"
+#include "pickup_manager.h"
 #include "text.h"
 
 const static int GAME_FPS = 60;

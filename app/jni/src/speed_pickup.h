@@ -2,7 +2,9 @@
 #define SPEEDPICKUP_H
 
 
-#include "Pickup.h"
+#include "pickup.h"
+
+
 
 class SpeedPickup : public Pickup {
     public:

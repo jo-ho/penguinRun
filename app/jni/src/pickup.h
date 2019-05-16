@@ -2,7 +2,7 @@
 #define PICKUP_H
 
 #include <memory>
-#include "Sprite.h"
+#include "sprite.h"
 #include "player.h"
 
 class Pickup : public Sprite {

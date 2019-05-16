@@ -2,7 +2,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Video.h"
+#include "video.h"
 
 class Sprite {
     public:

@@ -4,7 +4,7 @@
 #define SCOREPICKUP_H
 
 
-#include "Pickup.h"
+#include "pickup.h"
 
 class ScorePickup : public Pickup {
     public:

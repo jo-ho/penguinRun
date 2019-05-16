@@ -1,4 +1,4 @@
-#include "Pickup.h"
+#include "pickup.h"
 #include <stdlib.h>
 #include <time.h>
 

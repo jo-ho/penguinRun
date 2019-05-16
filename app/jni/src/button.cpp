@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "button.h"
 
 const int Button::BUTTON_WIDTH = 382;
 const int Button::BUTTON_HEIGHT = 192;

@@ -1,7 +1,7 @@
 #include <SDL.h>
 
 
-#include "Game.h"
+#include "game.h"
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
@@ -12,7 +12,7 @@
 Game::Game() : text(32){
 
     video.init();
-    pickupManager = new PickupManager(video);
+    pickupManager = new PickupManager();
     initSprites();
     menuLoop();
     srand (time(NULL));
@@ -95,7 +95,7 @@ void Game::gameLoop() {
     int lastUpdateTime = SDL_GetTicks();
 
     while (!quit) {
-        pickupManager->spawn();
+        pickupManager->spawn(video);
 
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -129,7 +129,7 @@ void Game::renderGame() {
     video.clear();
     player->renderSprite(video, 0, player->getY());
     text.render(video, std::to_string(player->getScore()).c_str(), {0,0,0}, 0, 0);
-    pickupManager->render();
+    pickupManager->render(video);
     video.present();
 }
 

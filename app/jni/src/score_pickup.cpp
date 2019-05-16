@@ -1,5 +1,5 @@
 
-#include "scorepickup.h"
+#include "score_pickup.h"
 
 
 const int ScorePickup::SPAWN_DELAY_MS = 1000;

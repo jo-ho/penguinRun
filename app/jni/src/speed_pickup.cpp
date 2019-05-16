@@ -1,4 +1,4 @@
-#include "SpeedPickup.h"
+#include "speed_pickup.h"
 
 const int SpeedPickup::SPAWN_DELAY_MS = 2000;
 

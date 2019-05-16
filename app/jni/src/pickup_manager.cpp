@@ -1,32 +1,27 @@
 #include <SDL.h>
 
-#include "PickupManager.h"
-#include "ScorePickup.h"
-#include "Player.h"
-#include "SpeedPickup.h"
-#include "SlowPickup.h"
+#include "pickup_manager.h"
+#include "score_pickup.h"
+#include "player.h"
+#include "speed_pickup.h"
+#include "slow_pickup.h"
 #include <stdlib.h>
 #include <memory>
 
 
-PickupManager::PickupManager(Video &video) {
-    this->video = video;
-    scorePickupTimer.reset();
-    speedPickupTimer.reset();
-    slowPickupTimer.reset();
-}
+PickupManager::PickupManager() {}
 
-void PickupManager::spawn() {
+void PickupManager::spawn(Video & video) {
     if (scorePickupTimer.getTimeElapsedMs()  >= ScorePickup::SPAWN_DELAY_MS) {
-        spawnPickup<ScorePickup>();
+        spawnPickup<ScorePickup>(video);
         scorePickupTimer.reset();
     }
     if (speedPickupTimer.getTimeElapsedMs() >= SpeedPickup::SPAWN_DELAY_MS) {
-        spawnPickup<SpeedPickup>();
+        spawnPickup<SpeedPickup>(video);
         speedPickupTimer.reset();
     }
     if (slowPickupTimer.getTimeElapsedMs() >= SlowPickup::SPAWN_DELAY_MS) {
-        spawnPickup<SlowPickup>();
+        spawnPickup<SlowPickup>(video);
         slowPickupTimer.reset();
     }
  }
@@ -42,7 +37,7 @@ void PickupManager::update() {
     }
 }
 
-void PickupManager::render() {
+void PickupManager::render(Video & video) {
     for (unsigned i = 0; i < pickups.size(); i++) {
         pickups.at(i)->renderSprite(video,pickups.at(i)->getX(),pickups.at(i)->getY());
     }
@@ -61,7 +56,7 @@ void PickupManager::checkCollisions(std::shared_ptr <Player> player){
 }
 
 template<class Class>
-void PickupManager::spawnPickup() {
+void PickupManager::spawnPickup(Video & video) {
     int randomY = rand() % (video.getScreenSizeH() - SpeedPickup::PICKUP_HEIGHT);
     std::shared_ptr<Class> pickup =
             std::make_shared<Class>(video,

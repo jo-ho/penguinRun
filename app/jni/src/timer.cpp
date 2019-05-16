@@ -2,7 +2,7 @@
 
 #include <SDL.h>
 
-Timer::Timer() : startTimeMs(0) {}
+Timer::Timer() : startTimeMs(SDL_GetTicks()) {}
 
 void Timer::reset() {
     startTimeMs = SDL_GetTicks();
