@@ -5,17 +5,23 @@
 
 #include "animated_sprite.h"
 
-const static int PLAYER_VELOCITY = 10;
+const static int DEFAULT_VELOCITY = 10;
+const static int SLOW_VELOCITY = 5;
+const static int FAST_VELOCITY = 20;
+
+enum MoveState { MOVING_UP, MOVING_DOWN, STOPPED };
+enum SpeedState {NORMAL, SLOWED, SPED_UP};
+
 
 class Player : public AnimatedSprite {
     public:
 
         Player(Video &video);
-        void reset();
         void updatePos(int screenSizeY);
-        void startMoveDown();
-        void startMoveUp();
-        void stopMove();
+        SpeedState getSpeedState();
+        void setSpeedState(SpeedState newState);
+        void setMoveState(MoveState newState);
+
 
         void increaseScore(int num);
 
@@ -29,6 +35,9 @@ class Player : public AnimatedSprite {
         const static int NUM_FRAMES;
         const static int TARGET_FPS;
         const static char * SPRITE_FILE_NAME;
+        MoveState moveState;
+        SpeedState speedState;
+
         int playerVelY;
         int score;
         SDL_Rect getCollider();

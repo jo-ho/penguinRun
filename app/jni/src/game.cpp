@@ -105,15 +105,15 @@ void Game::gameLoop() {
                 fingerIDs.push_back(event.tfinger.fingerId);
                 float touchPosY = event.tfinger.y * video.getScreenSizeH();
                 if (touchPosY >= 0 && touchPosY <= video.getScreenSizeH() / 2) {
-                    player->startMoveUp();
+                    player->setMoveState(MoveState::MOVING_UP);
                 } else {
-                    player->startMoveDown();
+                    player->setMoveState(MoveState::MOVING_DOWN);
                 }
             }
             else if (event.type == SDL_FINGERUP) {
                 fingerIDs.erase(std::remove(fingerIDs.begin(), fingerIDs.end(), event.tfinger.fingerId), fingerIDs.end());
                 if (fingerIDs.empty()) {
-                    player->stopMove();
+                    player->setMoveState(MoveState::STOPPED);
                 }
             }
         }

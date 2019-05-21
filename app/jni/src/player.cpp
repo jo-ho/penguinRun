@@ -10,6 +10,7 @@ const char * Player::SPRITE_FILE_NAME = "penguin-gray.png";
 
 
 
+
 Player::Player(Video &video) :
         AnimatedSprite(
                 video, SPRITE_FILE_NAME,
@@ -19,37 +20,43 @@ Player::Player(Video &video) :
                 video.getScreenSizeH() / 2 - PLAYER_HEIGHT / 2,
                 false,
                 NUM_FRAMES, TARGET_FPS) {
-    playerVelY = 0;
+    playerVelY = DEFAULT_VELOCITY;
+    moveState = STOPPED;
+    speedState = NORMAL;
     score = 0;
 
 }
 
-void Player::reset() {
-    playerVelY = 0;
-}
-
 void Player::updatePos(int screenSizeY) {
-    // Cap velocity
-    if (playerVelY > PLAYER_VELOCITY || playerVelY < -PLAYER_VELOCITY) playerVelY = (playerVelY > 0) ? PLAYER_VELOCITY : -PLAYER_VELOCITY;
 
-    y += playerVelY;
-    // Cap position
+    switch (speedState) {
+        case NORMAL:
+            playerVelY = DEFAULT_VELOCITY;
+            break;
+        case SLOWED:
+            playerVelY = SLOW_VELOCITY;
+            break;
+        case SPED_UP:
+            playerVelY = FAST_VELOCITY;
+            break;
+    }
+
+    switch (moveState) {
+        case MOVING_DOWN:
+            y += playerVelY;
+            break;
+        case MOVING_UP:
+            y -= playerVelY;
+            break;
+        case STOPPED:
+            y += 0;
+            break;
+    }
+
     if (y > screenSizeY - srcRect.h || y < 0) y = (y < 0) ? 0 : screenSizeY - srcRect.h;
 
 }
 
-void Player::startMoveDown() {
-    playerVelY = PLAYER_VELOCITY;
-}
-
-void Player::startMoveUp() {
-    playerVelY = -PLAYER_VELOCITY;
-}
-
-
-void Player::stopMove() {
-    playerVelY = 0;
-}
 
 
 SDL_Rect Player::getCollider() {
@@ -79,6 +86,21 @@ void Player::increaseScore(int num) {
 int Player::getScore() {
     return score;
 }
+
+SpeedState Player::getSpeedState() {
+    return speedState;
+}
+
+
+void Player::setSpeedState(SpeedState newState) {
+    speedState = newState;
+}
+
+void Player::setMoveState(MoveState newState) {
+    moveState = newState;
+
+}
+
 
 
 
