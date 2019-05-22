@@ -21,12 +21,9 @@ class Player : public AnimatedSprite {
         SpeedState getSpeedState();
         void setSpeedState(SpeedState newState);
         void setMoveState(MoveState newState);
-
-
         void increaseScore(int num);
-
-        bool checkCollision(SDL_Rect collider);
         int getScore();
+        bool checkCollision(SDL_Rect collider);
 
 
     private:
