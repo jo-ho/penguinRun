@@ -61,7 +61,6 @@ void Video::present() {
 
 // Load image from file and convert to SDL_Texture
 SDL_Texture * Video::loadImage(const char * fileName, bool colorKey) {
-
     SDL_Surface * tempSurface = IMG_Load(fileName);
     if (!tempSurface) {
         SDL_Log("IMG_Load error: %s", IMG_GetError());
