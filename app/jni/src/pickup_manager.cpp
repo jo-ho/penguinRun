@@ -6,24 +6,16 @@
 #include "speed_pickup.h"
 #include "slow_pickup.h"
 #include "death_pickup.h"
+#include "pickup_factory.h"
 #include <stdlib.h>
 #include <memory>
 
 PickupManager::PickupManager() {}
 
 void PickupManager::spawn(Video & video, void * code) {
-    intptr_t pSpawnCode = reinterpret_cast<intptr_t>(code);
-    Code spawnCode = static_cast<Code>(pSpawnCode);
-    switch (spawnCode) {
-        case SCORE_PICKUP: spawnPickup<ScorePickup>(video);
-            break;
-        case SLOW_PICKUP: spawnPickup<SlowPickup>(video);
-            break;
-        case SPEED_PICKUP: spawnPickup<SpeedPickup>(video);
-            break;
-        case DEATH_PICKUP: spawnPickup<DeathPickup>(video);
-            break;
-    }
+    intptr_t pPickupType = reinterpret_cast<intptr_t>(code);
+    PickupFactory::PickupType pickupType = static_cast<PickupFactory::PickupType>(pPickupType);
+    spawnPickup(video, pickupType);
 }
 
 void PickupManager::update() {
@@ -53,13 +45,11 @@ void PickupManager::checkCollisions(std::shared_ptr <Player> player){
     }
 }
 
-template<class Class>
-void PickupManager::spawnPickup(Video & video) {
+void PickupManager::spawnPickup(Video & video, PickupFactory::PickupType pickupType) {
     int randomY = rand() % (video.getScreenSizeH() - Pickup::PICKUP_HEIGHT);
-    std::shared_ptr<Class> pickup =
-            std::make_shared<Class>(video,
-                                          video.getScreenSizeW(),
-                                          randomY);
+    PickupFactory pickupFactory;
+    std::shared_ptr<Pickup> pickup = pickupFactory
+            .getPickup(pickupType, video, video.getScreenSizeW(), randomY);
     pickups.push_back(pickup);
 }
 
@@ -75,10 +65,10 @@ Uint32 PickupManager::pushEventToQueue(Uint32 interval, void *param){
 }
 
 void PickupManager::createTimers(Video & video) {
-    SDL_AddTimer(ScorePickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) SCORE_PICKUP);
-    SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) SLOW_PICKUP);
-    SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) SPEED_PICKUP);
-    SDL_AddTimer(DeathPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) DEATH_PICKUP);
+    SDL_AddTimer(ScorePickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SCORE_PICKUP);
+    SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SLOW_PICKUP);
+    SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SPEED_PICKUP);
+    SDL_AddTimer(DeathPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::DEATH_PICKUP);
 }
 
 

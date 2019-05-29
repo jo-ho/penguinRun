@@ -6,6 +6,7 @@
 #include "pickup.h"
 #include "timer.h"
 #include "player.h"
+#include "pickup_factory.h"
 #include <vector>
 #include <memory>
 
@@ -20,9 +21,8 @@ class PickupManager {
         void createTimers(Video & video);
     private:
         std::vector<std::shared_ptr<Pickup>> pickups;
-        enum Code {SCORE_PICKUP,SLOW_PICKUP, SPEED_PICKUP, DEATH_PICKUP };
         static Uint32 pushEventToQueue(Uint32 interval, void * param);
-        template <class Class> void spawnPickup(Video & video);
+        void spawnPickup(Video & video, PickupFactory::PickupType pickupType);
 
 };
 
