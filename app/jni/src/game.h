@@ -27,8 +27,8 @@ class Game {
         std::vector<std::shared_ptr<Button>>  buttons;
         std::shared_ptr<Player> player;
 
+        std::shared_ptr<PickupManager>  pickupManager;
         Video video;
-        PickupManager * pickupManager;
         Text text;
 
         enum buttonID { MENU_BUTTON_START, MENU_BUTTON_OPTIONS, MENU_BUTTON_QUIT };

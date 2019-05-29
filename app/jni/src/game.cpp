@@ -2,6 +2,7 @@
 
 
 #include "game.h"
+#include "slow_pickup.h"
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
@@ -12,7 +13,7 @@
 Game::Game() : text(32){
 
     video.init();
-    pickupManager = new PickupManager();
+    pickupManager = std::make_shared<PickupManager>();
     initSprites();
     menuLoop();
     srand (time(NULL));
@@ -94,8 +95,9 @@ void Game::gameLoop() {
     std::vector<long long> fingerIDs;
     int lastUpdateTime = SDL_GetTicks();
 
+    pickupManager->createTimers(video);
+
     while (!quit) {
-        pickupManager->spawn(video);
 
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -114,6 +116,12 @@ void Game::gameLoop() {
                 fingerIDs.erase(std::remove(fingerIDs.begin(), fingerIDs.end(), event.tfinger.fingerId), fingerIDs.end());
                 if (fingerIDs.empty()) {
                     player->setMoveState(MoveState::STOPPED);
+                }
+            }
+            else if (event.type == SDL_USEREVENT) {
+                SDL_UserEvent userEvent = event.user;
+                if (userEvent.code == 0) {
+                    pickupManager->spawn(video, userEvent.data1);
                 }
             }
         }

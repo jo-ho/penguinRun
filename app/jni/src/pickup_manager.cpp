@@ -5,26 +5,18 @@
 #include "player.h"
 #include "speed_pickup.h"
 #include "slow_pickup.h"
+#include "death_pickup.h"
+#include "pickup_factory.h"
 #include <stdlib.h>
 #include <memory>
 
-
 PickupManager::PickupManager() {}
 
-void PickupManager::spawn(Video & video) {
-    if (scorePickupTimer.getTimeElapsedMs()  >= ScorePickup::SPAWN_DELAY_MS) {
-        spawnPickup<ScorePickup>(video);
-        scorePickupTimer.reset();
-    }
-    if (speedPickupTimer.getTimeElapsedMs() >= SpeedPickup::SPAWN_DELAY_MS) {
-        spawnPickup<SpeedPickup>(video);
-        speedPickupTimer.reset();
-    }
-    if (slowPickupTimer.getTimeElapsedMs() >= SlowPickup::SPAWN_DELAY_MS) {
-        spawnPickup<SlowPickup>(video);
-        slowPickupTimer.reset();
-    }
- }
+void PickupManager::spawn(Video & video, void * code) {
+    intptr_t pPickupType = reinterpret_cast<intptr_t>(code);
+    PickupFactory::PickupType pickupType = static_cast<PickupFactory::PickupType>(pPickupType);
+    spawnPickup(video, pickupType);
+}
 
 void PickupManager::update() {
     for (unsigned i = 0; i < pickups.size(); i++) {
@@ -32,7 +24,6 @@ void PickupManager::update() {
         if (pickups.at(i)->getX() < 0 - Pickup::PICKUP_WIDTH) {
             pickups.at(i).reset();
             pickups.erase(pickups.begin() + i);
-
         }
     }
 }
@@ -52,18 +43,34 @@ void PickupManager::checkCollisions(std::shared_ptr <Player> player){
             pickups.erase(pickups.begin() + i);
         }
     }
-
 }
 
-template<class Class>
-void PickupManager::spawnPickup(Video & video) {
-    int randomY = rand() % (video.getScreenSizeH() - SpeedPickup::PICKUP_HEIGHT);
-    std::shared_ptr<Class> pickup =
-            std::make_shared<Class>(video,
-                                          video.getScreenSizeW(),
-                                          randomY);
+void PickupManager::spawnPickup(Video & video, PickupFactory::PickupType pickupType) {
+    int randomY = rand() % (video.getScreenSizeH() - Pickup::PICKUP_HEIGHT);
+    PickupFactory pickupFactory;
+    std::shared_ptr<Pickup> pickup = pickupFactory
+            .getPickup(pickupType, video, video.getScreenSizeW(), randomY);
     pickups.push_back(pickup);
-
 }
+
+Uint32 PickupManager::pushEventToQueue(Uint32 interval, void *param){
+    SDL_Event event;
+    SDL_UserEvent userEvent;
+
+    userEvent = {.type = SDL_USEREVENT, .code = 0, .data1 = param};
+    event = {.type = SDL_USEREVENT, .user = userEvent};
+
+    SDL_PushEvent(&event);
+    return interval;
+}
+
+void PickupManager::createTimers(Video & video) {
+    SDL_AddTimer(ScorePickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SCORE_PICKUP);
+    SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SLOW_PICKUP);
+    SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SPEED_PICKUP);
+    SDL_AddTimer(DeathPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::DEATH_PICKUP);
+}
+
+
 
 
