@@ -1,7 +1,9 @@
 #include "state_machine.h"
+#include "empty_state.h"
 
-StateMachine::StateMachine(std::shared_ptr<State> startState) {
-    this->currentState = startState;
+StateMachine::StateMachine() {
+    running = true;
+    currentState = std::make_shared<EmptyState>();
 }
 
 void StateMachine::handleEvents() {
@@ -24,4 +26,12 @@ void StateMachine::change(State::StateType stateType) {
 
 void StateMachine::add(std::shared_ptr<State> state) {
     states[state->getStateType()] = state;
+}
+
+bool StateMachine::isRunning() {
+    return running;
+}
+
+void StateMachine::stopRunning() {
+    running = false;
 }

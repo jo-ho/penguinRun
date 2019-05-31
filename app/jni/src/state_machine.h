@@ -7,7 +7,7 @@
 class StateMachine {
 public:
 
-    StateMachine(std::shared_ptr<State> startState);
+    StateMachine();
 
     void handleEvents();
     void update(int elapsedTime);
@@ -16,9 +16,13 @@ public:
     void change(State::StateType stateType);
     void add(std::shared_ptr<State> startState);
 
+    bool isRunning();
+    void stopRunning();
+
 private:
     std::map<State::StateType, std::shared_ptr<State>> states;
     std::shared_ptr<State> currentState;
+    bool running;
 
 };
 
