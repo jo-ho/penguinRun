@@ -2,9 +2,11 @@
 #include <SDL_ttf.h>
 #include "game.h"
 #include "main_menu_state.h"
+#include "play_state.h"
 #include "state.h"
 
 Game::Game()  {
+    srand (time(NULL));
 
     // Initialize SDL2
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -25,6 +27,7 @@ Game::Game()  {
 
 void Game::addStates() {
     stateMachine->add(std::make_shared<MainMenuState>(stateMachine, video));
+    stateMachine->add(std::make_shared<PlayState>(stateMachine, video));
     stateMachine->change(State::MAIN_MENU);
 }
 
