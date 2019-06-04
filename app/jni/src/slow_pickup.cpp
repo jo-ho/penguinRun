@@ -10,7 +10,7 @@ SlowPickup::SlowPickup(Video &video,
 
 }
 
-void SlowPickup::activateAction(std::shared_ptr<Player> player) {
+void SlowPickup::activateAction(std::unique_ptr<Player> &player) {
     if (player->getSpeedState() == NORMAL) {
         player->setSpeedState(SpeedState::SLOWED);
         SDL_AddTimer(EFFECT_TIME, resetEffects, player.get());

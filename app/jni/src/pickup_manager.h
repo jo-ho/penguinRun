@@ -17,7 +17,7 @@ class PickupManager {
         void spawn(Video & video, void * code);
         void update();
         void render(Video & video);
-        void checkCollisions(std::shared_ptr<Player> player);
+        void checkCollisions(std::unique_ptr<Player> &player);
         void createTimers(Video & video);
     private:
         std::vector<std::shared_ptr<Pickup>> pickups;

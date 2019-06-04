@@ -10,7 +10,7 @@ class SpeedPickup : public Pickup {
         SpeedPickup(Video & video,
                 int initX,
                 int initY);
-        void activateAction(std::shared_ptr<Player> player);
+        void activateAction(std::unique_ptr<Player> &player);
 
 private:
     static Uint32 resetEffects(Uint32 interval, void * param);

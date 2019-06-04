@@ -18,7 +18,7 @@ class Pickup : public Sprite {
         bool colorKey);
         void move();
         SDL_Rect getCollider();
-        virtual void activateAction(std::shared_ptr<Player> player) = 0;
+        virtual void activateAction(std::unique_ptr<Player> &player) = 0;
         const static int PICKUP_WIDTH;
         const static int PICKUP_HEIGHT;
 

@@ -24,7 +24,7 @@ Player::Player(Video &video) :
     moveState = STOPPED;
     speedState = NORMAL;
     score = 0;
-
+    dead = false;
 }
 
 void Player::updatePos(int screenSizeY) {
@@ -98,6 +98,15 @@ void Player::setSpeedState(SpeedState newState) {
 
 void Player::setMoveState(MoveState newState) {
     moveState = newState;
+
+}
+
+bool Player::isDead() {
+    return dead;
+}
+
+void Player::setDead() {
+    dead = true;
 
 }
 
