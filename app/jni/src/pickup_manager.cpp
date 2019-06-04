@@ -34,7 +34,7 @@ void PickupManager::render(Video & video) {
     }
 }
 
-void PickupManager::checkCollisions(std::shared_ptr <Player> player){
+void PickupManager::checkCollisions(std::unique_ptr<Player> & player){
     for (unsigned i = 0; i < pickups.size(); i++) {
         SDL_Rect collider = pickups.at(i)->getCollider();
         if (player->checkCollision(collider)) {

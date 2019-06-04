@@ -27,8 +27,8 @@ public:
 private:
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
-    std::shared_ptr<Player> player;
-    std::shared_ptr<PickupManager>  pickupManager;
+    std::unique_ptr<Player> player;
+    std::unique_ptr<PickupManager>  pickupManager;
     Text text = Text(32);
     std::vector<long long> fingerIDs;
 };

@@ -13,7 +13,7 @@ ScorePickup::ScorePickup(Video &video,
 
 }
 
-void ScorePickup::activateAction(std::shared_ptr<Player> player) {
+void ScorePickup::activateAction(std::unique_ptr<Player> &player) {
     player->increaseScore(DEFAULT_SCORE);
 }
 

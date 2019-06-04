@@ -24,6 +24,9 @@ class Player : public AnimatedSprite {
         void increaseScore(int num);
         int getScore();
         bool checkCollision(SDL_Rect collider);
+        bool isDead();
+        void setDead();
+
 
 
     private:
@@ -37,6 +40,8 @@ class Player : public AnimatedSprite {
 
         int playerVelY;
         int score;
+        bool dead;
+
         SDL_Rect getCollider();
 
 };

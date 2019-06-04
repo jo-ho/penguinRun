@@ -8,6 +8,7 @@ DeathPickup::DeathPickup(Video &video,
         Pickup(video, "pickups/death_pickup.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, false) {
 }
 
-void DeathPickup::activateAction(std::shared_ptr<Player> player) {
+void DeathPickup::activateAction(std::unique_ptr<Player> &player) {
+    player->setDead();
 }
 

@@ -5,8 +5,8 @@
 PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->stateMachine = stateMachine;
     this->video = video;
-    player = std::make_shared<Player>(video);
-    pickupManager = std::make_shared<PickupManager>();
+    player = std::unique_ptr<Player>(new Player(video));
+    pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
 
     pickupManager->createTimers(video);
 }
@@ -43,6 +43,11 @@ void PlayState::handleEvents() {
                 }
             }
         }
+
+    if (player->isDead()) {
+        stateMachine->change(MAIN_MENU);
+    }
+
     pickupManager->checkCollisions(player);
 }
 
@@ -65,5 +70,7 @@ void PlayState::onEnter() {
 }
 
 void PlayState::onExit() {
+    player.reset(new Player(video));
+    pickupManager.reset(new PickupManager());
 
 }

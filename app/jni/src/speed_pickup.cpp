@@ -10,7 +10,7 @@ SpeedPickup::SpeedPickup(Video &video,
 
 }
 
-void SpeedPickup::activateAction(std::shared_ptr<Player> player) {
+void SpeedPickup::activateAction(std::unique_ptr<Player> &player) {
     if (player->getSpeedState() == NORMAL) {
         player->setSpeedState(SpeedState::SPED_UP);
         SDL_AddTimer(EFFECT_TIME, resetEffects, player.get());
