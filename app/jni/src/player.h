@@ -29,9 +29,10 @@ class Player : public AnimatedSprite {
 
 
 
-    private:
-        const static int PLAYER_WIDTH;
-        const static int PLAYER_HEIGHT;
+
+private:
+        const static int SPRITE_SHEET_WIDTH;
+        const static int SPRITE_SHEET_HEIGHT;
         const static int NUM_FRAMES;
         const static int TARGET_FPS;
         const static char * SPRITE_FILE_NAME;
@@ -41,8 +42,9 @@ class Player : public AnimatedSprite {
         int playerVelY;
         int score;
         bool dead;
-
         SDL_Rect getCollider();
+
+
 
 };
 

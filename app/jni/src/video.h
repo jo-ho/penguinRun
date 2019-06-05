@@ -13,6 +13,7 @@ class Video {
         void clear();
         void present();
         void renderTexture(SDL_Texture * targetTexture, SDL_Rect * srcRect, SDL_Rect * destRect);
+        void renderRect(const SDL_Rect * srcRect);
 
         int getScreenSizeW();
         int getScreenSizeH();

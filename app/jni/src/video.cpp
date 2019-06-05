@@ -96,3 +96,9 @@ SDL_Texture *Video::loadText(TTF_Font * font, const char *text, SDL_Color color)
     return texture;
 }
 
+void Video::renderRect(const SDL_Rect *srcRect) {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(renderer, srcRect);
+
+}
+

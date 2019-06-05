@@ -2,8 +2,8 @@
 #include "../SDL2/include/SDL_rect.h"
 #include <sstream>
 
-const int Player::PLAYER_WIDTH = 64;
-const int Player::PLAYER_HEIGHT = 144;
+const int Player::SPRITE_SHEET_WIDTH = 144;
+const int Player::SPRITE_SHEET_HEIGHT = 64;
 const int Player::NUM_FRAMES = 3;
 const int Player::TARGET_FPS = 10;
 const char * Player::SPRITE_FILE_NAME = "penguin-gray.png";
@@ -14,10 +14,10 @@ const char * Player::SPRITE_FILE_NAME = "penguin-gray.png";
 Player::Player(Video &video) :
         AnimatedSprite(
                 video, SPRITE_FILE_NAME,
-                0, PLAYER_WIDTH,
-                PLAYER_HEIGHT, PLAYER_WIDTH,
+                0, SPRITE_SHEET_HEIGHT,
+                SPRITE_SHEET_WIDTH, SPRITE_SHEET_HEIGHT,
                 0,
-                video.getScreenSizeH() / 2 - PLAYER_HEIGHT / 2,
+                video.getScreenSizeH() / 2 - SPRITE_SHEET_HEIGHT / 2,
                 false,
                 NUM_FRAMES, TARGET_FPS) {
     playerVelY = DEFAULT_VELOCITY;
@@ -63,8 +63,8 @@ SDL_Rect Player::getCollider() {
     SDL_Rect collider;
     collider.x = x;
     collider.y = y;
-    collider.w = PLAYER_WIDTH;
-    collider.h = PLAYER_HEIGHT;
+    collider.w = SPRITE_SHEET_WIDTH / totalFrames;
+    collider.h = SPRITE_SHEET_HEIGHT;
     return collider;
 }
 
