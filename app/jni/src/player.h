@@ -11,6 +11,7 @@ const static int FAST_VELOCITY = 20;
 
 enum MoveState { MOVING_UP, MOVING_DOWN, STOPPED };
 enum SpeedState {NORMAL, SLOWED, SPED_UP};
+enum DamagedState {UNHURT ,SHIELDED, DEAD};
 
 
 class Player : public AnimatedSprite {
@@ -25,7 +26,8 @@ class Player : public AnimatedSprite {
         int getScore();
         bool checkCollision(SDL_Rect collider);
         bool isDead();
-        void setDead();
+        void setDamagedState(DamagedState newState);
+        DamagedState getDamagedState();
 
 
 
@@ -38,10 +40,10 @@ private:
         const static char * SPRITE_FILE_NAME;
         MoveState moveState;
         SpeedState speedState;
+        DamagedState damagedState;
 
         int playerVelY;
         int score;
-        bool dead;
         SDL_Rect getCollider();
 
 

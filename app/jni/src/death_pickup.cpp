@@ -9,6 +9,10 @@ DeathPickup::DeathPickup(Video &video,
 }
 
 void DeathPickup::activateAction(std::unique_ptr<Player> &player) {
-    player->setDead();
+    if (player->getDamagedState() == SHIELDED) {
+        player->setDamagedState(UNHURT);
+    } else {
+        player->setDamagedState(DEAD);
+    }
 }
 

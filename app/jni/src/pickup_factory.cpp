@@ -3,6 +3,7 @@
 #include "slow_pickup.h"
 #include "speed_pickup.h"
 #include "death_pickup.h"
+#include "shield_pickup.h"
 
 std::shared_ptr<Pickup>
 PickupFactory::getPickup(PickupFactory::PickupType pickupType, Video &video, int initX, int initY) {
@@ -15,5 +16,7 @@ PickupFactory::getPickup(PickupFactory::PickupType pickupType, Video &video, int
             return std::make_shared<SpeedPickup>(video, initX, initY);
         case DEATH_PICKUP:
             return std::make_shared<DeathPickup>(video, initX, initY);
+        case SHIELD_PICKUP:
+            return std::make_shared<ShieldPickup>(video, initX, initY);
     }
 }

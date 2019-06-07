@@ -24,7 +24,7 @@ Player::Player(Video &video) :
     moveState = STOPPED;
     speedState = NORMAL;
     score = 0;
-    dead = false;
+    damagedState = UNHURT;
 }
 
 void Player::updatePos(int screenSizeY) {
@@ -52,6 +52,7 @@ void Player::updatePos(int screenSizeY) {
             y += 0;
             break;
     }
+
 
     if (y > screenSizeY - srcRect.h || y < 0) y = (y < 0) ? 0 : screenSizeY - srcRect.h;
 
@@ -102,12 +103,15 @@ void Player::setMoveState(MoveState newState) {
 }
 
 bool Player::isDead() {
-    return dead;
+    return damagedState == DEAD;
 }
 
-void Player::setDead() {
-    dead = true;
+void Player::setDamagedState(DamagedState newState){
+    damagedState = newState;
+}
 
+DamagedState Player::getDamagedState() {
+    return damagedState;
 }
 
 

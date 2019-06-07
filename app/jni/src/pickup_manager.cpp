@@ -7,6 +7,7 @@
 #include "slow_pickup.h"
 #include "death_pickup.h"
 #include "pickup_factory.h"
+#include "shield_pickup.h"
 #include <stdlib.h>
 #include <memory>
 
@@ -78,6 +79,7 @@ void PickupManager::createTimers(Video & video) {
     timerIDs[PickupFactory::SLOW_PICKUP] = SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SLOW_PICKUP);
     timerIDs[PickupFactory::SPEED_PICKUP] = SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SPEED_PICKUP);
     timerIDs[PickupFactory::DEATH_PICKUP] = SDL_AddTimer(DeathPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::DEATH_PICKUP);
+    timerIDs[PickupFactory::SHIELD_PICKUP] = SDL_AddTimer(ShieldPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SHIELD_PICKUP);
 
 }
 
