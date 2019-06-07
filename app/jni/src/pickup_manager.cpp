@@ -10,7 +10,9 @@
 #include <stdlib.h>
 #include <memory>
 
-PickupManager::PickupManager() {}
+
+PickupManager::PickupManager() {
+}
 
 void PickupManager::spawn(Video & video, void * code) {
     intptr_t pPickupType = reinterpret_cast<intptr_t>(code);
@@ -25,6 +27,13 @@ void PickupManager::update() {
             pickups.at(i).reset();
             pickups.erase(pickups.begin() + i);
         }
+    }
+
+    if (diffIncreaseTimer.getTimeElapsedMs() >= DIFF_INCREASE_TIME_MS) {
+        diffIncreaseTimer.reset();
+        changeSpawnDelay(PickupFactory::DEATH_PICKUP, static_cast<const int>(
+                DeathPickup::SPAWN_DELAY_MS /
+                log10(DIFF_SCALING_FACTOR * diffIncreaseTimer.getResetCount())));
     }
 }
 
@@ -65,11 +74,26 @@ Uint32 PickupManager::pushEventToQueue(Uint32 interval, void *param){
 }
 
 void PickupManager::createTimers(Video & video) {
-    SDL_AddTimer(ScorePickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SCORE_PICKUP);
-    SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SLOW_PICKUP);
-    SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SPEED_PICKUP);
-    SDL_AddTimer(DeathPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::DEATH_PICKUP);
+    timerIDs[PickupFactory::SCORE_PICKUP] = SDL_AddTimer(ScorePickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SCORE_PICKUP);
+    timerIDs[PickupFactory::SLOW_PICKUP] = SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SLOW_PICKUP);
+    timerIDs[PickupFactory::SPEED_PICKUP] = SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SPEED_PICKUP);
+    timerIDs[PickupFactory::DEATH_PICKUP] = SDL_AddTimer(DeathPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::DEATH_PICKUP);
+
 }
+
+void PickupManager::changeSpawnDelay(PickupFactory::PickupType pickupType, const int delay) {
+    SDL_RemoveTimer(timerIDs[pickupType]);
+    timerIDs[pickupType] = SDL_AddTimer(delay, pushEventToQueue, (void *) pickupType);
+}
+
+PickupManager::~PickupManager() {
+    for (std::map<PickupFactory::PickupType, SDL_TimerID>::iterator it = timerIDs.begin();
+            it != timerIDs.end();
+            ++it) {
+        SDL_RemoveTimer(it->second);
+    }
+}
+
 
 
 

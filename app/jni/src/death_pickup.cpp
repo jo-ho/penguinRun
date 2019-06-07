@@ -1,6 +1,6 @@
 #include "death_pickup.h"
 
-const int DeathPickup::SPAWN_DELAY_MS = 2000;
+const int DeathPickup::SPAWN_DELAY_MS = 1000;
 
 DeathPickup::DeathPickup(Video &video,
                          int initX,

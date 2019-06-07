@@ -2,10 +2,11 @@
 
 #include <SDL.h>
 
-Timer::Timer() : startTimeMs(SDL_GetTicks()) {}
+Timer::Timer() : startTimeMs(SDL_GetTicks()), resetCount(0) {}
 
 void Timer::reset() {
     startTimeMs = SDL_GetTicks();
+    resetCount++;
 }
 
 unsigned int Timer::getTimeElapsedMs() {
@@ -15,5 +16,8 @@ unsigned int Timer::getTimeElapsedMs() {
     return 0;
 }
 
+int Timer::getResetCount() {
+    return resetCount;
+}
 
 

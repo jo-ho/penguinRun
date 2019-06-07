@@ -10,8 +10,10 @@ public:
     Timer();
     void reset();
     unsigned int getTimeElapsedMs();
+    int getResetCount();
 private:
     unsigned int startTimeMs;
+    int resetCount;
 };
 
 

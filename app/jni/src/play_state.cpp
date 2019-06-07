@@ -7,8 +7,6 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->video = video;
     player = std::unique_ptr<Player>(new Player(video));
     pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
-
-    pickupManager->createTimers(video);
 }
 
 State::StateType PlayState::getStateType() {
@@ -66,7 +64,7 @@ void PlayState::render() {
 }
 
 void PlayState::onEnter() {
-
+    pickupManager->createTimers(video);
 }
 
 void PlayState::onExit() {
