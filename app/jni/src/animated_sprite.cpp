@@ -16,7 +16,6 @@ AnimatedSprite::AnimatedSprite(Video &video,
     spriteElapsedTime = 0;
     totalFrames = numFrames;
     currentFrame = 0;
-    srcRect.w = srcRect.w / numFrames;
 }
 
 void AnimatedSprite::updateSprite(int elapsedTime) {

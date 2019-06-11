@@ -2,31 +2,38 @@
 #include "../SDL2/include/SDL_rect.h"
 #include <sstream>
 
-const int Player::SPRITE_SHEET_WIDTH = 144;
-const int Player::SPRITE_SHEET_HEIGHT = 64;
+const int Player::SPRITE_SHEET_WIDTH = 90;
+const int Player::SPRITE_SHEET_HEIGHT = 208;
+const int Player::TILE_WIDTH = 30;
+const int Player::TILE_HEIGHT = 52;
 const int Player::NUM_FRAMES = 3;
 const int Player::TARGET_FPS = 10;
-const char * Player::SPRITE_FILE_NAME = "penguin-gray.png";
+const char * Player::SPRITE_FILE_NAME = "penguin-gray_new.png";
 
 
 
 
-Player::Player(Video &video) :
-        AnimatedSprite(
-                video, SPRITE_FILE_NAME,
-                0, SPRITE_SHEET_HEIGHT,
-                SPRITE_SHEET_WIDTH, SPRITE_SHEET_HEIGHT,
-                0,
-                video.getScreenSizeH() / 2 - SPRITE_SHEET_HEIGHT / 2,
-                false,
-                NUM_FRAMES, TARGET_FPS) {
+Player::Player(Video &video) {
     playerVelY = DEFAULT_VELOCITY;
     moveState = STOPPED;
     speedState = NORMAL;
     score = 0;
     damagedState = UNHURT;
+    initSprites(video);
 }
 
+void Player::initSprites(Video & video) {
+    for (int i = MOVING_UP; i <= MOVING_DOWN; i++){
+        MoveState state = static_cast<MoveState>(i);
+        sprites[state] = std::unique_ptr<AnimatedSprite>(new AnimatedSprite(video, SPRITE_FILE_NAME,
+                                                                            0, TILE_HEIGHT * i,
+                                                                            TILE_WIDTH, TILE_HEIGHT,
+                                                                            0, 0,
+                                                                            false, NUM_FRAMES, TARGET_FPS));
+    }
+}
+
+//TODO merge with update()
 void Player::updatePos(int screenSizeY) {
 
     switch (speedState) {
@@ -53,19 +60,17 @@ void Player::updatePos(int screenSizeY) {
             break;
     }
 
-
-    if (y > screenSizeY - srcRect.h || y < 0) y = (y < 0) ? 0 : screenSizeY - srcRect.h;
-
+    if (y > screenSizeY - TILE_HEIGHT || y < 0) y = (y < 0) ? 0 : screenSizeY - TILE_HEIGHT;
 }
 
 
 
 SDL_Rect Player::getCollider() {
     SDL_Rect collider;
-    collider.x = x;
+    collider.x = 0;
     collider.y = y;
-    collider.w = SPRITE_SHEET_WIDTH / totalFrames;
-    collider.h = SPRITE_SHEET_HEIGHT;
+    collider.w = TILE_WIDTH;
+    collider.h = TILE_HEIGHT;
     return collider;
 }
 
@@ -113,6 +118,19 @@ void Player::setDamagedState(DamagedState newState){
 DamagedState Player::getDamagedState() {
     return damagedState;
 }
+
+void Player::render(Video &video, int x, int y) {
+    sprites[moveState]->renderSprite(video, x , y);
+}
+
+void Player::update(int elapsedTime) {
+    sprites[moveState]->updateSprite(elapsedTime);
+}
+
+int Player::getY() {
+    return y;
+}
+
 
 
 

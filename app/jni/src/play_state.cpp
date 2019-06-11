@@ -51,13 +51,13 @@ void PlayState::handleEvents() {
 
 void PlayState::update(int elapsedTime) {
     player->updatePos(video.getScreenSizeH());
-    player->updateSprite(elapsedTime);
+    player->update(elapsedTime);
     pickupManager->update();
 }
 
 void PlayState::render() {
     video.clear();
-    player->renderSprite(video, 0, player->getY());
+    player->render(video, 0, player->getY());
     text.render(video, std::to_string(player->getScore()).c_str(), {0,0,0}, 0, 0);
     pickupManager->render(video);
     video.present();
