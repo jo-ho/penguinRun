@@ -42,7 +42,7 @@ void PlayState::handleEvents() {
             }
         }
 
-    if (player->isDead()) {
+    if (player->getDamagedState() == DEAD) {
         stateMachine->change(MAIN_MENU);
     }
 
@@ -50,8 +50,7 @@ void PlayState::handleEvents() {
 }
 
 void PlayState::update(int elapsedTime) {
-    player->updatePos(video.getScreenSizeH());
-    player->update(elapsedTime);
+    player->update(video.getScreenSizeH(), elapsedTime);
     pickupManager->update();
 }
 

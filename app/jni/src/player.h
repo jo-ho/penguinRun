@@ -17,29 +17,27 @@ enum DamagedState {UNHURT ,SHIELDED, DEAD};
 
 class Player  {
 public:
-
     Player(Video &video);
-    void updatePos(int screenSizeY);
-    // TODO remove
-    SpeedState getSpeedState();
-    void setSpeedState(SpeedState newState);
+
     void setMoveState(MoveState newState);
+    void setSpeedState(SpeedState newState);
+    void setDamagedState(DamagedState newState);
+    SpeedState getSpeedState();
+    DamagedState getDamagedState();
+
     void increaseScore(int num);
     int getScore();
-    bool checkCollision(SDL_Rect collider);
-    bool isDead();
-    void setDamagedState(DamagedState newState);
-    // TODO remove
-    DamagedState getDamagedState();
+
     SDL_Rect getCollider();
+    bool checkCollision(SDL_Rect collider);
+
     void initSprites(Video & video);
     void render(Video & video, int x, int y);
-    void update(int elapsedTime);
+    void update(int screenSizeY, int elapsedTime);
+
     int getY();
     
 private:
-    const static int SPRITE_SHEET_WIDTH;
-    const static int SPRITE_SHEET_HEIGHT;
     const static int NUM_FRAMES;
     const static int TARGET_FPS;
     const static char * SPRITE_FILE_NAME;

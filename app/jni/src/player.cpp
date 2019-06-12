@@ -2,8 +2,6 @@
 #include "../SDL2/include/SDL_rect.h"
 #include <sstream>
 
-const int Player::SPRITE_SHEET_WIDTH = 90;
-const int Player::SPRITE_SHEET_HEIGHT = 208;
 const int Player::TILE_WIDTH = 30;
 const int Player::TILE_HEIGHT = 52;
 const int Player::NUM_FRAMES = 3;
@@ -19,6 +17,7 @@ Player::Player(Video &video) {
     speedState = NORMAL;
     score = 0;
     damagedState = UNHURT;
+    y = video.getScreenSizeH() / 2 - TILE_HEIGHT / 2;
     initSprites(video);
 }
 
@@ -33,8 +32,7 @@ void Player::initSprites(Video & video) {
     }
 }
 
-//TODO merge with update()
-void Player::updatePos(int screenSizeY) {
+void Player::update(int screenSizeY, int elapsedTime) {
 
     switch (speedState) {
         case NORMAL:
@@ -60,7 +58,10 @@ void Player::updatePos(int screenSizeY) {
             break;
     }
 
+    // Cap player position to screen
     if (y > screenSizeY - TILE_HEIGHT || y < 0) y = (y < 0) ? 0 : screenSizeY - TILE_HEIGHT;
+
+    sprites[moveState]->updateSprite(elapsedTime);
 }
 
 
@@ -107,10 +108,6 @@ void Player::setMoveState(MoveState newState) {
 
 }
 
-bool Player::isDead() {
-    return damagedState == DEAD;
-}
-
 void Player::setDamagedState(DamagedState newState){
     damagedState = newState;
 }
@@ -121,10 +118,6 @@ DamagedState Player::getDamagedState() {
 
 void Player::render(Video &video, int x, int y) {
     sprites[moveState]->renderSprite(video, x , y);
-}
-
-void Player::update(int elapsedTime) {
-    sprites[moveState]->updateSprite(elapsedTime);
 }
 
 int Player::getY() {
