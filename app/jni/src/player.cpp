@@ -1,5 +1,6 @@
 #include "player.h"
-#include "../SDL2/include/SDL_rect.h"
+#include <SDL.h>
+#include "shield_sprite.h"
 #include <sstream>
 
 const int Player::TILE_WIDTH = 30;
@@ -27,9 +28,9 @@ void Player::initSprites(Video & video) {
         sprites[state] = std::unique_ptr<AnimatedSprite>(new AnimatedSprite(video, SPRITE_FILE_NAME,
                                                                             0, TILE_HEIGHT * i,
                                                                             TILE_WIDTH, TILE_HEIGHT,
-                                                                            0, 0,
-                                                                            false, NUM_FRAMES, TARGET_FPS));
+                                                                            0, 0, true, NUM_FRAMES, TARGET_FPS));
     }
+    shieldSprite = std::unique_ptr<Sprite>(new ShieldSprite(video, 0, getY()));
 }
 
 void Player::update(int screenSizeY, int elapsedTime) {
@@ -117,6 +118,13 @@ DamagedState Player::getDamagedState() {
 }
 
 void Player::render(Video &video, int x, int y) {
+    if (damagedState == SHIELDED) {
+        int playerCenterX = x + (TILE_WIDTH / 2);
+        int playerCenterY = y + (TILE_HEIGHT / 2);
+        int shieldX = playerCenterX - (556 / 2);
+        int shieldY = playerCenterY - (556 / 2);
+        shieldSprite->renderSprite(video, shieldX, shieldY);
+    }
     sprites[moveState]->renderSprite(video, x , y);
 }
 

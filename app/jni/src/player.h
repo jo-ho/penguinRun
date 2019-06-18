@@ -45,6 +45,7 @@ private:
     const static int TILE_HEIGHT;
 
     std::map<MoveState, std::unique_ptr<AnimatedSprite>> sprites;
+    std::unique_ptr<Sprite> shieldSprite;
     MoveState moveState;
     SpeedState speedState;
     DamagedState damagedState;
