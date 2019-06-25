@@ -56,7 +56,7 @@ void PlayState::update(int elapsedTime) {
 
 void PlayState::render() {
     video.clear();
-    player->render(video, 0, player->getY());
+    player->render(video);
     text.render(video, std::to_string(player->getScore()).c_str(), {0,0,0}, 0, 0);
     pickupManager->render(video);
     video.present();

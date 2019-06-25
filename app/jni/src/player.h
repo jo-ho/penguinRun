@@ -32,11 +32,9 @@ public:
     bool checkCollision(SDL_Rect collider);
 
     void initSprites(Video & video);
-    void render(Video & video, int x, int y);
+    void render(Video & video);
     void update(int screenSizeY, int elapsedTime);
 
-    int getY();
-    
 private:
     const static int NUM_FRAMES;
     const static int TARGET_FPS;
@@ -50,6 +48,7 @@ private:
     SpeedState speedState;
     DamagedState damagedState;
 
+    int x;
     int y;
     int playerVelY;
     int score;

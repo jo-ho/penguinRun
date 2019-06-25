@@ -12,6 +12,7 @@ public:
 
 private:
     const static char * SHIELD_SPRITE_FILE_NAME;
+public:
     const static int SPRITE_WIDTH;
     const static int SPRITE_HEIGHT;
 };

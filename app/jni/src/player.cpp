@@ -18,6 +18,7 @@ Player::Player(Video &video) {
     speedState = NORMAL;
     score = 0;
     damagedState = UNHURT;
+    x = ShieldSprite::SPRITE_WIDTH / 2;
     y = video.getScreenSizeH() / 2 - TILE_HEIGHT / 2;
     initSprites(video);
 }
@@ -30,7 +31,7 @@ void Player::initSprites(Video & video) {
                                                                             TILE_WIDTH, TILE_HEIGHT,
                                                                             0, 0, true, NUM_FRAMES, TARGET_FPS));
     }
-    shieldSprite = std::unique_ptr<Sprite>(new ShieldSprite(video, 0, getY()));
+    shieldSprite = std::unique_ptr<Sprite>(new ShieldSprite(video, x, y));
 }
 
 void Player::update(int screenSizeY, int elapsedTime) {
@@ -69,7 +70,7 @@ void Player::update(int screenSizeY, int elapsedTime) {
 
 SDL_Rect Player::getCollider() {
     SDL_Rect collider;
-    collider.x = 0;
+    collider.x = x;
     collider.y = y;
     collider.w = TILE_WIDTH;
     collider.h = TILE_HEIGHT;
@@ -117,20 +118,17 @@ DamagedState Player::getDamagedState() {
     return damagedState;
 }
 
-void Player::render(Video &video, int x, int y) {
+void Player::render(Video &video) {
     if (damagedState == SHIELDED) {
         int playerCenterX = x + (TILE_WIDTH / 2);
         int playerCenterY = y + (TILE_HEIGHT / 2);
-        int shieldX = playerCenterX - (556 / 2);
-        int shieldY = playerCenterY - (556 / 2);
+        int shieldX = playerCenterX - (ShieldSprite::SPRITE_WIDTH / 2);
+        int shieldY = playerCenterY - (ShieldSprite::SPRITE_HEIGHT / 2);
         shieldSprite->renderSprite(video, shieldX, shieldY);
     }
     sprites[moveState]->renderSprite(video, x , y);
 }
 
-int Player::getY() {
-    return y;
-}
 
 
 
