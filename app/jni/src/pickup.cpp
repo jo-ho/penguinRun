@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-const int Pickup::PICKUP_WIDTH = 66;
-const int Pickup::PICKUP_HEIGHT = 66;
+const int Pickup::PICKUP_WIDTH = 64;
+const int Pickup::PICKUP_HEIGHT = 64;
 
 const static int VELOCITY_MIN = 5;
 const static int VELOCITY_OFFSET = 5;
