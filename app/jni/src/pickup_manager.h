@@ -17,7 +17,7 @@ class PickupManager {
         ~PickupManager();
 
         void spawn(Video & video, void * code);
-        void update();
+        void update(int screenHeight);
         void render(Video & video);
         void checkCollisions(std::unique_ptr<Player> &player);
         void createTimers(Video & video);

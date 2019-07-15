@@ -21,9 +21,9 @@ void PickupManager::spawn(Video & video, void * code) {
     spawnPickup(video, pickupType);
 }
 
-void PickupManager::update() {
+void PickupManager::update(int screenHeight) {
     for (unsigned i = 0; i < pickups.size(); i++) {
-        pickups.at(i)->move();
+        pickups.at(i)->move(screenHeight);
         if (pickups.at(i)->getX() < 0 - Pickup::PICKUP_WIDTH) {
             pickups.at(i).reset();
             pickups.erase(pickups.begin() + i);

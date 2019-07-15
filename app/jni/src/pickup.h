@@ -16,7 +16,7 @@ class Pickup : public Sprite {
         int initX,
         int initY,
         bool colorKey);
-        void move();
+        void move(int screenHeight);
         SDL_Rect getCollider();
         virtual void activateAction(std::unique_ptr<Player> &player) = 0;
         const static int PICKUP_WIDTH;
@@ -25,6 +25,7 @@ class Pickup : public Sprite {
 
     private:
         int velocityX;
+        int velocityY;
 
 };
 

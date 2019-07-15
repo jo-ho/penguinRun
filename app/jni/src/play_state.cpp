@@ -51,7 +51,7 @@ void PlayState::handleEvents() {
 
 void PlayState::update(int elapsedTime) {
     player->update(video.getScreenSizeH(), elapsedTime);
-    pickupManager->update();
+    pickupManager->update(video.getScreenSizeH());
 }
 
 void PlayState::render() {
