@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "shield_sprite.h"
 #include <sstream>
+#include "colour.h"
 
 const int Player::TILE_WIDTH = 30;
 const int Player::TILE_HEIGHT = 52;
@@ -39,12 +40,15 @@ void Player::update(int screenSizeY, int elapsedTime) {
     switch (speedState) {
         case NORMAL:
             playerVelY = DEFAULT_VELOCITY;
+            sprites[moveState]->setTextureColourMod(Colour::white);
             break;
         case SLOWED:
             playerVelY = SLOW_VELOCITY;
+            sprites[moveState]->setTextureColourMod(Colour::blue);
             break;
         case SPED_UP:
             playerVelY = FAST_VELOCITY;
+            sprites[moveState]->setTextureColourMod(Colour::purple);
             break;
     }
 

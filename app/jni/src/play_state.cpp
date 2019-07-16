@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include "play_state.h"
 #include "player.h"
+#include "colour.h"
 
 PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->stateMachine = stateMachine;
@@ -57,7 +58,7 @@ void PlayState::update(int elapsedTime) {
 void PlayState::render() {
     video.clear();
     player->render(video);
-    text.render(video, std::to_string(player->getScore()).c_str(), {0,0,0}, 0, 0);
+    text.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
     pickupManager->render(video);
     video.present();
 }

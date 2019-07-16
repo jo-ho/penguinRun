@@ -45,3 +45,7 @@ int Sprite::getX() {
 int Sprite::getY() {
     return y;
 }
+
+void Sprite::setTextureColourMod(SDL_Color colour) {
+    SDL_SetTextureColorMod(spriteTexture, colour.r, colour.g, colour.b);
+}

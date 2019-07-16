@@ -17,6 +17,7 @@ class Sprite {
                bool colorKey);
         ~Sprite();
         void renderSprite(Video& video, int destX, int destY);
+        void setTextureColourMod(SDL_Color colour);
 
         int getX();
         int getY();
