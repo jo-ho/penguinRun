@@ -24,6 +24,7 @@ void AnimatedSprite::updateSprite(int elapsedTime) {
         spriteElapsedTime = 0;
         if (currentFrame >= totalFrames - 1) {
             currentFrame = 0;
+            numCompletedLoops++;
 
         } else {
             currentFrame++;
@@ -31,4 +32,8 @@ void AnimatedSprite::updateSprite(int elapsedTime) {
 
     }
     srcRect.x = currentFrame * srcRect.w;
+}
+
+int AnimatedSprite::getNumCompletedLoops() {
+    return numCompletedLoops;
 }

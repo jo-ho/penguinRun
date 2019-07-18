@@ -4,12 +4,12 @@
 
 class State {
 public:
-    enum StateType{MAIN_MENU, PLAY, QUIT, EMPTY};
+    enum StateType{MAIN_MENU, PLAY, QUIT, GAME_OVER, EMPTY};
     virtual StateType getStateType() = 0;
     virtual void handleEvents() = 0;
     virtual void update(int elapsedTime) = 0;
     virtual void render() = 0;
-    virtual void onEnter() = 0;
+    virtual void onEnter(void * param) = 0;
     virtual void onExit() = 0;
 };
 

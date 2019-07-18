@@ -18,6 +18,7 @@ class AnimatedSprite : public Sprite {
                int numFrames,
                int targetFps);
         void updateSprite(int elapsedTime);
+        int getNumCompletedLoops();
 
     protected:
         int frameTime;
@@ -25,6 +26,8 @@ class AnimatedSprite : public Sprite {
         int totalFrames;
         int currentFrame;
 
+private:
+    int numCompletedLoops;
 
 };
 

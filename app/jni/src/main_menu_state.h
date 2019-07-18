@@ -20,7 +20,7 @@ public:
 
     void render() override;
 
-    void onEnter() override;
+    void onEnter(void * param) override;
 
     void onExit() override;
 

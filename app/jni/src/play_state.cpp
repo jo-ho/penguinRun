@@ -44,7 +44,7 @@ void PlayState::handleEvents() {
         }
 
     if (player->getDamagedState() == DEAD) {
-        stateMachine->change(MAIN_MENU);
+        stateMachine->change(GAME_OVER, player.release());
     }
 
     pickupManager->checkCollisions(player);
@@ -63,7 +63,7 @@ void PlayState::render() {
     video.present();
 }
 
-void PlayState::onEnter() {
+void PlayState::onEnter(void * param) {
     pickupManager->createTimers(video);
 }
 

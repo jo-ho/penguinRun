@@ -18,10 +18,10 @@ void StateMachine::render() {
     currentState->render();
 }
 
-void StateMachine::change(State::StateType stateType) {
+void StateMachine::change(State::StateType stateType, void * param) {
     currentState->onExit();
     currentState = states[stateType];
-    currentState->onEnter();
+    currentState->onEnter(param);
 }
 
 void StateMachine::add(std::shared_ptr<State> state) {

@@ -36,7 +36,7 @@ void MainMenuState::handleEvents() {
                                           event.tfinger.y * video.getScreenSizeH())) {
                 switch(i) {
                     case buttonID::MENU_BUTTON_START:
-                        stateMachine->change(PLAY);
+                        stateMachine->change(PLAY, NULL);
                         break;
                     case buttonID::MENU_BUTTON_OPTIONS:
                         break;
@@ -64,7 +64,7 @@ void MainMenuState::render() {
 
 }
 
-void MainMenuState::onEnter() {
+void MainMenuState::onEnter(void * param) {
 
 }
 

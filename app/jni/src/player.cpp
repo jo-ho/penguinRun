@@ -133,6 +133,13 @@ void Player::render(Video &video) {
     sprites[moveState]->renderSprite(video, x , y);
 }
 
+int Player::getX() {
+    return x;
+}
+
+int Player::getY() {
+    return y;
+}
 
 
 

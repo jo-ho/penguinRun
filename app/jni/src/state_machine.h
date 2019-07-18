@@ -13,7 +13,7 @@ public:
     void update(int elapsedTime);
     void render();
 
-    void change(State::StateType stateType);
+    void change(State::StateType stateType, void * param);
     void add(std::shared_ptr<State> startState);
 
     bool isRunning();

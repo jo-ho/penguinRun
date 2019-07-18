@@ -19,6 +19,9 @@ class Player  {
 public:
     Player(Video &video);
 
+    const static int TILE_WIDTH;
+    const static int TILE_HEIGHT;
+
     void setMoveState(MoveState newState);
     void setSpeedState(SpeedState newState);
     void setDamagedState(DamagedState newState);
@@ -35,12 +38,14 @@ public:
     void render(Video & video);
     void update(int screenSizeY, int elapsedTime);
 
+    int getX();
+    int getY();
+
 private:
     const static int NUM_FRAMES;
     const static int TARGET_FPS;
     const static char * SPRITE_FILE_NAME;
-    const static int TILE_WIDTH;
-    const static int TILE_HEIGHT;
+
 
     std::map<MoveState, std::unique_ptr<AnimatedSprite>> sprites;
     std::unique_ptr<Sprite> shieldSprite;
