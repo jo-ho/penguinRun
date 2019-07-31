@@ -6,6 +6,7 @@
 #include "death_animation.h"
 #include "state_machine.h"
 #include "player.h"
+#include "background.h"
 #include <SDL.h>
 
 class GameOverState : public State {
@@ -29,6 +30,7 @@ private:
     std::unique_ptr<Player> player;
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
+    std::unique_ptr<Background> background;
     std::unique_ptr<DeathAnimation> deathAnimation;
 };
 

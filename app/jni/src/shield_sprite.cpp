@@ -6,5 +6,6 @@ const int ShieldSprite::SPRITE_HEIGHT = 128;
 
 
 ShieldSprite::ShieldSprite(Video &video, int initX, int initY) :
-        Sprite(video, SHIELD_SPRITE_FILE_NAME, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, initX, initY, false){
+        Sprite(video, SHIELD_SPRITE_FILE_NAME, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT, initX, initY, true){
+    setTextureAlphaMod(127);
 }

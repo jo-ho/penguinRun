@@ -7,6 +7,7 @@
 #include "video.h"
 #include "pickup_manager.h"
 #include "text.h"
+#include "background.h"
 
 class PlayState : public State {
 public:
@@ -28,6 +29,7 @@ private:
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
     std::unique_ptr<Player> player;
+    std::unique_ptr<Background> background;
     std::unique_ptr<PickupManager>  pickupManager;
     Text text = Text(32);
     std::vector<long long> fingerIDs;

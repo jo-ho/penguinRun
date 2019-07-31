@@ -3,11 +3,14 @@
 #include "player.h"
 #include "colour.h"
 
+
+
 PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->stateMachine = stateMachine;
     this->video = video;
     player = std::unique_ptr<Player>(new Player(video));
     pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
+    background = std::unique_ptr<Background>(new Background(video, "bk.jpg"));
 }
 
 State::StateType PlayState::getStateType() {
@@ -57,6 +60,7 @@ void PlayState::update(int elapsedTime) {
 
 void PlayState::render() {
     video.clear();
+    background->render(video);
     player->render(video);
     text.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
     pickupManager->render(video);

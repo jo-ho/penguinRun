@@ -5,6 +5,8 @@ GameOverState::GameOverState(std::shared_ptr<StateMachine> stateMachine, Video &
     this->stateMachine = stateMachine;
     this->video = video;
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
+    background = std::unique_ptr<Background>(new Background(video, "bk.jpg"));
+
 }
 
 State::StateType GameOverState::getStateType() {
@@ -33,6 +35,7 @@ void GameOverState::update(int elapsedTime) {
 
 void GameOverState::render() {
     video.clear();
+    background->render(video);
     if (!deathAnimationComplete) deathAnimation->renderSprite(video, player->getX(), player->getY());
     video.present();
 }

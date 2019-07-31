@@ -48,4 +48,10 @@ int Sprite::getY() {
 
 void Sprite::setTextureColourMod(SDL_Color colour) {
     SDL_SetTextureColorMod(spriteTexture, colour.r, colour.g, colour.b);
+
+}
+
+void Sprite::setTextureAlphaMod(Uint8 alpha) {
+    SDL_SetTextureAlphaMod(spriteTexture, alpha);
+
 }
