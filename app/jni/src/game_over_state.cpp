@@ -5,7 +5,7 @@ GameOverState::GameOverState(std::shared_ptr<StateMachine> stateMachine, Video &
     this->stateMachine = stateMachine;
     this->video = video;
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
-    background = std::unique_ptr<Background>(new Background(video, "bk.jpg"));
+    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground(video, "under.png", 1024, 768));
 
 }
 

@@ -3,14 +3,17 @@
 
 
 #include "video.h"
+#include "sprite.h"
 #include <SDL.h>
 
-class Background {
+class ScrollableBackground {
 public:
-    Background(Video & video, const char * fileName);
+    ScrollableBackground(Video & video, const char * fileName, int imgWidth, int imgHeight);
     void render(Video & video);
+    void update(int screenSizeW);
 private:
-    SDL_Texture * texture;
+    std::unique_ptr<Sprite> sprite;
+    int offset;
 };
 
 

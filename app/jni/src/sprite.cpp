@@ -55,3 +55,12 @@ void Sprite::setTextureAlphaMod(Uint8 alpha) {
     SDL_SetTextureAlphaMod(spriteTexture, alpha);
 
 }
+
+void Sprite::renderStretchToBackground(Video &video, int destX, int destY) {
+    SDL_Rect destRect;
+    destRect.x = destX;
+    destRect.y = destY;
+    destRect.w = video.getScreenSizeW();
+    destRect.h = video.getScreenSizeH();
+    video.renderTexture(spriteTexture, &srcRect, &destRect);
+}

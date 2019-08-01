@@ -10,7 +10,7 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->video = video;
     player = std::unique_ptr<Player>(new Player(video));
     pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
-    background = std::unique_ptr<Background>(new Background(video, "bk.jpg"));
+    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground(video, "under.png", 1024, 768));
 }
 
 State::StateType PlayState::getStateType() {
@@ -55,6 +55,7 @@ void PlayState::handleEvents() {
 
 void PlayState::update(int elapsedTime) {
     player->update(video.getScreenSizeH(), elapsedTime);
+    background->update(video.getScreenSizeW());
     pickupManager->update(video.getScreenSizeH());
 }
 

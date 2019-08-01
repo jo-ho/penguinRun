@@ -30,7 +30,7 @@ private:
     std::unique_ptr<Player> player;
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
-    std::unique_ptr<Background> background;
+    std::unique_ptr<ScrollableBackground> background;
     std::unique_ptr<DeathAnimation> deathAnimation;
 };
 
