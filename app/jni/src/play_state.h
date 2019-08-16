@@ -8,6 +8,7 @@
 #include "pickup_manager.h"
 #include "text.h"
 #include "background.h"
+#include "death_animation.h"
 
 class PlayState : public State {
 public:
@@ -33,6 +34,9 @@ private:
     std::unique_ptr<PickupManager>  pickupManager;
     Text text = Text(32);
     std::vector<long long> fingerIDs;
+
+    bool deathAnimationComplete; //TODO remove?
+    std::unique_ptr<DeathAnimation> deathAnimation;
 };
 
 
