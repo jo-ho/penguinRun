@@ -2,6 +2,12 @@
 #define PLAY_STATE_H
 
 
+static const int BACKGROUND_WIDTH = 1024;
+static const int BACKGROUND_HEIGHT = 768;
+static const char *const BACKGROUND_FILENAME = "under.png";
+
+static const int FLOOR_HEIGHT_FACTOR = 8;
+
 #include "state.h"
 #include "state_machine.h"
 #include "video.h"
@@ -32,11 +38,12 @@ private:
     std::unique_ptr<Player> player;
     std::unique_ptr<ScrollableBackground> background;
     std::unique_ptr<PickupManager>  pickupManager;
-    Text text = Text(32);
+    Text score = Text(32);
     std::vector<long long> fingerIDs;
 
     bool deathAnimationComplete; //TODO remove?
     std::unique_ptr<DeathAnimation> deathAnimation;
+    int moveAreaHeight;
 };
 
 

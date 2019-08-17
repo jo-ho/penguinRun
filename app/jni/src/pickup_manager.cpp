@@ -15,10 +15,10 @@
 PickupManager::PickupManager() {
 }
 
-void PickupManager::spawn(Video & video, void * code) {
+void PickupManager::spawn(Video & video, void * code, int spawnAreaHeight) {
     intptr_t pPickupType = reinterpret_cast<intptr_t>(code);
     PickupFactory::PickupType pickupType = static_cast<PickupFactory::PickupType>(pPickupType);
-    spawnPickup(video, pickupType);
+    spawnPickup(video, pickupType, spawnAreaHeight);
 }
 
 void PickupManager::update(int screenHeight) {
@@ -55,8 +55,8 @@ void PickupManager::checkCollisions(std::unique_ptr<Player> & player){
     }
 }
 
-void PickupManager::spawnPickup(Video & video, PickupFactory::PickupType pickupType) {
-    int randomY = rand() % (video.getScreenSizeH() - Pickup::PICKUP_HEIGHT);
+void PickupManager::spawnPickup(Video & video, PickupFactory::PickupType pickupType, int spawnAreaHeight) {
+    int randomY = rand() % (spawnAreaHeight - Pickup::PICKUP_HEIGHT);
     PickupFactory pickupFactory;
     std::shared_ptr<Pickup> pickup = pickupFactory
             .getPickup(pickupType, video, video.getScreenSizeW(), randomY);

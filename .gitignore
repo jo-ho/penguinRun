@@ -41,6 +41,7 @@ captures/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/misc.xml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -74,6 +75,7 @@ cmake-build-*/
 
 # File-based project format
 *.iws
+*.iml
 
 # IntelliJ
 out/
@@ -98,6 +100,7 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+.idea/cache/gradle_models.ser
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.

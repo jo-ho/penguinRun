@@ -16,7 +16,7 @@ class PickupManager {
         PickupManager();
         ~PickupManager();
 
-        void spawn(Video & video, void * code);
+        void spawn(Video & video, void * code, int spawnAreaHeight);
         void update(int screenHeight);
         void render(Video & video);
         void checkCollisions(std::unique_ptr<Player> &player);
@@ -28,7 +28,7 @@ class PickupManager {
         std::map<PickupFactory::PickupType, SDL_TimerID> timerIDs;
         Timer diffIncreaseTimer;
         static Uint32 pushEventToQueue(Uint32 interval, void * param);
-        void spawnPickup(Video & video, PickupFactory::PickupType pickupType);
+        void spawnPickup(Video & video, PickupFactory::PickupType pickupType, int spawnAreaHeight);
         void changeSpawnDelay(PickupFactory::PickupType pickupType, const int delay);
 };
 

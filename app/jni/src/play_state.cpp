@@ -10,8 +10,12 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->video = video;
     player = std::unique_ptr<Player>(new Player(video));
     pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
-    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground(video, "under.png", 1024, 768));
+    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground(video,
+                                                                                BACKGROUND_FILENAME,
+                                                                                BACKGROUND_WIDTH,
+                                                                                BACKGROUND_HEIGHT));
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
+    moveAreaHeight = video.getScreenSizeH() - (video.getScreenSizeH() / FLOOR_HEIGHT_FACTOR);
 }
 
 State::StateType PlayState::getStateType() {
@@ -43,7 +47,7 @@ void PlayState::handleEvents() {
             } else if (event.type == SDL_USEREVENT) {
                 SDL_UserEvent userEvent = event.user;
                 if (userEvent.code == 0) {
-                    pickupManager->spawn(video, userEvent.data1);
+                    pickupManager->spawn(video, userEvent.data1, moveAreaHeight);
                 }
             }
         }
@@ -54,9 +58,9 @@ void PlayState::handleEvents() {
 void PlayState::update(int elapsedTime) {
     if (player->getDamagedState() != DEAD) {
         pickupManager->checkCollisions(player);
-        player->update(video.getScreenSizeH(), elapsedTime);
+        player->update(moveAreaHeight, elapsedTime);
         background->update(video.getScreenSizeW());
-        pickupManager->update(video.getScreenSizeH());
+        pickupManager->update(moveAreaHeight);
     } else {
         if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
 
@@ -70,7 +74,7 @@ void PlayState::update(int elapsedTime) {
 void PlayState::render() {
     video.clear();
     background->render(video);
-    text.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
+    score.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
     if (player->getDamagedState() != DEAD) {
         player->render(video);
         pickupManager->render(video);
