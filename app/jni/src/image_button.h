@@ -1,13 +1,10 @@
-//
-// Created by User on 2019-10-07.
-//
-
 #ifndef GAME1_IMAGE_BUTTON_H
 #define GAME1_IMAGE_BUTTON_H
 
 
 #include "sprite.h"
 #include <memory>
+#include <SDL_events.h>
 
 class ImageButton {
 public:
@@ -18,6 +15,8 @@ public:
             int posX, int posY, bool colorKey);
     bool handleEvent(SDL_Event & event);
     void render();
+    void setX(int x);
+    void setY(int y);
 
 
 private:

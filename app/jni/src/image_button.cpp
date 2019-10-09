@@ -42,4 +42,13 @@ void ImageButton::render() {
     } else unpressed->renderSprite(video, x, y);
 }
 
+void ImageButton::setY(int y) {
+    this->y = y;
+}
+
+void ImageButton::setX(int x) {
+    this->x = x;
+
+}
+
 

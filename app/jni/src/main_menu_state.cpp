@@ -1,3 +1,4 @@
+#include <memory>
 #include "main_menu_state.h"
 #include "button.h"
 
@@ -6,9 +7,19 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
 
     this->video = video;
 
-    playButton = std::unique_ptr<ImageButton>(new ImageButton(
+    row = std::unique_ptr<ImageButtonRow>(new ImageButtonRow(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
+                                                             BUTTON_SIZE));
+    row->add(new ImageButton(
             video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
-            0, 0, 701, 701,
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, false));
+    row->add(new ImageButton(
+            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, false));
+    row->add(new ImageButton(
+            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
             0, 0, false));
 }
 
@@ -22,9 +33,6 @@ void MainMenuState::handleEvents() {
         if (event.type == SDL_QUIT) {
             stateMachine->stopRunning();
         }
-        if (playButton->handleEvent(event)) {
-            stateMachine->change(PLAY, nullptr);
-        }
 
     }
 
@@ -36,7 +44,7 @@ void MainMenuState::update(int elapsedTime) {
 
 void MainMenuState::render() {
     video.clear();
-    playButton->render();
+    row->render();
     video.present();
 
 }

@@ -2,12 +2,15 @@
 #define MAINMENUSTATE_H
 
 
+static const int BUTTON_SIZE = 300;
+
 #include <vector>
 #include "state.h"
 #include "state_machine.h"
 #include "video.h"
 #include "button.h"
 #include "image_button.h"
+#include "image_button_row.h"
 
 class MainMenuState : public State {
 public:
@@ -29,6 +32,7 @@ private:
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
     std::unique_ptr<ImageButton> playButton;
+    std::unique_ptr<ImageButtonRow> row;
 
 
 };
