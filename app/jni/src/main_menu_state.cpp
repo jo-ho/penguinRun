@@ -6,18 +6,10 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
 
     this->video = video;
 
-        for (int i = 0; i < 3; i++) {
-        buttons.push_back(std::unique_ptr<Button>(new Button(video,
-                                                   "buttons-384_192.png",
-                                                   Button::BUTTON_WIDTH*i,
-                                                   0,
-                                                   Button::BUTTON_WIDTH,
-                                                   Button::BUTTON_HEIGHT,
-                                                   0,
-                                                   Button::BUTTON_HEIGHT*i,
-                                                   false))
-        );
-    }
+    playButton = std::unique_ptr<ImageButton>(new ImageButton(
+            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            0, 0, 701, 701,
+            0, 0, false));
 }
 
 State::StateType MainMenuState::getStateType() {
@@ -27,27 +19,14 @@ State::StateType MainMenuState::getStateType() {
 void MainMenuState::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
-    if (event.type == SDL_QUIT) {
-        stateMachine->stopRunning();
-    }
-    else if (event.type == SDL_FINGERUP) {
-        for (unsigned i = 0; i < 3; i++) {
-            if (buttons.at(i)->checkTouch(event.tfinger.x * video.getScreenSizeW(),
-                                          event.tfinger.y * video.getScreenSizeH())) {
-                switch(i) {
-                    case buttonID::MENU_BUTTON_START:
-                        stateMachine->change(PLAY, NULL);
-                        break;
-                    case buttonID::MENU_BUTTON_OPTIONS:
-                        break;
-                    case buttonID::MENU_BUTTON_QUIT:
-                        stateMachine->stopRunning();
-                        break;
-                }
-            }
+        if (event.type == SDL_QUIT) {
+            stateMachine->stopRunning();
         }
-    }
+        if (playButton->handleEvent(event)) {
+            stateMachine->change(PLAY, nullptr);
         }
+
+    }
 
 }
 
@@ -57,9 +36,7 @@ void MainMenuState::update(int elapsedTime) {
 
 void MainMenuState::render() {
     video.clear();
-    for (unsigned i = 0; i < 3; i++) {
-        buttons.at(i)->renderSprite(video,buttons.at(i)->getX(),buttons.at(i)->getY());
-    }
+    playButton->render();
     video.present();
 
 }

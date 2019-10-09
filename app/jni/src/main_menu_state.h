@@ -7,6 +7,7 @@
 #include "state_machine.h"
 #include "video.h"
 #include "button.h"
+#include "image_button.h"
 
 class MainMenuState : public State {
 public:
@@ -27,8 +28,7 @@ public:
 private:
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
-    std::vector<std::shared_ptr<Button>>  buttons;
-    enum buttonID { MENU_BUTTON_START, MENU_BUTTON_OPTIONS, MENU_BUTTON_QUIT };
+    std::unique_ptr<ImageButton> playButton;
 
 
 };
