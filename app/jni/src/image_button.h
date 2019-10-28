@@ -12,7 +12,8 @@ public:
             const char * unpressedFileName, const char * pressedFileName,
             int imgX, int imgY,
             int imgWidth, int imgHeight,
-            int posX, int posY, bool colorKey);
+            int posX, int posY, bool colorKey,
+            std::function<void()> callback);
     bool handleEvent(SDL_Event & event);
     void render();
     void setX(int x);
@@ -28,6 +29,7 @@ private:
     int w;
     int h;
     bool isPressed;
+    std::function<void()> callback;
 };
 
 

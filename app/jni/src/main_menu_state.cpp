@@ -7,21 +7,29 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
 
     this->video = video;
 
-    row = std::unique_ptr<ImageButtonRow>(new ImageButtonRow(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
-                                                             BUTTON_SIZE));
+    row = std::make_unique<ImageButtonRow>(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
+                                                             BUTTON_SIZE);
     row->add(new ImageButton(
             video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, false));
+            0, 0, false,  [sm = stateMachine]() {sm->change(PLAY, nullptr);}));
     row->add(new ImageButton(
-            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            video, "gui/buttons/normal/records.png", "gui/buttons/click/records.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, false));
+            0, 0, false, []() {}));
     row->add(new ImageButton(
-            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            video, "gui/buttons/normal/help.png", "gui/buttons/click/help.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, false));
+            0, 0, false, []() {}));
+    row->add(new ImageButton(
+                 video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
+                 0, 0, BUTTON_SIZE, BUTTON_SIZE,
+                 0, 0, false, []() {}));
+
+    SDL_Log("%d, %d", video.getScreenSizeW(), video.getScreenSizeH());
 }
+
+
 
 State::StateType MainMenuState::getStateType() {
     return StateType::MAIN_MENU;
@@ -33,6 +41,7 @@ void MainMenuState::handleEvents() {
         if (event.type == SDL_QUIT) {
             stateMachine->stopRunning();
         }
+        row->handleEvent(event);
 
     }
 

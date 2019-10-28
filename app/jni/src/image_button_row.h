@@ -13,6 +13,7 @@ public:
     ~ImageButtonRow();
     void add(ImageButton * imageButton);
     void render();
+    void handleEvent(SDL_Event & event);
 
 private:
     std::vector<ImageButton *> buttons;
