@@ -49,7 +49,12 @@ void PlayState::handleEvents() {
                 if (userEvent.code == 0) {
                     pickupManager->spawn(video, userEvent.data1, moveAreaHeight);
                 }
+            } else if (event.type == SDL_APP_WILLENTERFOREGROUND) {
+                pickupManager->resumeTimers();
+            } else if (event.type == SDL_APP_DIDENTERBACKGROUND) {
+                pickupManager->stopTimers();
             }
+
         }
     }
 
@@ -60,7 +65,7 @@ void PlayState::update(int elapsedTime) {
         pickupManager->checkCollisions(player);
         player->update(moveAreaHeight, elapsedTime);
         background->update(video.getScreenSizeW());
-        pickupManager->update(moveAreaHeight);
+        pickupManager->update(moveAreaHeight, elapsedTime);
     } else {
         if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
 
@@ -85,7 +90,7 @@ void PlayState::render() {
 }
 
 void PlayState::onEnter(void * param) {
-    pickupManager->createTimers(video);
+    pickupManager->resumeTimers();
     deathAnimationComplete = false;
 }
 

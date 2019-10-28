@@ -5,19 +5,24 @@
 Timer::Timer() : startTimeMs(SDL_GetTicks()), resetCount(0) {}
 
 void Timer::reset() {
-    startTimeMs = SDL_GetTicks();
+    startTimeMs = 0;
     resetCount++;
 }
 
 unsigned int Timer::getTimeElapsedMs() {
     if (startTimeMs != 0) {
-        return SDL_GetTicks() - startTimeMs;
+        return startTimeMs;
     }
     return 0;
 }
 
 int Timer::getResetCount() {
     return resetCount;
+}
+
+void Timer::update(int elapsedTime) {
+    startTimeMs += elapsedTime;
+
 }
 
 

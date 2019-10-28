@@ -21,7 +21,7 @@ void PickupManager::spawn(Video & video, void * code, int spawnAreaHeight) {
     spawnPickup(video, pickupType, spawnAreaHeight);
 }
 
-void PickupManager::update(int screenHeight) {
+void PickupManager::update(int screenHeight, int elapsedTime) {
     for (unsigned i = 0; i < pickups.size(); i++) {
         pickups.at(i)->move(screenHeight);
         if (pickups.at(i)->getX() < 0 - Pickup::PICKUP_WIDTH) {
@@ -29,6 +29,8 @@ void PickupManager::update(int screenHeight) {
             pickups.erase(pickups.begin() + i);
         }
     }
+
+    diffIncreaseTimer.update(elapsedTime);
 
     if (diffIncreaseTimer.getTimeElapsedMs() >= DIFF_INCREASE_TIME_MS) {
         diffIncreaseTimer.reset();
@@ -74,7 +76,7 @@ Uint32 PickupManager::pushEventToQueue(Uint32 interval, void *param){
     return interval;
 }
 
-void PickupManager::createTimers(Video & video) {
+void PickupManager::resumeTimers(){
     timerIDs[PickupFactory::SCORE_PICKUP] = SDL_AddTimer(ScorePickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SCORE_PICKUP);
     timerIDs[PickupFactory::SLOW_PICKUP] = SDL_AddTimer(SlowPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SLOW_PICKUP);
     timerIDs[PickupFactory::SPEED_PICKUP] = SDL_AddTimer(SpeedPickup::SPAWN_DELAY_MS, pushEventToQueue, (void *) PickupFactory::SPEED_PICKUP);
@@ -84,17 +86,23 @@ void PickupManager::createTimers(Video & video) {
 }
 
 void PickupManager::changeSpawnDelay(PickupFactory::PickupType pickupType, const int delay) {
+
     SDL_RemoveTimer(timerIDs[pickupType]);
     timerIDs[pickupType] = SDL_AddTimer(delay, pushEventToQueue, (void *) pickupType);
 }
 
+
 PickupManager::~PickupManager() {
-    for (std::map<PickupFactory::PickupType, SDL_TimerID>::iterator it = timerIDs.begin();
-            it != timerIDs.end();
-            ++it) {
+    stopTimers();
+}
+
+void PickupManager::stopTimers() {
+    for (auto it = timerIDs.begin(); it != timerIDs.end(); ++it) {
         SDL_RemoveTimer(it->second);
     }
+
 }
+
 
 
 
