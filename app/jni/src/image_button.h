@@ -15,6 +15,7 @@ public:
     void render();
     void setX(int x);
     void setY(int y);
+    SDL_Rect getButtonArea();
 
 
 private:

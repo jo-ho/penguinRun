@@ -3,6 +3,7 @@
 #include "player.h"
 #include "colour.h"
 #include "image_button.h"
+#include "collision.h"
 
 
 PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
@@ -19,8 +20,8 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     pauseButton = std::unique_ptr<ImageButton>(new ImageButton(
             video, "gui/buttons/normal/settings.png", "gui/buttons/click/settings.png",
             0, 0,
-            100, 100,
-            video.getScreenSizeW() - 100, 0, []() {},
+            PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE,
+            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0, []() {},
             &Colour::black));
 }
 
@@ -31,6 +32,7 @@ State::StateType PlayState::getStateType() {
 void PlayState::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
+        pauseButton->handleEvent(event);
         if (event.type == SDL_QUIT) {
             stateMachine->stopRunning();
         }
@@ -38,10 +40,13 @@ void PlayState::handleEvents() {
             if (event.type == SDL_FINGERDOWN) {
                 fingerIDs.push_back(event.tfinger.fingerId);
                 float touchPosY = event.tfinger.y * video.getScreenSizeH();
-                if (touchPosY >= 0 && touchPosY <= video.getScreenSizeH() / 2) {
-                    player->setMoveState(MoveState::MOVING_UP);
-                } else {
-                    player->setMoveState(MoveState::MOVING_DOWN);
+                float touchPosX = event.tfinger.x * video.getScreenSizeW();
+                if (!Collision::PointInRect(touchPosX, touchPosY, pauseButton->getButtonArea())) {
+                    if (touchPosY >= 0 && touchPosY <= video.getScreenSizeH() / 2) {
+                        player->setMoveState(MoveState::MOVING_UP);
+                    } else {
+                        player->setMoveState(MoveState::MOVING_DOWN);
+                    }
                 }
             } else if (event.type == SDL_FINGERUP) {
                 fingerIDs.erase(

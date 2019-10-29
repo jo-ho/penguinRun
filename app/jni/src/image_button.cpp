@@ -1,4 +1,5 @@
 #include "image_button.h"
+#include "collision.h"
 
 ImageButton::ImageButton(Video &video, const char *unpressedFileName, const char *pressedFileName,
                          int imgX,
@@ -21,8 +22,7 @@ ImageButton::ImageButton(Video &video, const char *unpressedFileName, const char
 bool ImageButton::handleEvent(SDL_Event &event) {
     float touchPosX = event.tfinger.x * video.getScreenSizeW();
     float touchPosY = event.tfinger.y * video.getScreenSizeH();
-    bool fingerOnButton = (touchPosX >= x && touchPosX <= (x + w)) &&
-                          (touchPosY >= y && touchPosY <= (y + h));
+    bool fingerOnButton = Collision::PointInRect(touchPosX, touchPosY, {x,y,w,h});
     if (event.type == SDL_FINGERDOWN) {
 
         isPressed = fingerOnButton;
@@ -52,6 +52,10 @@ void ImageButton::setY(int y) {
 void ImageButton::setX(int x) {
     this->x = x;
 
+}
+
+SDL_Rect ImageButton::getButtonArea() {
+    return {x,y,w,h};
 }
 
 
