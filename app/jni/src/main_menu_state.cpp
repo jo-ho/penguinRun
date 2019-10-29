@@ -1,6 +1,7 @@
 #include <memory>
 #include "main_menu_state.h"
 #include "button.h"
+#include "colour.h"
 
 MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video & video) {
     this->stateMachine = stateMachine;
@@ -12,19 +13,19 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
     row->add(new ImageButton(
             video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, false,  [sm = stateMachine]() {sm->change(PLAY, nullptr);}));
+            0, 0, [sm = stateMachine]() { sm->change(PLAY, nullptr); }, &Colour::black));
     row->add(new ImageButton(
             video, "gui/buttons/normal/records.png", "gui/buttons/click/records.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, false, []() {}));
+            0, 0, []() {}, &Colour::black));
     row->add(new ImageButton(
             video, "gui/buttons/normal/help.png", "gui/buttons/click/help.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, false, []() {}));
+            0, 0, []() {}, &Colour::black));
     row->add(new ImageButton(
-                 video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
-                 0, 0, BUTTON_SIZE, BUTTON_SIZE,
-                 0, 0, false, []() {}));
+            video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, []() {}, &Colour::black));
 
     SDL_Log("%d, %d", video.getScreenSizeW(), video.getScreenSizeH());
 }

@@ -1,4 +1,5 @@
 #include "slow_pickup.h"
+#include "colour.h"
 
 const int SlowPickup::SPAWN_DELAY_MS = 2000;
 const int SlowPickup::EFFECT_TIME = 1000;
@@ -6,7 +7,7 @@ const int SlowPickup::EFFECT_TIME = 1000;
 SlowPickup::SlowPickup(Video &video,
                        int initX,
                        int initY) :
-        Pickup(video, "pickups/snail.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, true){
+        Pickup(video, "pickups/snail.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, &Colour::white){
 
 }
 

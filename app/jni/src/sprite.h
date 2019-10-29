@@ -6,15 +6,15 @@
 
 class Sprite {
     public:
-        Sprite(Video& video,
-               const char* fileName,
+        Sprite(Video &video,
+               const char *fileName,
                int imgX,
                int imgY,
                int imgWidth,
                int imgHeight,
                int initX,
                int initY,
-               bool colorKey);
+               const SDL_Color *colorKey = nullptr);
         ~Sprite();
         void renderSprite(Video& video, int destX, int destY);
         void renderStretchToBackground(Video &video, int destX, int destY);

@@ -8,12 +8,9 @@
 
 class ImageButton {
 public:
-    ImageButton(Video &video,
-            const char * unpressedFileName, const char * pressedFileName,
-            int imgX, int imgY,
-            int imgWidth, int imgHeight,
-            int posX, int posY, bool colorKey,
-            std::function<void()> callback);
+    ImageButton(Video &video, const char *unpressedFileName, const char *pressedFileName, int imgX,
+                int imgY, int imgWidth, int imgHeight, int posX, int posY,
+                std::function<void()> callback, const SDL_Color *colorKey = nullptr);
     bool handleEvent(SDL_Event & event);
     void render();
     void setX(int x);

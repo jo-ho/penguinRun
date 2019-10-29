@@ -2,7 +2,7 @@
 #include "play_state.h"
 #include "player.h"
 #include "colour.h"
-
+#include "image_button.h"
 
 
 PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
@@ -16,6 +16,12 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
                                                                                 BACKGROUND_HEIGHT));
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
     moveAreaHeight = video.getScreenSizeH() - (video.getScreenSizeH() / FLOOR_HEIGHT_FACTOR);
+    pauseButton = std::unique_ptr<ImageButton>(new ImageButton(
+            video, "gui/buttons/normal/settings.png", "gui/buttons/click/settings.png",
+            0, 0,
+            100, 100,
+            video.getScreenSizeW() - 100, 0, []() {},
+            &Colour::black));
 }
 
 State::StateType PlayState::getStateType() {
@@ -80,6 +86,7 @@ void PlayState::render() {
     video.clear();
     background->render(video);
     score.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
+    pauseButton->render();
     if (player->getDamagedState() != DEAD) {
         player->render(video);
         pickupManager->render(video);

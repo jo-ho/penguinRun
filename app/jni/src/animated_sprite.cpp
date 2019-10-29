@@ -1,16 +1,8 @@
 #include "animated_sprite.h"
 
-AnimatedSprite::AnimatedSprite(Video &video,
-                               const char *fileName,
-                               int imgX,
-                               int imgY,
-                               int imgWidth,
-                               int imgHeight,
-                               int initX,
-                               int initY,
-                               bool colorKey,
-                               int numFrames,
-                               int targetFps) :
+AnimatedSprite::AnimatedSprite(Video &video, const char *fileName, int imgX, int imgY, int imgWidth,
+                               int imgHeight, int initX, int initY, int numFrames, int targetFps,
+                               const SDL_Color *colorKey) :
         Sprite(video, fileName, imgX ,imgY , imgWidth, imgHeight, initX, initY, colorKey) {
     frameTime = 1000 / targetFps;
     spriteElapsedTime = 0;

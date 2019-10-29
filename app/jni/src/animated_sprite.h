@@ -6,17 +6,9 @@
 
 class AnimatedSprite : public Sprite {
     public:
-        AnimatedSprite(Video& video,
-               const char* fileName,
-               int imgX,
-               int imgY,
-               int imgWidth,
-               int imgHeight,
-               int initX,
-               int initY,
-               bool colorKey,
-               int numFrames,
-               int targetFps);
+        AnimatedSprite(Video &video, const char *fileName, int imgX, int imgY, int imgWidth,
+                       int imgHeight, int initX, int initY, int numFrames, int targetFps,
+                       const SDL_Color *colorKey = nullptr);
         void updateSprite(int elapsedTime);
         int getNumCompletedLoops();
 

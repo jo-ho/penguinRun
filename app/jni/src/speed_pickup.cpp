@@ -1,4 +1,5 @@
 #include "speed_pickup.h"
+#include "colour.h"
 
 const int SpeedPickup::SPAWN_DELAY_MS = 2000;
 const int SpeedPickup::EFFECT_TIME = 1000;
@@ -6,7 +7,7 @@ const int SpeedPickup::EFFECT_TIME = 1000;
 SpeedPickup::SpeedPickup(Video &video,
                          int initX,
                          int initY) :
-        Pickup(video, "pickups/sprint.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, true){
+        Pickup(video, "pickups/sprint.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, &Colour::white){
 
 }
 

@@ -1,7 +1,7 @@
 #include "background.h"
 
 ScrollableBackground::ScrollableBackground(Video &video, const char *fileName, int imgWidth, int imgHeight) {
-    sprite = std::unique_ptr<Sprite>(new Sprite(video, fileName, 0, 0, imgWidth, imgHeight, 0,0 , false));
+    sprite = std::unique_ptr<Sprite>(new Sprite(video, fileName, 0, 0, imgWidth, imgHeight, 0,0));
     offset = 0;
 }
 

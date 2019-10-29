@@ -15,6 +15,8 @@ static const int FLOOR_HEIGHT_FACTOR = 8;
 #include "text.h"
 #include "background.h"
 #include "death_animation.h"
+#include "button.h"
+#include "image_button.h"
 
 class PlayState : public State {
 public:
@@ -44,6 +46,7 @@ private:
     bool deathAnimationComplete; //TODO remove?
     std::unique_ptr<DeathAnimation> deathAnimation;
     int moveAreaHeight;
+    std::unique_ptr<ImageButton> pauseButton;
 };
 
 

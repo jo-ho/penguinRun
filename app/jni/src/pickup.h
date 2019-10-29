@@ -7,15 +7,15 @@
 
 class Pickup : public Sprite {
     public:
-        Pickup(Video& video,
-        const char* fileName,
-        int imgX,
-        int imgY,
-        int imgWidth,
-        int imgHeight,
-        int initX,
-        int initY,
-        bool colorKey);
+        Pickup(Video &video,
+               const char *fileName,
+               int imgX,
+               int imgY,
+               int imgWidth,
+               int imgHeight,
+               int initX,
+               int initY,
+               const SDL_Color *colorKey);
         void move(int screenHeight);
         SDL_Rect getCollider();
         virtual void activateAction(std::unique_ptr<Player> &player) = 0;

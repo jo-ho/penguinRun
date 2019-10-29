@@ -18,7 +18,7 @@ Pickup::Pickup(Video &video,
                int imgHeight,
                int initX,
                int initY,
-               bool colorKey) :
+               const SDL_Color *colorKey) :
         Sprite(video, fileName, imgX ,imgY , imgWidth, imgHeight, initX, initY, colorKey) {
     // Range = [VELOCITY_MIN, VELOCITY_MIN + VELOCITY_OFFSET]
     velocityX = rand() % (VELOCITY_OFFSET + 1) + VELOCITY_MIN;

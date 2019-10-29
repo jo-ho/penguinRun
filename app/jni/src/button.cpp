@@ -11,7 +11,7 @@ Button::Button(Video &video,
                int imgHeight,
                int initX,
                int initY,
-               bool colorKey) : Sprite(video, fileName, imgX ,imgY , imgWidth, imgHeight, initX, initY, colorKey) {
+               const SDL_Color *colorKey) : Sprite(video, fileName, imgX , imgY , imgWidth, imgHeight, initX, initY, colorKey) {
 
 }
 

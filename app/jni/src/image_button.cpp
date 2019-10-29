@@ -1,11 +1,9 @@
 #include "image_button.h"
 
-ImageButton::ImageButton(Video &video,
-                         const char * unpressedFileName, const char * pressedFileName,
-                         int imgX, int imgY,
-                         int imgWidth, int imgHeight,
-                         int posX, int posY, bool colorKey,
-                         std::function<void()> callback)  {
+ImageButton::ImageButton(Video &video, const char *unpressedFileName, const char *pressedFileName,
+                         int imgX,
+                         int imgY, int imgWidth, int imgHeight, int posX, int posY,
+                         std::function<void()> callback, const SDL_Color *colorKey) {
     unpressed = std::unique_ptr<Sprite>(
             new Sprite(video, unpressedFileName, imgX, imgY, imgWidth, imgHeight, posX, posY, colorKey));
     pressed = std::unique_ptr<Sprite>(

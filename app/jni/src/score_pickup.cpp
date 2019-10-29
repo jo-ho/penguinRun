@@ -1,5 +1,6 @@
 
 #include "score_pickup.h"
+#include "colour.h"
 
 
 const int ScorePickup::SPAWN_DELAY_MS = 500;
@@ -10,7 +11,7 @@ ScorePickup::ScorePickup(Video &video,
                          int initX,
                          int initY) :
         Pickup(video, "pickups/fried-fish.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY,
-               true) {
+               &Colour::white) {
 
 }
 
