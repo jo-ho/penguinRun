@@ -65,3 +65,8 @@ void Sprite::renderStretchToBackground(Video &video, int destX, int destY) {
     video.renderTexture(spriteTexture, &srcRect, &destRect);
 }
 
+void Sprite::renderSprite(Video &video, int destX, int destY, int destW, int destH) {
+    SDL_Rect destRect =  {destX, destY, destW, destH};
+    video.renderTexture(spriteTexture, &srcRect, &destRect);
+}
+

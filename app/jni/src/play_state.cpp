@@ -21,8 +21,10 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
             video, "gui/buttons/normal/settings.png", "gui/buttons/click/settings.png",
             0, 0,
             PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE,
-            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0, []() {},
+            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0, [this]() {this->paused = true;},
             &Colour::black));
+    paused = false;
+    pauseMenu = std::unique_ptr<PauseMenu>(new PauseMenu(video));
 }
 
 State::StateType PlayState::getStateType() {
@@ -36,34 +38,19 @@ void PlayState::handleEvents() {
         if (event.type == SDL_QUIT) {
             stateMachine->stopRunning();
         }
-        if (player->getDamagedState() != DEAD) {
-            if (event.type == SDL_FINGERDOWN) {
-                fingerIDs.push_back(event.tfinger.fingerId);
-                float touchPosY = event.tfinger.y * video.getScreenSizeH();
-                float touchPosX = event.tfinger.x * video.getScreenSizeW();
-                if (!Collision::PointInRect(touchPosX, touchPosY, pauseButton->getButtonArea())) {
-                    if (touchPosY >= 0 && touchPosY <= video.getScreenSizeH() / 2) {
-                        player->setMoveState(MoveState::MOVING_UP);
-                    } else {
-                        player->setMoveState(MoveState::MOVING_DOWN);
+        if (!paused) {
+            if (player->getDamagedState() != DEAD) {
+                handleInput(event);
+                if (event.type == SDL_USEREVENT) {
+                    SDL_UserEvent userEvent = event.user;
+                    if (userEvent.code == 0) {
+                        pickupManager->spawn(video, userEvent.data1, moveAreaHeight);
                     }
+                } else if (event.type == SDL_APP_WILLENTERFOREGROUND) {
+                    pickupManager->resumeTimers();
+                } else if (event.type == SDL_APP_DIDENTERBACKGROUND) {
+                    pickupManager->stopTimers();
                 }
-            } else if (event.type == SDL_FINGERUP) {
-                fingerIDs.erase(
-                        std::remove(fingerIDs.begin(), fingerIDs.end(), event.tfinger.fingerId),
-                        fingerIDs.end());
-                if (fingerIDs.empty()) {
-                    player->setMoveState(MoveState::STOPPED);
-                }
-            } else if (event.type == SDL_USEREVENT) {
-                SDL_UserEvent userEvent = event.user;
-                if (userEvent.code == 0) {
-                    pickupManager->spawn(video, userEvent.data1, moveAreaHeight);
-                }
-            } else if (event.type == SDL_APP_WILLENTERFOREGROUND) {
-                pickupManager->resumeTimers();
-            } else if (event.type == SDL_APP_DIDENTERBACKGROUND) {
-                pickupManager->stopTimers();
             }
 
         }
@@ -72,17 +59,19 @@ void PlayState::handleEvents() {
 }
 
 void PlayState::update(int elapsedTime) {
-    if (player->getDamagedState() != DEAD) {
-        pickupManager->checkCollisions(player);
-        player->update(moveAreaHeight, elapsedTime);
-        background->update(video.getScreenSizeW());
-        pickupManager->update(moveAreaHeight, elapsedTime);
-    } else {
-        if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
+    if (!paused) {
+        if (player->getDamagedState() != DEAD) {
+            pickupManager->checkCollisions(player);
+            player->update(moveAreaHeight, elapsedTime);
+            background->update(video.getScreenSizeW());
+            pickupManager->update(moveAreaHeight, elapsedTime);
+        } else {
+            if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
 
-        if (deathAnimation->getNumCompletedLoops() == 1) {
-            deathAnimationComplete = true;
-            stateMachine->change(MAIN_MENU, NULL);
+            if (deathAnimation->getNumCompletedLoops() == 1) {
+                deathAnimationComplete = true;
+                stateMachine->change(MAIN_MENU, NULL);
+            }
         }
     }
 }
@@ -98,6 +87,7 @@ void PlayState::render() {
     } else {
         if (!deathAnimationComplete) deathAnimation->renderSprite(video, player->getX(), player->getY());
     }
+    if (paused) pauseMenu->render();
     video.present();
 }
 
@@ -111,4 +101,30 @@ void PlayState::onExit() {
     pickupManager.reset(new PickupManager());
     deathAnimation.reset(new DeathAnimation(video));
 
+}
+
+void PlayState::pause() {
+    paused = true;
+}
+
+void PlayState::handleInput(SDL_Event & event) {
+    if (event.type == SDL_FINGERDOWN) {
+        fingerIDs.push_back(event.tfinger.fingerId);
+        float touchPosY = event.tfinger.y * video.getScreenSizeH();
+        float touchPosX = event.tfinger.x * video.getScreenSizeW();
+        if (!Collision::PointInRect(touchPosX, touchPosY, pauseButton->getButtonArea())) {
+            if (touchPosY >= 0 && touchPosY <= video.getScreenSizeH() / 2) {
+                player->setMoveState(MoveState::MOVING_UP);
+            } else {
+                player->setMoveState(MoveState::MOVING_DOWN);
+            }
+        }
+    } else if (event.type == SDL_FINGERUP) {
+        fingerIDs.erase(
+                std::remove(fingerIDs.begin(), fingerIDs.end(), event.tfinger.fingerId),
+                fingerIDs.end());
+        if (fingerIDs.empty()) {
+            player->setMoveState(MoveState::STOPPED);
+        }
+    }
 }

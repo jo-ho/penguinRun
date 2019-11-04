@@ -19,6 +19,7 @@ static const int PAUSE_BUTTON_SIZE = 100;
 #include "death_animation.h"
 #include "button.h"
 #include "image_button.h"
+#include "pause_menu.h"
 
 class PlayState : public State {
 public:
@@ -36,12 +37,17 @@ public:
 
     void onExit() override;
 
+    void pause();
+
+    void handleInput(SDL_Event & event);
+
 private:
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
     std::unique_ptr<Player> player;
     std::unique_ptr<ScrollableBackground> background;
     std::unique_ptr<PickupManager>  pickupManager;
+    std::unique_ptr<PauseMenu>  pauseMenu;
     Text score = Text(32);
     std::vector<long long> fingerIDs;
 
@@ -49,6 +55,7 @@ private:
     std::unique_ptr<DeathAnimation> deathAnimation;
     int moveAreaHeight;
     std::unique_ptr<ImageButton> pauseButton;
+    bool paused;
 };
 
 

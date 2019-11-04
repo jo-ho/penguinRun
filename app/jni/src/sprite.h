@@ -17,6 +17,7 @@ class Sprite {
                const SDL_Color *colorKey = nullptr);
         ~Sprite();
         void renderSprite(Video& video, int destX, int destY);
+        void renderSprite(Video& video, int destX, int destY, int destW, int destH);
         void renderStretchToBackground(Video &video, int destX, int destY);
         void setTextureColourMod(SDL_Color colour);
         void setTextureAlphaMod(Uint8 alpha);
