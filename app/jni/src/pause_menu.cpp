@@ -3,6 +3,10 @@
 
 const int PauseMenu::BACKGROUND_WIDTH = 2102;
 const int PauseMenu::BACKGROUND_HEIGHT = 2121;
+const int PauseMenu::BUTTON_SIZE = 100;
+
+const int PauseMenu::BUTTON_SPRITE_SIZE = 300;
+
 
 PauseMenu::PauseMenu(Video &video) {
     background = std::unique_ptr<Sprite>(new Sprite(

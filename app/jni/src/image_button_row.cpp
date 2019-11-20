@@ -1,6 +1,6 @@
 #include "image_button_row.h"
 
-`ImageButtonRow::ImageButtonRow(int x, int y, int w, int h, int buttonSize, int offsetY) {
+ImageButtonRow::ImageButtonRow(int x, int y, int w, int h, int buttonSize, int offsetY) {
     this->x = x;
     this->y = y;
     this->w = w;
