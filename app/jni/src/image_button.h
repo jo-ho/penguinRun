@@ -12,7 +12,7 @@ public:
                 int imgY, int imgWidth, int imgHeight, int posX, int posY,
                 std::function<void()> callback, const SDL_Color *colorKey = nullptr);
     bool handleEvent(SDL_Event & event);
-    void render();
+    void render(int w, int h);
     void setX(int x);
     void setY(int y);
     SDL_Rect getButtonArea();

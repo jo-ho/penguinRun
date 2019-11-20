@@ -38,11 +38,11 @@ bool ImageButton::handleEvent(SDL_Event &event) {
     return false;
 }
 
-void ImageButton::render() {
+void ImageButton::render(int w, int h) {
 
     if (isPressed) {
-        pressed->renderSprite(video, x, y);
-    } else unpressed->renderSprite(video, x, y);
+        pressed->renderSprite(video, x, y, w, h);
+    } else unpressed->renderSprite(video, x, y, w, h);
 }
 
 void ImageButton::setY(int y) {

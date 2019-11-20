@@ -9,7 +9,7 @@
 
 class ImageButtonRow {
 public:
-    ImageButtonRow(int x, int y, int w, int h, int buttonSize);
+    ImageButtonRow(int x, int y, int w, int h, int buttonSize, int posX);
     ~ImageButtonRow();
     void add(ImageButton * imageButton);
     void render();
@@ -21,6 +21,7 @@ private:
     int y;
     int w;
     int h;
+    int offsetY;
     int numButtons;
     int buttonSize;
 };

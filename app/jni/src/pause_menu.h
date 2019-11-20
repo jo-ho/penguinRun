@@ -6,9 +6,12 @@
 #define GAME1_PAUSE_MENU_H
 
 
+static const int BUTTON_SIZE = 100;
 
+static const int BUTTON_SPRITE_SIZE = 300;
 
 #include "sprite.h"
+#include "image_button_row.h"
 
 class PauseMenu {
 public:
@@ -19,7 +22,13 @@ private:
     static const int BACKGROUND_HEIGHT;
 
     std::unique_ptr<Sprite> background;
+    std::unique_ptr<ImageButtonRow> buttons;
     Video video;
+
+    int x;
+    int y;
+    int w;
+    int h;
 
 };
 

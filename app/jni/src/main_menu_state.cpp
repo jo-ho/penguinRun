@@ -9,7 +9,7 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
     this->video = video;
 
     row = std::make_unique<ImageButtonRow>(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
-                                                             BUTTON_SIZE);
+                                                             BUTTON_SIZE, video.getScreenSizeH() - video.getScreenSizeH() / 4);
     row->add(new ImageButton(
             video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,

@@ -80,7 +80,7 @@ void PlayState::render() {
     video.clear();
     background->render(video);
     score.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
-    pauseButton->render();
+    pauseButton->render(PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
     if (player->getDamagedState() != DEAD) {
         player->render(video);
         pickupManager->render(video);
