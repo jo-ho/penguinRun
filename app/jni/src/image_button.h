@@ -11,7 +11,7 @@ public:
     ImageButton(Video &video, const char *unpressedFileName, const char *pressedFileName, int imgX,
                 int imgY, int imgWidth, int imgHeight, int posX, int posY,
                 std::function<void()> callback, const SDL_Color *colorKey = nullptr);
-    bool handleEvent(SDL_Event & event);
+    bool handleEvent(SDL_Event & event, int w, int h);
     void render(int w, int h);
     void setX(int x);
     void setY(int y);

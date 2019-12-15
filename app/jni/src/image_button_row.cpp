@@ -43,7 +43,7 @@ ImageButtonRow::~ImageButtonRow() {
 
 void ImageButtonRow::handleEvent(SDL_Event & event) {
     for (auto & b : buttons) {
-        b->handleEvent(event);
+        b->handleEvent(event, buttonSize, buttonSize);
     }
 
 }

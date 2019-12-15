@@ -6,6 +6,9 @@
 #include "collision.h"
 
 
+
+
+
 PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->stateMachine = stateMachine;
     this->video = video;
@@ -25,6 +28,15 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
             &Colour::black));
     paused = false;
     pauseMenu = std::unique_ptr<PauseMenu>(new PauseMenu(video));
+
+    pauseMenu->add(new ImageButton(
+            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            0, 0, BUTTON_SPRITE_SIZE, BUTTON_SPRITE_SIZE,
+            0, 0, [this]() {this->paused = false;}, &Colour::black));
+    pauseMenu->add(new ImageButton(
+            video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
+            0, 0, BUTTON_SPRITE_SIZE, BUTTON_SPRITE_SIZE,
+            0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}, &Colour::black));
 }
 
 State::StateType PlayState::getStateType() {
@@ -34,7 +46,7 @@ State::StateType PlayState::getStateType() {
 void PlayState::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
-        pauseButton->handleEvent(event);
+        pauseButton->handleEvent(event, PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
         if (event.type == SDL_QUIT) {
             stateMachine->stopRunning();
         }
@@ -53,6 +65,8 @@ void PlayState::handleEvents() {
                 }
             }
 
+        } else {
+            pauseMenu->handleEvent(event);
         }
     }
 

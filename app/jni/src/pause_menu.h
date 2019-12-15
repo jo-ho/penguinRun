@@ -15,6 +15,8 @@ class PauseMenu {
 public:
     PauseMenu(Video & video);
     void render();
+    void add(ImageButton * imageButton);
+    void handleEvent(SDL_Event & event);
 private:
     static const int BACKGROUND_WIDTH;
     static const int BACKGROUND_HEIGHT;

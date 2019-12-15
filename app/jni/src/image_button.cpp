@@ -19,7 +19,7 @@ ImageButton::ImageButton(Video &video, const char *unpressedFileName, const char
 
 }
 
-bool ImageButton::handleEvent(SDL_Event &event) {
+bool ImageButton::handleEvent(SDL_Event &event, int w, int h) {
     float touchPosX = event.tfinger.x * video.getScreenSizeW();
     float touchPosY = event.tfinger.y * video.getScreenSizeH();
     bool fingerOnButton = Collision::PointInRect(touchPosX, touchPosY, {x,y,w,h});

@@ -9,6 +9,8 @@ static const char *const BACKGROUND_FILENAME = "under.png";
 static const int FLOOR_HEIGHT_FACTOR = 8;
 
 static const int PAUSE_BUTTON_SIZE = 100;
+static const int BUTTON_SPRITE_SIZE = 300;
+
 
 #include "state.h"
 #include "state_machine.h"
