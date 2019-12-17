@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include <memory>
 #include <SDL_events.h>
+#include <functional>
 
 class ImageButton {
 public:
