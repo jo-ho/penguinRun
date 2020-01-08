@@ -18,9 +18,12 @@ void FileManager::appendInt(const char *fileName, int value) {
     char buffer[sizeof(int)];
 
     SDL_itoa(value, buffer, 10);
-    size_t len = SDL_strlen(buffer);
-    if(SDL_RWwrite(rw, buffer, 1, len)) {
+    if(SDL_RWwrite(rw, buffer, 1, SDL_strlen(buffer))) {
         SDL_Log("append");
+    }
+    const char * newLine = "\n";
+    if(SDL_RWwrite(rw, newLine, 1, SDL_strlen(newLine))) {
+        SDL_Log("append newLine");
     }
     SDL_RWclose(rw);
 

@@ -3,15 +3,15 @@
 //
 
 #include "score_manager.h"
+#include "file_manager.h"
 
 ScoreManager * ScoreManager::instance = nullptr;
 
 ScoreManager::ScoreManager() {}
 
 void ScoreManager::addScore(int score) {
-
-
-
+    FileManager * fm = FileManager::Get();
+    fm->appendInt(SCORES_FILE, score);
 }
 
 ScoreManager * ScoreManager::Get() {

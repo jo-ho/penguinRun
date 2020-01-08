@@ -16,6 +16,7 @@ public:
 
 private:
     static ScoreManager * instance;
+    static const  char * SCORES_FILE = "scores.txt";
     ScoreManager();
     ~ScoreManager();
 };
