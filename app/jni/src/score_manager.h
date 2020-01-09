@@ -6,6 +6,8 @@
 #define GAME1_SCORE_MANAGER_H
 #include <vector>
 
+const static   char * SCORES_FILE = "scores.txt";
+
 
 class ScoreManager {
 public:
@@ -16,7 +18,6 @@ public:
 
 private:
     static ScoreManager * instance;
-    static const  char * SCORES_FILE = "scores.txt";
     ScoreManager();
     ~ScoreManager();
 };

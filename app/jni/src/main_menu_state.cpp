@@ -3,6 +3,7 @@
 #include "button.h"
 #include "colour.h"
 #include "file_manager.h"
+#include "score_manager.h"
 
 MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video & video) {
     this->stateMachine = stateMachine;
@@ -28,10 +29,6 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
             0, 0, []() {}, &Colour::black));
 
-    FileManager * fm = FileManager::Get();
-    fm->appendInt("test.txt", 100);
-    char * res = fm->readFile("test.txt");
-    SDL_Log("%s",res);
 }
 
 
