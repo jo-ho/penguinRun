@@ -6,11 +6,14 @@
 #define GAME1_HIGH_SCORES_STATE_H
 
 
+
 #include <SDL_events.h>
 #include <vector>
 #include "state.h"
 #include "text.h"
 #include "state_machine.h"
+#include "sprite.h"
+#include "high_scores_frame.h"
 
 class HighScoresState : public State {
 
@@ -32,6 +35,7 @@ public:
 
 private:
     std::shared_ptr<StateMachine> stateMachine;
+    std::unique_ptr<HighScoresFrame> frame;
     Video video;
     std::vector<int> scores;
     Text firstScore = Text(32);

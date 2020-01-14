@@ -9,6 +9,7 @@
 HighScoresState::HighScoresState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->stateMachine = stateMachine;
     this->video = video;
+    frame = std::unique_ptr<HighScoresFrame>(new HighScoresFrame(video));
 
 }
 
@@ -26,6 +27,7 @@ void HighScoresState::update(int elapsedTime) {
 
 void HighScoresState::render() {
     video.clear();
+    frame->render();
     if (scores.size() == 1) {
         firstScore.render(video, std::to_string(scores.at(0)).c_str(), Colour::black, 0 , 0);
     }
