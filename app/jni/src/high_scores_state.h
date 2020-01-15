@@ -37,8 +37,7 @@ private:
     std::shared_ptr<StateMachine> stateMachine;
     std::unique_ptr<HighScoresFrame> frame;
     Video video;
-    std::vector<int> scores;
-    Text firstScore = Text(32);
+
 };
 
 

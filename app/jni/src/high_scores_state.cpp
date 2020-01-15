@@ -28,16 +28,12 @@ void HighScoresState::update(int elapsedTime) {
 void HighScoresState::render() {
     video.clear();
     frame->render();
-    if (scores.size() == 1) {
-        firstScore.render(video, std::to_string(scores.at(0)).c_str(), Colour::black, 0 , 0);
-    }
     video.present();
 
 }
 
 void HighScoresState::onEnter(void *param) {
-    scores = ScoreManager::Get()->getScores();
-    std::sort(scores.begin(), scores.end(),  std::greater<int>());
+    frame->updateScores();
 
 }
 
