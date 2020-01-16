@@ -113,6 +113,7 @@ void PlayState::onExit() {
     player.reset(new Player(video));
     pickupManager.reset(new PickupManager());
     deathAnimation.reset(new DeathAnimation(video));
+    paused = false;
 
 }
 
