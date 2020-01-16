@@ -14,6 +14,7 @@
 #include "state_machine.h"
 #include "sprite.h"
 #include "high_scores_frame.h"
+#include "image_button.h"
 
 class HighScoresState : public State {
 
@@ -37,10 +38,13 @@ private:
     static const int BACKGROUND_WIDTH = 4866;
 
     static const int BACKGROUND_HEIGHT = 3000;
+    static const int BACK_BUTTON_SPRITE_SIZE = 701;
+    static const int BACK_BUTTON_SIZE = BACK_BUTTON_SPRITE_SIZE / 7;
 
     std::shared_ptr<StateMachine> stateMachine;
     std::unique_ptr<HighScoresFrame> frame;
     std::unique_ptr<Sprite> background;
+    std::unique_ptr<ImageButton> backButton;
     Video video;
 
 };
