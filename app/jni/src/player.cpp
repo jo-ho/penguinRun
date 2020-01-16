@@ -30,7 +30,8 @@ void Player::initSprites(Video & video) {
         sprites[state] = std::unique_ptr<AnimatedSprite>(new AnimatedSprite(video, SPRITE_FILE_NAME,
                                                                             0, TILE_HEIGHT * i,
                                                                             TILE_WIDTH, TILE_HEIGHT,
-                                                                            0, 0, true, NUM_FRAMES, TARGET_FPS));
+                                                                            0, 0, NUM_FRAMES,
+                                                                            TARGET_FPS, &Colour::white));
     }
     shieldSprite = std::unique_ptr<Sprite>(new ShieldSprite(video, x, y));
 }

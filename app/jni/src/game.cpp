@@ -4,6 +4,7 @@
 #include "main_menu_state.h"
 #include "play_state.h"
 #include "state.h"
+#include "high_scores_state.h"
 
 Game::Game()  {
     srand (time(NULL));
@@ -28,6 +29,7 @@ Game::Game()  {
 void Game::addStates() {
     stateMachine->add(std::make_shared<MainMenuState>(stateMachine, video));
     stateMachine->add(std::make_shared<PlayState>(stateMachine, video));
+    stateMachine->add(std::make_shared<HighScoresState>(stateMachine, video));
     stateMachine->change(State::MAIN_MENU, NULL);
 }
 

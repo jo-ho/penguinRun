@@ -2,11 +2,17 @@
 #define MAINMENUSTATE_H
 
 
+static const int BUTTON_SIZE = 300;
+
+
+
 #include <vector>
 #include "state.h"
 #include "state_machine.h"
 #include "video.h"
 #include "button.h"
+#include "image_button.h"
+#include "image_button_row.h"
 
 class MainMenuState : public State {
 public:
@@ -25,10 +31,15 @@ public:
     void onExit() override;
 
 private:
+    static const int BACKGROUND_WIDTH = 4866;
+
+    static const int BACKGROUND_HEIGHT = 3000;
+
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
-    std::vector<std::shared_ptr<Button>>  buttons;
-    enum buttonID { MENU_BUTTON_START, MENU_BUTTON_OPTIONS, MENU_BUTTON_QUIT };
+    std::unique_ptr<ImageButton> playButton;
+    std::unique_ptr<Sprite> background;
+    std::unique_ptr<ImageButtonRow> row;
 
 
 };

@@ -1,24 +1,42 @@
+#include <memory>
 #include "main_menu_state.h"
 #include "button.h"
+#include "colour.h"
+#include "file_manager.h"
+#include "score_manager.h"
 
 MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video & video) {
     this->stateMachine = stateMachine;
 
     this->video = video;
 
-        for (int i = 0; i < 3; i++) {
-        buttons.push_back(std::unique_ptr<Button>(new Button(video,
-                                                   "buttons-384_192.png",
-                                                   Button::BUTTON_WIDTH*i,
-                                                   0,
-                                                   Button::BUTTON_WIDTH,
-                                                   Button::BUTTON_HEIGHT,
-                                                   0,
-                                                   Button::BUTTON_HEIGHT*i,
-                                                   false))
-        );
-    }
+    background = std::unique_ptr<Sprite>(new Sprite(video, "gui/background1.png",
+                                                    0, 0,
+                                                    BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
+                                                    0, 0));
+
+    row = std::make_unique<ImageButtonRow>(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
+                                                             BUTTON_SIZE, video.getScreenSizeH() - video.getScreenSizeH() / 4);
+    row->add(new ImageButton(
+            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, [sm = stateMachine]() { sm->change(PLAY, nullptr); }, &Colour::black));
+    row->add(new ImageButton(
+            video, "gui/buttons/normal/records.png", "gui/buttons/click/records.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, [sm = stateMachine]() {sm->change(HIGH_SCORES, nullptr);}, &Colour::black));
+    row->add(new ImageButton(
+            video, "gui/buttons/normal/help.png", "gui/buttons/click/help.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, []() {}, &Colour::black));
+    row->add(new ImageButton(
+            video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
+            0, 0, BUTTON_SIZE, BUTTON_SIZE,
+            0, 0, [sm = stateMachine]() {sm->stopRunning();}, &Colour::black));
+
 }
+
+
 
 State::StateType MainMenuState::getStateType() {
     return StateType::MAIN_MENU;
@@ -27,27 +45,12 @@ State::StateType MainMenuState::getStateType() {
 void MainMenuState::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
-    if (event.type == SDL_QUIT) {
-        stateMachine->stopRunning();
-    }
-    else if (event.type == SDL_FINGERUP) {
-        for (unsigned i = 0; i < 3; i++) {
-            if (buttons.at(i)->checkTouch(event.tfinger.x * video.getScreenSizeW(),
-                                          event.tfinger.y * video.getScreenSizeH())) {
-                switch(i) {
-                    case buttonID::MENU_BUTTON_START:
-                        stateMachine->change(PLAY, NULL);
-                        break;
-                    case buttonID::MENU_BUTTON_OPTIONS:
-                        break;
-                    case buttonID::MENU_BUTTON_QUIT:
-                        stateMachine->stopRunning();
-                        break;
-                }
-            }
+        if (event.type == SDL_QUIT) {
+            stateMachine->stopRunning();
         }
+        row->handleEvent(event);
+
     }
-        }
 
 }
 
@@ -57,9 +60,8 @@ void MainMenuState::update(int elapsedTime) {
 
 void MainMenuState::render() {
     video.clear();
-    for (unsigned i = 0; i < 3; i++) {
-        buttons.at(i)->renderSprite(video,buttons.at(i)->getX(),buttons.at(i)->getY());
-    }
+    background->renderStretchToBackground(video, 0, 0);
+    row->render();
     video.present();
 
 }

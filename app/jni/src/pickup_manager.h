@@ -17,10 +17,11 @@ class PickupManager {
         ~PickupManager();
 
         void spawn(Video & video, void * code, int spawnAreaHeight);
-        void update(int screenHeight);
+        void update(int screenHeight, int elapsedTime);
         void render(Video & video);
         void checkCollisions(std::unique_ptr<Player> &player);
-        void createTimers(Video & video);
+        void resumeTimers();
+        void stopTimers();
     private:
         const int DIFF_INCREASE_TIME_MS = 2000;
         const int DIFF_SCALING_FACTOR = 10;

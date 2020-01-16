@@ -18,7 +18,7 @@ class Video {
         int getScreenSizeW();
         int getScreenSizeH();
 
-        SDL_Texture * loadImage(const char * fileName, bool colorKey );
+        SDL_Texture * loadImage(const char * fileName, const SDL_Color * colorKey = nullptr);
         SDL_Texture * loadText(TTF_Font *font, const char *text, SDL_Color color);
     private:
         SDL_DisplayMode displayMode;

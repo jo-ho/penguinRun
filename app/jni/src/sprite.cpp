@@ -9,7 +9,7 @@ Sprite::Sprite(Video &video,
                int imgHeight,
                int initX,
                int initY,
-               bool colorKey) {
+               const SDL_Color *colorKey) {
     spriteTexture = video.loadImage(fileName, colorKey);
     if (!spriteTexture) {
         SDL_Log("video.loadImage error");
@@ -64,3 +64,9 @@ void Sprite::renderStretchToBackground(Video &video, int destX, int destY) {
     destRect.h = video.getScreenSizeH();
     video.renderTexture(spriteTexture, &srcRect, &destRect);
 }
+
+void Sprite::renderSprite(Video &video, int destX, int destY, int destW, int destH) {
+    SDL_Rect destRect =  {destX, destY, destW, destH};
+    video.renderTexture(spriteTexture, &srcRect, &destRect);
+}
+

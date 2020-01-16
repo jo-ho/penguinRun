@@ -9,6 +9,7 @@ class Timer {
 public:
     Timer();
     void reset();
+    void update(int elapsedTime);
     unsigned int getTimeElapsedMs();
     int getResetCount();
 private:
