@@ -10,6 +10,12 @@ HighScoresState::HighScoresState(std::shared_ptr<StateMachine> stateMachine, Vid
     this->stateMachine = stateMachine;
     this->video = video;
     frame = std::unique_ptr<HighScoresFrame>(new HighScoresFrame(video));
+    background = std::unique_ptr<Sprite>(new Sprite(
+            video, "gui/background2.png",
+            0,0,
+            BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
+            0, 0));
+
 
 }
 
@@ -27,6 +33,7 @@ void HighScoresState::update(int elapsedTime) {
 
 void HighScoresState::render() {
     video.clear();
+    background->renderStretchToBackground(video, 0, 0);
     frame->render();
     video.present();
 

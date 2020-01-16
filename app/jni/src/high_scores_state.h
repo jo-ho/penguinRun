@@ -34,8 +34,13 @@ public:
     void onExit() override;
 
 private:
+    static const int BACKGROUND_WIDTH = 4866;
+
+    static const int BACKGROUND_HEIGHT = 3000;
+
     std::shared_ptr<StateMachine> stateMachine;
     std::unique_ptr<HighScoresFrame> frame;
+    std::unique_ptr<Sprite> background;
     Video video;
 
 };

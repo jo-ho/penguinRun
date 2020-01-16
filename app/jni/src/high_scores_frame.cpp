@@ -13,7 +13,8 @@ HighScoresFrame::HighScoresFrame(Video &video) {
                                                     0, 0,
                                                     HIGH_SCORES_FRAME_WIDTH,
                                                     HIGH_SCORES_FRAME_HEIGHT,
-                                                    0, 0));
+                                                    0, 0,
+                                                    &Colour::black));
     w =  HIGH_SCORES_FRAME_WIDTH / 3;
     h = HIGH_SCORES_FRAME_HEIGHT / 3;
     x = (video.getScreenSizeW() -  w) /2;

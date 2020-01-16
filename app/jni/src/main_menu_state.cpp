@@ -10,6 +10,11 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
 
     this->video = video;
 
+    background = std::unique_ptr<Sprite>(new Sprite(video, "gui/background1.png",
+                                                    0, 0,
+                                                    BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
+                                                    0, 0));
+
     row = std::make_unique<ImageButtonRow>(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
                                                              BUTTON_SIZE, video.getScreenSizeH() - video.getScreenSizeH() / 4);
     row->add(new ImageButton(
@@ -55,6 +60,7 @@ void MainMenuState::update(int elapsedTime) {
 
 void MainMenuState::render() {
     video.clear();
+    background->renderStretchToBackground(video, 0, 0);
     row->render();
     video.present();
 

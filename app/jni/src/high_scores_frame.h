@@ -27,6 +27,7 @@ public:
     void updateScores();
 
 private:
+
     Video video;
     std::unique_ptr<Sprite> background;
     std::vector<int> scores;
