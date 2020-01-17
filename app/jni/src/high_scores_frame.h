@@ -15,6 +15,7 @@ static const int SECOND_SCORE_OFFSET_Y = 1024;
 static const int THIRD_SCORE_OFFSET_Y = 1485;
 
 
+
 #include <vector>
 #include "video.h"
 #include "sprite.h"
@@ -27,10 +28,17 @@ public:
     void updateScores();
 
 private:
+    static const int HEADLINE_SPRITE_SIZE_W = 2080;
+    static const int HEADLINE_SIZE_W = HEADLINE_SPRITE_SIZE_W / 8;
+
+    static const int HEADLINE_SPRITE_SIZE_H = 408;
+    static const int HEADLINE_SIZE_H = HEADLINE_SPRITE_SIZE_H / 8;
+
 
     Video video;
     std::unique_ptr<Sprite> background;
     std::vector<int> scores;
+    std::unique_ptr<Sprite> headline;
     Text firstScore = Text(32);
     Text secondScore = Text(32);
     Text thirdScore = Text(32);

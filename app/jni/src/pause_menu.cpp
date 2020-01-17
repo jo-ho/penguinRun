@@ -20,11 +20,18 @@ PauseMenu::PauseMenu(Video &video) {
     h = BACKGROUND_HEIGHT / 4;
 
     buttons = std::unique_ptr<ImageButtonRow>(new ImageButtonRow(x, y, w, h, BUTTON_SIZE, h - (w / 3)));
+    headline = std::unique_ptr<Sprite>(new Sprite(video, "gui/headlines/paused.png",
+                                                  0, 0,
+                                                  HEADLINE_SPRITE_SIZE_W, HEADLINE_SPRITE_SIZE_H,
+                                                  0, 0));
 
 }
 
 void PauseMenu::render() {
     background->renderSprite(video, x, y, w, h);
+    headline->renderSprite(video,
+            (x + w  / 2) - (HEADLINE_SIZE_W / 2)  , y + h / 4,
+            HEADLINE_SIZE_W, HEADLINE_SIZE_H);
     buttons->render();
 
 }

@@ -15,6 +15,10 @@ HighScoresFrame::HighScoresFrame(Video &video) {
                                                     HIGH_SCORES_FRAME_HEIGHT,
                                                     0, 0,
                                                     &Colour::black));
+    headline = std::unique_ptr<Sprite>(new Sprite(video, "gui/headlines/hi-score.png",
+                                                  0, 0,
+                                                  HEADLINE_SPRITE_SIZE_W, HEADLINE_SPRITE_SIZE_H,
+                                                  0, 0));
     w =  HIGH_SCORES_FRAME_WIDTH / 3;
     h = HIGH_SCORES_FRAME_HEIGHT / 3;
     x = (video.getScreenSizeW() -  w) /2;
@@ -26,6 +30,9 @@ HighScoresFrame::HighScoresFrame(Video &video) {
 
 void HighScoresFrame::render() {
     background->renderSprite(video, x, y, w, h);
+    headline->renderSprite(video,
+            x + w / 2 - HEADLINE_SIZE_W / 2 , y,
+            HEADLINE_SIZE_W, HEADLINE_SIZE_H);
     if (scores.size() > 0) {
         firstScore.render(video, std::to_string(scores.at(0)).c_str(), Colour::black,
                 x + SCORE_OFFSET_X / 3, y + FIRST_SCORE_OFFSET_Y / 3);
