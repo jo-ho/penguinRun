@@ -8,6 +8,7 @@ AnimatedSprite::AnimatedSprite(Video &video, const char *fileName, int imgX, int
     spriteElapsedTime = 0;
     totalFrames = numFrames;
     currentFrame = 0;
+    numCompletedLoops = 0;
 }
 
 void AnimatedSprite::updateSprite(int elapsedTime) {

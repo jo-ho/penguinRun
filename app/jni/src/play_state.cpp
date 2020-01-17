@@ -80,7 +80,7 @@ void PlayState::update(int elapsedTime) {
         } else {
             if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
 
-            if (deathAnimation->getNumCompletedLoops() == 1) {
+            if (deathAnimation->getNumCompletedLoops() == 1 ) {
                 deathAnimationComplete = true;
                 ScoreManager::Get()->addScore(player->getScore());
                 stateMachine->change(MAIN_MENU, NULL);
