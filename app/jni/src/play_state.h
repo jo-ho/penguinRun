@@ -52,7 +52,7 @@ private:
     std::unique_ptr<ScrollableBackground> background;
     std::unique_ptr<PickupManager>  pickupManager;
     std::unique_ptr<PauseMenu>  pauseMenu;
-    Text score = Text(32);
+    Text score = Text(48);
     std::vector<long long> fingerIDs;
 
     bool deathAnimationComplete; //TODO remove?

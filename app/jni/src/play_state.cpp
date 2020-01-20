@@ -92,7 +92,7 @@ void PlayState::update(int elapsedTime) {
 void PlayState::render() {
     video.clear();
     background->render(video);
-    score.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
+    score.render(video, std::to_string(player->getScore()).c_str(), Colour::white, 5 , 5);
     pauseButton->render(PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
     if (player->getDamagedState() != DEAD) {
         player->render(video);
