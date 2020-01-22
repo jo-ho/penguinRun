@@ -28,7 +28,7 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
     row->add(new ImageButton(
             video, "gui/buttons/normal/help.png", "gui/buttons/click/help.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, []() {}, &Colour::black));
+            0, 0, [sm = stateMachine]() {sm->change(HELP, nullptr);}, &Colour::black));
     row->add(new ImageButton(
             video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
             0, 0, BUTTON_SIZE, BUTTON_SIZE,
