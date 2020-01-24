@@ -35,6 +35,14 @@ private:
     std::shared_ptr<StateMachine> stateMachine;
     std::unique_ptr<Sprite> background;
     std::unique_ptr<ImageButton> backButton;
+    std::unique_ptr<Sprite> penguin;
+    std::unique_ptr<Sprite> scorePickup;
+    std::unique_ptr<Sprite> deathPickup;
+    std::unique_ptr<Sprite> shieldPickup;
+    std::unique_ptr<Sprite> slowPickup;
+    std::unique_ptr<Sprite> fastPickup;
+    Text desc = Text(32);
+    Text title = Text(48);
 
 
 };
