@@ -21,27 +21,27 @@ HelpState::HelpState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
             [sm = stateMachine]() {sm->change(MAIN_MENU, nullptr);}, &Colour::black));
     penguin = std::unique_ptr<Sprite>(new Sprite(
             video, "penguin-gray_new.png",
-            0, 52, 30, 52,
+            0, PENGUIN_WIDTH, PENGUIN_HEIGHT, PENGUIN_WIDTH,
             0, 0, &Colour::white));
     scorePickup = std::unique_ptr<Sprite>(new Sprite(
             video, "pickups/fried-fish.png",
-            0, 0, 64, 64,
+            0, 0, PICKUP_SIZE, PICKUP_SIZE,
             0, 0));
     deathPickup = std::unique_ptr<Sprite>(new Sprite(
             video, "pickups/skull-crossed-bones.png",
-            0, 0, 64, 64,
+            0, 0, PICKUP_SIZE, PICKUP_SIZE,
             0, 0));
     shieldPickup = std::unique_ptr<Sprite>(new Sprite(
             video, "pickups/shield.png",
-            0, 0, 64, 64,
+            0, 0, PICKUP_SIZE, PICKUP_SIZE,
             0, 0));
     slowPickup = std::unique_ptr<Sprite>(new Sprite(
             video, "pickups/snail.png",
-            0, 0, 64, 64,
+            0, 0, PICKUP_SIZE, PICKUP_SIZE,
             0, 0));
     fastPickup = std::unique_ptr<Sprite>(new Sprite(
             video, "pickups/sprint.png",
-            0, 0, 64, 64,
+            0, 0, PICKUP_SIZE, PICKUP_SIZE,
             0, 0));
 }
 
@@ -72,12 +72,12 @@ void HelpState::render() {
     int yCursor =  padding;
     const int descX = video.getScreenSizeW() / 3;
     const int spriteX = video.getScreenSizeW() / 4;
-    penguin->renderSprite(video, spriteX, yCursor, 30 * 1.5, 52 * 1.5);
+    penguin->renderSprite(video, spriteX, yCursor, PENGUIN_HEIGHT * 1.5, PENGUIN_WIDTH * 1.5);
     desc.render(video, "This is your character.", Colour::black, descX, yCursor);
-    yCursor += 32;
+    yCursor += DESC_TEXT_SIZE;
     desc.render(video, "Tap the top half of the screen to move up",
             Colour::black, descX, yCursor);
-    yCursor += 32;
+    yCursor += DESC_TEXT_SIZE;
     desc.render(video, "and the bottom half to move down.",
             Colour::black, descX, yCursor);
     yCursor += padding;

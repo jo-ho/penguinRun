@@ -2,6 +2,14 @@
 #define GAME1_HELP_STATE_H
 
 
+static const int PICKUP_SIZE = 64;
+
+static const int DESC_TEXT_SIZE = 32;
+
+static const int PENGUIN_WIDTH = 52;
+
+static const int PENGUIN_HEIGHT = 30;
+
 #include "state.h"
 #include "state_machine.h"
 #include "video.h"
@@ -41,7 +49,7 @@ private:
     std::unique_ptr<Sprite> shieldPickup;
     std::unique_ptr<Sprite> slowPickup;
     std::unique_ptr<Sprite> fastPickup;
-    Text desc = Text(32);
+    Text desc = Text(DESC_TEXT_SIZE);
     Text title = Text(48);
 
 
