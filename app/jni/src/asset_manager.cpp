@@ -4,6 +4,9 @@
 
 #include "asset_manager.h"
 
+AssetManager * AssetManager::instance = nullptr;
+
+
 AssetManager::AssetManager() {}
 
 AssetManager *AssetManager::Get() {
