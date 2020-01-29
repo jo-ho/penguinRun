@@ -4,16 +4,14 @@
 #include "colour.h"
 #include "file_manager.h"
 #include "score_manager.h"
+#include "asset_manager.h"
 
 MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video & video) {
     this->stateMachine = stateMachine;
 
     this->video = video;
 
-    background = std::unique_ptr<Sprite>(new Sprite(video, "gui/background1.png",
-                                                    0, 0,
-                                                    BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
-                                                    0, 0));
+    background = AssetManager::Get()->GetSprite("main_menu_bg");
 
     row = std::make_unique<ImageButtonRow>(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
                                                              BUTTON_SIZE, video.getScreenSizeH() - video.getScreenSizeH() / 4);

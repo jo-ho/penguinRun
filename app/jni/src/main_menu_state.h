@@ -38,7 +38,7 @@ private:
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
     std::unique_ptr<ImageButton> playButton;
-    std::unique_ptr<Sprite> background;
+    Sprite * background;
     std::unique_ptr<ImageButtonRow> row;
 
 

@@ -7,7 +7,10 @@
 AssetManager * AssetManager::instance = nullptr;
 
 
-AssetManager::AssetManager(Video & video) {}
+AssetManager::AssetManager(Video & video) {
+    this->video = video;
+    addSprite("main_menu_bg", "gui/background1.png", 4866, 3000);
+}
 
 void AssetManager::Init(Video &video) {
     instance = new AssetManager(video);
@@ -18,13 +21,20 @@ AssetManager *AssetManager::Get() {
 }
 
 AssetManager::~AssetManager() {
+    for(auto itr = sprites.begin(); itr != sprites.end(); itr++)
+    {
+        delete itr->second;
+    }
     delete instance;
 }
 
-void AssetManager::addSprite(Video & video, const std::string& name, const std::string& fileName,
+void AssetManager::addSprite( const char * name, const char * fileName,
                                       int w, int h, const SDL_Color * colorKey) {
-    auto * sprite = new Sprite(video, fileName.c_str(), w, h, colorKey);
-    sprites[name] = sprite;
+    sprites[name] =  new Sprite(video, fileName, w, h, colorKey);
+}
+
+Sprite *AssetManager::GetSprite(const char * name) {
+    return sprites[name];
 }
 
 

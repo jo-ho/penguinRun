@@ -14,14 +14,17 @@ public:
 
     static AssetManager * Get();
     static void Init(Video & video);
+    Sprite * GetSprite(const char * name);
 
 private:
     static AssetManager * instance;
-    std::map<std::string, Sprite *> sprites;
+    std::map<const char *, Sprite *> sprites;
+    Video video;
     AssetManager(Video & video);
     ~AssetManager();
-    void addSprite(Video & video, const std::string& name, const std::string& fileName,
+    void addSprite(const char * name, const char * fileName,
                    int w, int h, const SDL_Color * colorKey = nullptr);
+
 };
 
 

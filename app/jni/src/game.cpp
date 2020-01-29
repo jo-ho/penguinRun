@@ -6,6 +6,7 @@
 #include "state.h"
 #include "high_scores_state.h"
 #include "help_state.h"
+#include "asset_manager.h"
 
 Game::Game()  {
     srand (time(NULL));
@@ -20,6 +21,7 @@ Game::Game()  {
     }
 
     video.init();
+    AssetManager::Init(video);
     stateMachine = std::make_shared<StateMachine>();
 
     addStates();
