@@ -7,17 +7,24 @@
 AssetManager * AssetManager::instance = nullptr;
 
 
-AssetManager::AssetManager() {}
+AssetManager::AssetManager(Video & video) {}
+
+void AssetManager::Init(Video &video) {
+    instance = new AssetManager(video);
+}
 
 AssetManager *AssetManager::Get() {
-    if (!instance) {
-        instance = new AssetManager();
-    }
     return instance;
 }
 
 AssetManager::~AssetManager() {
     delete instance;
+}
+
+void AssetManager::addSprite(Video & video, const std::string& name, const std::string& fileName,
+                                      int w, int h, const SDL_Color * colorKey) {
+    auto * sprite = new Sprite(video, fileName.c_str(), w, h, colorKey);
+    sprites[name] = sprite;
 }
 
 
