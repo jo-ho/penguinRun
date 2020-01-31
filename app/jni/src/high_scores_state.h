@@ -43,7 +43,7 @@ private:
 
     std::shared_ptr<StateMachine> stateMachine;
     std::unique_ptr<HighScoresFrame> frame;
-    std::unique_ptr<Sprite> background;
+    Sprite * background;
     std::unique_ptr<ImageButton> backButton;
     Video video;
 

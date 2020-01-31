@@ -29,9 +29,9 @@ private:
     static const int HEADLINE_SIZE_H = HEADLINE_SPRITE_SIZE_H / 8;
 
 
-    std::unique_ptr<Sprite> background;
+    Sprite * background;
     std::unique_ptr<ImageButtonRow> buttons;
-    std::unique_ptr<Sprite> headline;
+    Sprite * headline;
     Video video;
 
     int x;

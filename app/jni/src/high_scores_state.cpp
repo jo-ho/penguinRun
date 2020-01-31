@@ -5,16 +5,13 @@
 #include "high_scores_state.h"
 #include "score_manager.h"
 #include "colour.h"
+#include "asset_manager.h"
 
 HighScoresState::HighScoresState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->stateMachine = stateMachine;
     this->video = video;
     frame = std::unique_ptr<HighScoresFrame>(new HighScoresFrame(video));
-    background = std::unique_ptr<Sprite>(new Sprite(
-            video, "gui/background2.png",
-            0,0,
-            BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
-            0, 0));
+    background = AssetManager::Get()->GetSprite("high_scores_bg");
     backButton = std::unique_ptr<ImageButton>(new ImageButton(
             video, "gui/buttons/normal/left.png", "gui/buttons/click/left.png",
             0, 0, BACK_BUTTON_SPRITE_SIZE, BACK_BUTTON_SPRITE_SIZE,

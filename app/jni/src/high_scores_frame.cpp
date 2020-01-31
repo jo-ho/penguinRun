@@ -5,20 +5,13 @@
 #include "high_scores_frame.h"
 #include "score_manager.h"
 #include "colour.h"
+#include "asset_manager.h"
 
 
 HighScoresFrame::HighScoresFrame(Video &video) {
     this->video = video;
-    background = std::unique_ptr<Sprite>(new Sprite(video, "gui/frames/hi-score-new.png",
-                                                    0, 0,
-                                                    HIGH_SCORES_FRAME_WIDTH,
-                                                    HIGH_SCORES_FRAME_HEIGHT,
-                                                    0, 0,
-                                                    &Colour::black));
-    headline = std::unique_ptr<Sprite>(new Sprite(video, "gui/headlines/hi-score.png",
-                                                  0, 0,
-                                                  HEADLINE_SPRITE_SIZE_W, HEADLINE_SPRITE_SIZE_H,
-                                                  0, 0));
+    background = AssetManager::Get()->GetSprite("high_scores_frame");
+    headline = AssetManager::Get()->GetSprite("high_scores_hl");
     w =  HIGH_SCORES_FRAME_WIDTH / 3;
     h = HIGH_SCORES_FRAME_HEIGHT / 3;
     x = (video.getScreenSizeW() -  w) /2;

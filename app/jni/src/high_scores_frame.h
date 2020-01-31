@@ -36,9 +36,9 @@ private:
 
 
     Video video;
-    std::unique_ptr<Sprite> background;
+    Sprite * background;
     std::vector<int> scores;
-    std::unique_ptr<Sprite> headline;
+    Sprite * headline;
     Text firstScore = Text(32);
     Text secondScore = Text(32);
     Text thirdScore = Text(32);
