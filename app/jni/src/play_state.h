@@ -18,7 +18,7 @@ static const int BUTTON_SPRITE_SIZE = 300;
 #include "text.h"
 #include "background.h"
 #include "death_animation.h"
-#include "button.h"
+
 #include "image_button.h"
 #include "pause_menu.h"
 

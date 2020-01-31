@@ -10,7 +10,7 @@ static const int BUTTON_SIZE = 300;
 #include "state.h"
 #include "state_machine.h"
 #include "video.h"
-#include "button.h"
+
 #include "image_button.h"
 #include "image_button_row.h"
 
@@ -31,13 +31,8 @@ public:
     void onExit() override;
 
 private:
-    static const int BACKGROUND_WIDTH = 4866;
-
-    static const int BACKGROUND_HEIGHT = 3000;
-
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
-    std::unique_ptr<ImageButton> playButton;
     Sprite * background;
     std::unique_ptr<ImageButtonRow> row;
 

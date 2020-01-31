@@ -1,6 +1,5 @@
 #include <memory>
 #include "main_menu_state.h"
-#include "button.h"
 #include "colour.h"
 #include "file_manager.h"
 #include "score_manager.h"
