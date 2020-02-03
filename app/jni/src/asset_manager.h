@@ -7,12 +7,15 @@
 
 
 
+
+
 #include <map>
 #include "sprite.h"
 
 
 class AssetManager {
 public:
+    static const int SHIELD_SIZE = 128;
 
     static AssetManager * Get();
     static void Init(Video & video);
@@ -27,6 +30,7 @@ private:
     static const int HIGHSCORES_HL_H = 408;
     static const int PAUSED_HL_W = 1388;
     static const int PAUSED_HL_H = 374;
+    static const int SHIELD_ALPHA = 127;
 
     static AssetManager * instance;
     std::map<const char *, Sprite *> sprites;

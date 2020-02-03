@@ -16,6 +16,8 @@ AssetManager::AssetManager(Video & video) {
     addSprite("high_scores_hl", "gui/headlines/hi-score.png", HIGHSCORES_HL_W, HIGHSCORES_HL_H);
     addSprite("paused_frame", "gui/frames/paused.png", FRAME_W, FRAME_H);
     addSprite("paused_hl", "gui/headlines/paused.png", PAUSED_HL_W, PAUSED_HL_H);
+    addSprite("shield", "spr_shield.png", SHIELD_SIZE, SHIELD_SIZE, &Colour::white);
+    sprites["shield"]->setTextureAlphaMod(SHIELD_ALPHA);
 }
 
 void AssetManager::Init(Video &video) {
