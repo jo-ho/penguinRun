@@ -8,7 +8,6 @@
 
 
 
-
 #include <map>
 #include "sprite.h"
 
@@ -31,6 +30,9 @@ private:
     static const int PAUSED_HL_W = 1388;
     static const int PAUSED_HL_H = 374;
     static const int SHIELD_ALPHA = 127;
+    static const int MENU_BUTTON_SIZE = 300;
+    static const int BACK_BUTTON_SIZE = 701;
+    static const int PAUSE_BUTTON_SIZE = 100;
 
     static AssetManager * instance;
     std::map<const char *, Sprite *> sprites;

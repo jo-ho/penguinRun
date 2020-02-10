@@ -15,10 +15,9 @@ HelpState::HelpState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
             BACKGROUND_WIDTH, BACKGROUND_HEIGHT,
             0, 0));
     backButton = std::unique_ptr<ImageButton>(new ImageButton(
-            video, "gui/buttons/normal/left.png", "gui/buttons/click/left.png",
-            0, 0, BACK_BUTTON_SPRITE_SIZE, BACK_BUTTON_SPRITE_SIZE,
+            video, "back_unpressed", "back_pressed",
             0, video.getScreenSizeH() - BACK_BUTTON_SIZE,
-            [sm = stateMachine]() {sm->change(MAIN_MENU, nullptr);}, &Colour::black));
+            [sm = stateMachine]() {sm->change(MAIN_MENU, nullptr);}));
     penguin = std::unique_ptr<Sprite>(new Sprite(
             video, "penguin-gray_new.png",
             0, PENGUIN_WIDTH, PENGUIN_HEIGHT, PENGUIN_WIDTH,

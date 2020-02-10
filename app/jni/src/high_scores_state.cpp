@@ -13,10 +13,9 @@ HighScoresState::HighScoresState(std::shared_ptr<StateMachine> stateMachine, Vid
     frame = std::unique_ptr<HighScoresFrame>(new HighScoresFrame(video));
     background = AssetManager::Get()->GetSprite("high_scores_bg");
     backButton = std::unique_ptr<ImageButton>(new ImageButton(
-            video, "gui/buttons/normal/left.png", "gui/buttons/click/left.png",
-            0, 0, BACK_BUTTON_SPRITE_SIZE, BACK_BUTTON_SPRITE_SIZE,
+            video, "back_unpressed", "back_pressed",
             0, video.getScreenSizeH() - BACK_BUTTON_SIZE,
-            [sm = stateMachine]() {sm->change(MAIN_MENU, nullptr);}, &Colour::black));
+            [sm = stateMachine]() {sm->change(MAIN_MENU, nullptr);}));
 
 
 }

@@ -15,21 +15,17 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
     row = std::make_unique<ImageButtonRow>(0, 0, video.getScreenSizeW(), video.getScreenSizeH(),
                                                              BUTTON_SIZE, video.getScreenSizeH() - video.getScreenSizeH() / 4);
     row->add(new ImageButton(
-            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
-            0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, [sm = stateMachine]() { sm->change(PLAY, nullptr); }, &Colour::black));
+            video, "play_unpressed", "play_pressed",
+            0, 0, [sm = stateMachine]() { sm->change(PLAY, nullptr); }));
     row->add(new ImageButton(
-            video, "gui/buttons/normal/records.png", "gui/buttons/click/records.png",
-            0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, [sm = stateMachine]() {sm->change(HIGH_SCORES, nullptr);}, &Colour::black));
+            video, "records_unpressed", "records_pressed",
+            0, 0, [sm = stateMachine]() {sm->change(HIGH_SCORES, nullptr);}));
     row->add(new ImageButton(
-            video, "gui/buttons/normal/help.png", "gui/buttons/click/help.png",
-            0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, [sm = stateMachine]() {sm->change(HELP, nullptr);}, &Colour::black));
+            video, "help_unpressed", "help_pressed",
+            0, 0, [sm = stateMachine]() {sm->change(HELP, nullptr);}));
     row->add(new ImageButton(
-            video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
-            0, 0, BUTTON_SIZE, BUTTON_SIZE,
-            0, 0, [sm = stateMachine]() {sm->stopRunning();}, &Colour::black));
+            video, "home_unpressed", "home_pressed",
+            0, 0, [sm = stateMachine]() {sm->stopRunning();}));
 
 }
 

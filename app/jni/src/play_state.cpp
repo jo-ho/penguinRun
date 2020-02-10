@@ -19,22 +19,19 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
     moveAreaHeight = video.getScreenSizeH() - (video.getScreenSizeH() / FLOOR_HEIGHT_FACTOR);
     pauseButton = std::unique_ptr<ImageButton>(new ImageButton(
-            video, "gui/buttons/normal/settings.png", "gui/buttons/click/settings.png",
-            0, 0,
-            PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE,
-            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0, [this]() {this->paused = true;},
-            &Colour::black));
+            video,
+            "paused_unpressed", "paused_pressed",
+            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0,
+            [this]() {this->paused = true;}));
     paused = false;
     pauseMenu = std::unique_ptr<PauseMenu>(new PauseMenu(video));
 
     pauseMenu->add(new ImageButton(
-            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
-            0, 0, BUTTON_SPRITE_SIZE, BUTTON_SPRITE_SIZE,
-            0, 0, [this]() {this->paused = false;}, &Colour::black));
+            video, "play_unpressed", "play_pressed",
+            0, 0, [this]() {this->paused = false;}));
     pauseMenu->add(new ImageButton(
-            video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
-            0, 0, BUTTON_SPRITE_SIZE, BUTTON_SPRITE_SIZE,
-            0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}, &Colour::black));
+            video, "home_unpressed", "home_pressed",
+            0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}));
 }
 
 State::StateType PlayState::getStateType() {

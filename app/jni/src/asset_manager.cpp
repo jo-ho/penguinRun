@@ -18,6 +18,22 @@ AssetManager::AssetManager(Video & video) {
     addSprite("paused_hl", "gui/headlines/paused.png", PAUSED_HL_W, PAUSED_HL_H);
     addSprite("shield", "spr_shield.png", SHIELD_SIZE, SHIELD_SIZE, &Colour::white);
     sprites["shield"]->setTextureAlphaMod(SHIELD_ALPHA);
+    addSprite("play_unpressed", "gui/buttons/normal/play.png", MENU_BUTTON_SIZE, MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("play_pressed", "gui/buttons/click/play.png", MENU_BUTTON_SIZE, MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("records_unpressed", "gui/buttons/normal/records.png", MENU_BUTTON_SIZE,
+              MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("records_pressed", "gui/buttons/click/records.png", MENU_BUTTON_SIZE,
+              MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("help_unpressed", "gui/buttons/normal/help.png", MENU_BUTTON_SIZE, MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("help_pressed", "gui/buttons/click/help.png", MENU_BUTTON_SIZE, MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("home_unpressed", "gui/buttons/normal/home.png", MENU_BUTTON_SIZE, MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("home_pressed", "gui/buttons/click/home.png", MENU_BUTTON_SIZE, MENU_BUTTON_SIZE, &Colour::black );
+    addSprite("back_unpressed", "gui/buttons/normal/left.png", BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, &Colour::black );
+    addSprite("back_pressed", "gui/buttons/click/left.png", BACK_BUTTON_SIZE, BACK_BUTTON_SIZE, &Colour::black );
+    addSprite("paused_unpressed", "gui/buttons/normal/settings.png", PAUSE_BUTTON_SIZE,
+              PAUSE_BUTTON_SIZE, &Colour::black );
+    addSprite("paused_pressed", "gui/buttons/click/settings.png", PAUSE_BUTTON_SIZE,
+              PAUSE_BUTTON_SIZE, &Colour::black );
 }
 
 void AssetManager::Init(Video &video) {
