@@ -6,7 +6,9 @@
 #define GAME1_ASSET_MANAGER_H
 
 
+static const int HELP_FRAME_W = 1920;
 
+static const int HELP_FRAME_H = 1080;
 
 #include <map>
 #include "sprite.h"

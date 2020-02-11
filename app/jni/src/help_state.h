@@ -33,22 +33,13 @@ public:
     void onExit() override;
 
 private:
-    static const int BACKGROUND_WIDTH = 4866;
-
-    static const int BACKGROUND_HEIGHT = 3000;
     static const int BACK_BUTTON_SPRITE_SIZE = 701;
     static const int BACK_BUTTON_SIZE = BACK_BUTTON_SPRITE_SIZE / 7;
 
     Video video;
     std::shared_ptr<StateMachine> stateMachine;
-    std::unique_ptr<Sprite> background;
+    Sprite * background;
     std::unique_ptr<ImageButton> backButton;
-    std::unique_ptr<Sprite> penguin;
-    std::unique_ptr<Sprite> scorePickup;
-    std::unique_ptr<Sprite> deathPickup;
-    std::unique_ptr<Sprite> shieldPickup;
-    std::unique_ptr<Sprite> slowPickup;
-    std::unique_ptr<Sprite> fastPickup;
     Text desc = Text(DESC_TEXT_SIZE);
     Text title = Text(48);
 
