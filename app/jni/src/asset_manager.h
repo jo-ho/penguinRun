@@ -10,6 +10,10 @@ static const int HELP_FRAME_W = 1920;
 
 static const int HELP_FRAME_H = 1080;
 
+static const int PLAY_BG_W = 1024;
+
+static const int PLAY_BG_H = 768;
+
 #include <map>
 #include "sprite.h"
 

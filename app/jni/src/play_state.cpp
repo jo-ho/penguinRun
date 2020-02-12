@@ -12,10 +12,7 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->video = video;
     player = std::unique_ptr<Player>(new Player(video));
     pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
-    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground(video,
-                                                                                BACKGROUND_FILENAME,
-                                                                                BACKGROUND_WIDTH,
-                                                                                BACKGROUND_HEIGHT));
+    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground("play_bg"));
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
     moveAreaHeight = video.getScreenSizeH() - (video.getScreenSizeH() / FLOOR_HEIGHT_FACTOR);
     pauseButton = std::unique_ptr<ImageButton>(new ImageButton(

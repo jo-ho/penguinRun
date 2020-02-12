@@ -3,7 +3,7 @@
 
 
 
-static const char *const BACKGROUND_FILENAME = "under.png";
+
 
 static const int FLOOR_HEIGHT_FACTOR = 8;
 
@@ -43,8 +43,6 @@ public:
     void handleInput(SDL_Event & event);
 
 private:
-    static const int BACKGROUND_WIDTH = 1024;
-    static const int BACKGROUND_HEIGHT = 768;
 
     std::shared_ptr<StateMachine> stateMachine;
     Video video;

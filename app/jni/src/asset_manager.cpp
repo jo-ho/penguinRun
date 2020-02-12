@@ -12,6 +12,7 @@ AssetManager::AssetManager(Video & video) {
     this->video = video;
     addSprite("main_menu_bg", "gui/background1.png", STATE_BACKGROUND_W, STATE_BACKGROUND_H);
     addSprite("high_scores_bg", "gui/background2.png", STATE_BACKGROUND_W, STATE_BACKGROUND_H);
+    addSprite("play_bg", "under.png", PLAY_BG_W, PLAY_BG_H);
     addSprite("high_scores_frame", "gui/frames/hi-score-new.png", FRAME_W, FRAME_H, &Colour::black);
     addSprite("high_scores_hl", "gui/headlines/hi-score.png", HIGHSCORES_HL_W, HIGHSCORES_HL_H);
     addSprite("paused_frame", "gui/frames/paused.png", FRAME_W, FRAME_H);

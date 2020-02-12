@@ -8,11 +8,11 @@
 
 class ScrollableBackground {
 public:
-    ScrollableBackground(Video & video, const char * fileName, int imgWidth, int imgHeight);
+    ScrollableBackground(const char * name);
     void render(Video & video);
     void update(int screenSizeW);
 private:
-    std::unique_ptr<Sprite> sprite;
+    Sprite * sprite;
     int offset;
 };
 
