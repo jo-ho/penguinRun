@@ -5,27 +5,28 @@
 #include "sprite.h"
 #include "player.h"
 
-class Pickup : public Sprite {
+class Pickup {
     public:
         Pickup(Video &video,
-               const char *fileName,
-               int imgX,
-               int imgY,
-               int imgWidth,
-               int imgHeight,
+               const char * textureName,
                int initX,
-               int initY,
-               const SDL_Color *colorKey);
+               int initY);
         void move(int screenHeight);
+        void render(Video & video);
         SDL_Rect getCollider();
+        int getX();
+        int getY();
         virtual void activateAction(std::unique_ptr<Player> &player) = 0;
         const static int PICKUP_WIDTH;
         const static int PICKUP_HEIGHT;
 
 
     private:
+        Sprite * sprite;
         int velocityX;
         int velocityY;
+        int x;
+        int y;
 
 };
 

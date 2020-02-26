@@ -22,12 +22,13 @@ Sprite::Sprite(Video &video,
     srcRect.h = imgHeight;
 }
 
+
+
 Sprite::~Sprite() {
     if (!spriteTexture) {
         SDL_DestroyTexture(spriteTexture);
     }
 }
-
 
 void Sprite::renderSprite(Video &video, int destX, int destY) {
     SDL_Rect destRect;
@@ -69,4 +70,8 @@ void Sprite::renderSprite(Video &video, int destX, int destY, int destW, int des
     SDL_Rect destRect =  {destX, destY, destW, destH};
     video.renderTexture(spriteTexture, &srcRect, &destRect);
 }
+
+Sprite::Sprite(Video &video, const char *fileName, int imgWidth, int imgHeight,
+               const SDL_Color *colorKey) :
+               Sprite(video, fileName, 0, 0, imgWidth, imgHeight, 0, 0, colorKey) {}
 

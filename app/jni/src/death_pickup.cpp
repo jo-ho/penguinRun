@@ -6,7 +6,7 @@ const int DeathPickup::SPAWN_DELAY_MS = 1000;
 DeathPickup::DeathPickup(Video &video,
                          int initX,
                          int initY) :
-        Pickup(video, "pickups/skull-crossed-bones.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, &Colour::white) {
+        Pickup(video, "death_pickup", initX, initY) {
 }
 
 void DeathPickup::activateAction(std::unique_ptr<Player> &player) {

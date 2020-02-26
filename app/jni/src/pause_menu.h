@@ -22,10 +22,16 @@ private:
     static const int BACKGROUND_HEIGHT;
     static const int BUTTON_SIZE;
 
-    static const int BUTTON_SPRITE_SIZE;
 
-    std::unique_ptr<Sprite> background;
+    static const int HEADLINE_SPRITE_SIZE_W = 1388;
+    static const int HEADLINE_SIZE_W = HEADLINE_SPRITE_SIZE_W / 8;
+    static const int HEADLINE_SPRITE_SIZE_H = 374;
+    static const int HEADLINE_SIZE_H = HEADLINE_SPRITE_SIZE_H / 8;
+
+
+    Sprite * background;
     std::unique_ptr<ImageButtonRow> buttons;
+    Sprite * headline;
     Video video;
 
     int x;

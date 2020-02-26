@@ -1,30 +1,27 @@
 //
-// Created by User on 2020-01-09.
+// Created by User on 2020-01-19.
 //
 
-#include "high_scores_state.h"
-#include "score_manager.h"
+#include "help_state.h"
 #include "colour.h"
 #include "asset_manager.h"
 
-HighScoresState::HighScoresState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
-    this->stateMachine = stateMachine;
+HelpState::HelpState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->video = video;
-    frame = std::unique_ptr<HighScoresFrame>(new HighScoresFrame(video));
-    background = AssetManager::Get()->GetSprite("high_scores_bg");
+    this->stateMachine = stateMachine;
+
+    background = AssetManager::Get()->GetSprite("help_frame");
     backButton = std::unique_ptr<ImageButton>(new ImageButton(
             video, "back_unpressed", "back_pressed",
             0, video.getScreenSizeH() - BACK_BUTTON_SIZE,
             [sm = stateMachine]() {sm->change(MAIN_MENU, nullptr);}));
-
-
 }
 
-State::StateType HighScoresState::getStateType() {
-    return HIGH_SCORES;
+State::StateType HelpState::getStateType() {
+    return HELP;
 }
 
-void HighScoresState::handleEvents() {
+void HelpState::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
         if (event.type == SDL_QUIT) {
@@ -33,27 +30,26 @@ void HighScoresState::handleEvents() {
         backButton->handleEvent(event, BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
 
     }
-}
-
-void HighScoresState::update(int elapsedTime) {
 
 }
 
-void HighScoresState::render() {
+void HelpState::update(int elapsedTime) {
+
+}
+
+void HelpState::render() {
     video.clear();
     background->renderStretchToBackground(video, 0, 0);
     backButton->render(BACK_BUTTON_SIZE, BACK_BUTTON_SIZE);
-    frame->render();
     video.present();
 
-}
-
-void HighScoresState::onEnter(void *param) {
-    frame->updateScores();
 
 }
 
-void HighScoresState::onExit() {
+void HelpState::onEnter(void *param) {
 
 }
 
+void HelpState::onExit() {
+
+}

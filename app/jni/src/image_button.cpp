@@ -1,21 +1,17 @@
 #include "image_button.h"
 #include "collision.h"
+#include "asset_manager.h"
 
-ImageButton::ImageButton(Video &video, const char *unpressedFileName, const char *pressedFileName,
-                         int imgX,
-                         int imgY, int imgWidth, int imgHeight, int posX, int posY,
-                         std::function<void()> callback, const SDL_Color *colorKey) {
-    unpressed = std::unique_ptr<Sprite>(
-            new Sprite(video, unpressedFileName, imgX, imgY, imgWidth, imgHeight, posX, posY, colorKey));
-    pressed = std::unique_ptr<Sprite>(
-            new Sprite(video, pressedFileName, imgX, imgY, imgWidth, imgHeight, posX, posY, colorKey));
+ImageButton::ImageButton(Video &video, const char *unpressedName, const char * pressedName,
+        int posX, int posY,
+        std::function<void()> callback) {
+    unpressed = AssetManager::Get()->GetSprite(unpressedName);
+    pressed = AssetManager::Get()->GetSprite(pressedName);
     isPressed = false;
     this->callback = callback;
     this->video = video;
     this->x = posX;
     this->y = posY;
-    this->w = imgWidth;
-    this->h = imgHeight;
 
 }
 

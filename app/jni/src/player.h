@@ -48,7 +48,7 @@ private:
 
 
     std::map<MoveState, std::unique_ptr<AnimatedSprite>> sprites;
-    std::unique_ptr<Sprite> shieldSprite;
+    Sprite * shieldSprite;
     MoveState moveState;
     SpeedState speedState;
     DamagedState damagedState;

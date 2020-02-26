@@ -3,7 +3,7 @@
 
 
 
-static const char *const BACKGROUND_FILENAME = "under.png";
+
 
 static const int FLOOR_HEIGHT_FACTOR = 8;
 
@@ -18,7 +18,7 @@ static const int BUTTON_SPRITE_SIZE = 300;
 #include "text.h"
 #include "background.h"
 #include "death_animation.h"
-#include "button.h"
+
 #include "image_button.h"
 #include "pause_menu.h"
 
@@ -43,8 +43,6 @@ public:
     void handleInput(SDL_Event & event);
 
 private:
-    static const int BACKGROUND_WIDTH = 1024;
-    static const int BACKGROUND_HEIGHT = 768;
 
     std::shared_ptr<StateMachine> stateMachine;
     Video video;
@@ -52,7 +50,7 @@ private:
     std::unique_ptr<ScrollableBackground> background;
     std::unique_ptr<PickupManager>  pickupManager;
     std::unique_ptr<PauseMenu>  pauseMenu;
-    Text score = Text(32);
+    Text score = Text(48);
     std::vector<long long> fingerIDs;
 
     bool deathAnimationComplete; //TODO remove?

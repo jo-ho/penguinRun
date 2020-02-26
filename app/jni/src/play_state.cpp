@@ -12,29 +12,23 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     this->video = video;
     player = std::unique_ptr<Player>(new Player(video));
     pickupManager = std::unique_ptr<PickupManager>(new PickupManager());
-    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground(video,
-                                                                                BACKGROUND_FILENAME,
-                                                                                BACKGROUND_WIDTH,
-                                                                                BACKGROUND_HEIGHT));
+    background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground("play_bg"));
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
     moveAreaHeight = video.getScreenSizeH() - (video.getScreenSizeH() / FLOOR_HEIGHT_FACTOR);
     pauseButton = std::unique_ptr<ImageButton>(new ImageButton(
-            video, "gui/buttons/normal/settings.png", "gui/buttons/click/settings.png",
-            0, 0,
-            PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE,
-            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0, [this]() {this->paused = true;},
-            &Colour::black));
+            video,
+            "paused_unpressed", "paused_pressed",
+            video.getScreenSizeW() - PAUSE_BUTTON_SIZE, 0,
+            [this]() {this->paused = true;}));
     paused = false;
     pauseMenu = std::unique_ptr<PauseMenu>(new PauseMenu(video));
 
     pauseMenu->add(new ImageButton(
-            video, "gui/buttons/normal/play.png", "gui/buttons/click/play.png",
-            0, 0, BUTTON_SPRITE_SIZE, BUTTON_SPRITE_SIZE,
-            0, 0, [this]() {this->paused = false;}, &Colour::black));
+            video, "play_unpressed", "play_pressed",
+            0, 0, [this]() {this->paused = false;}));
     pauseMenu->add(new ImageButton(
-            video, "gui/buttons/normal/home.png", "gui/buttons/click/home.png",
-            0, 0, BUTTON_SPRITE_SIZE, BUTTON_SPRITE_SIZE,
-            0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}, &Colour::black));
+            video, "home_unpressed", "home_pressed",
+            0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}));
 }
 
 State::StateType PlayState::getStateType() {
@@ -80,7 +74,7 @@ void PlayState::update(int elapsedTime) {
         } else {
             if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
 
-            if (deathAnimation->getNumCompletedLoops() == 1) {
+            if (deathAnimation->getNumCompletedLoops() == 1 ) {
                 deathAnimationComplete = true;
                 ScoreManager::Get()->addScore(player->getScore());
                 stateMachine->change(MAIN_MENU, NULL);
@@ -92,7 +86,7 @@ void PlayState::update(int elapsedTime) {
 void PlayState::render() {
     video.clear();
     background->render(video);
-    score.render(video, std::to_string(player->getScore()).c_str(), Colour::black, 0, 0);
+    score.render(video, std::to_string(player->getScore()).c_str(), Colour::white, 5 , 5);
     pauseButton->render(PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
     if (player->getDamagedState() != DEAD) {
         player->render(video);

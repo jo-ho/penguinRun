@@ -1,8 +1,8 @@
 #include "player.h"
 #include <SDL.h>
-#include "shield_sprite.h"
 #include <sstream>
 #include "colour.h"
+#include "asset_manager.h"
 
 const int Player::TILE_WIDTH = 30;
 const int Player::TILE_HEIGHT = 52;
@@ -19,7 +19,7 @@ Player::Player(Video &video) {
     speedState = NORMAL;
     score = 0;
     damagedState = UNHURT;
-    x = ShieldSprite::SPRITE_WIDTH / 2;
+    x = AssetManager::SHIELD_SIZE / 2;
     y = video.getScreenSizeH() / 2 - TILE_HEIGHT / 2;
     initSprites(video);
 }
@@ -33,7 +33,7 @@ void Player::initSprites(Video & video) {
                                                                             0, 0, NUM_FRAMES,
                                                                             TARGET_FPS, &Colour::white));
     }
-    shieldSprite = std::unique_ptr<Sprite>(new ShieldSprite(video, x, y));
+    shieldSprite = AssetManager::Get()->GetSprite("shield");
 }
 
 void Player::update(int screenSizeY, int elapsedTime) {
@@ -127,8 +127,8 @@ void Player::render(Video &video) {
     if (damagedState == SHIELDED) {
         int playerCenterX = x + (TILE_WIDTH / 2);
         int playerCenterY = y + (TILE_HEIGHT / 2);
-        int shieldX = playerCenterX - (ShieldSprite::SPRITE_WIDTH / 2);
-        int shieldY = playerCenterY - (ShieldSprite::SPRITE_HEIGHT / 2);
+        int shieldX = playerCenterX - (AssetManager::SHIELD_SIZE / 2);
+        int shieldY = playerCenterY - (AssetManager::SHIELD_SIZE / 2);
         shieldSprite->renderSprite(video, shieldX, shieldY);
     }
     sprites[moveState]->renderSprite(video, x , y);

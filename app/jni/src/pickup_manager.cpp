@@ -42,7 +42,7 @@ void PickupManager::update(int screenHeight, int elapsedTime) {
 
 void PickupManager::render(Video & video) {
     for (unsigned i = 0; i < pickups.size(); i++) {
-        pickups.at(i)->renderSprite(video,pickups.at(i)->getX(),pickups.at(i)->getY());
+        pickups.at(i)->render(video);
     }
 }
 

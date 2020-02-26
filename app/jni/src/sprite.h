@@ -15,6 +15,7 @@ class Sprite {
                int initX,
                int initY,
                const SDL_Color *colorKey = nullptr);
+        Sprite(Video & video, const char * fileName, int imgWidth, int imgHeight, const SDL_Color *colorKey = nullptr);
         ~Sprite();
         void renderSprite(Video& video, int destX, int destY);
         void renderSprite(Video& video, int destX, int destY, int destW, int destH);

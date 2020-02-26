@@ -9,9 +9,9 @@
 
 class ImageButton {
 public:
-    ImageButton(Video &video, const char *unpressedFileName, const char *pressedFileName, int imgX,
-                int imgY, int imgWidth, int imgHeight, int posX, int posY,
-                std::function<void()> callback, const SDL_Color *colorKey = nullptr);
+    ImageButton(Video &video, const char *unpressedName, const char *pressedName,
+                int posX, int posY,
+                std::function<void()> callback);
     bool handleEvent(SDL_Event & event, int w, int h);
     void render(int w, int h);
     void setX(int x);
@@ -20,8 +20,8 @@ public:
 
 
 private:
-    std::unique_ptr<Sprite> unpressed;
-    std::unique_ptr<Sprite> pressed;
+    Sprite * unpressed;
+    Sprite * pressed;
     Video video;
     int x;
     int y;

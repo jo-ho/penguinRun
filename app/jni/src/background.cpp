@@ -1,7 +1,8 @@
 #include "background.h"
+#include "asset_manager.h"
 
-ScrollableBackground::ScrollableBackground(Video &video, const char *fileName, int imgWidth, int imgHeight) {
-    sprite = std::unique_ptr<Sprite>(new Sprite(video, fileName, 0, 0, imgWidth, imgHeight, 0,0));
+ScrollableBackground::ScrollableBackground(const char * name) {
+    sprite = AssetManager::Get()->GetSprite(name);
     offset = 0;
 }
 

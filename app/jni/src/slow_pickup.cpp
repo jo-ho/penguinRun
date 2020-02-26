@@ -7,7 +7,7 @@ const int SlowPickup::EFFECT_TIME = 1000;
 SlowPickup::SlowPickup(Video &video,
                        int initX,
                        int initY) :
-        Pickup(video, "pickups/snail.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, &Colour::white){
+        Pickup(video, "slow_pickup", initX, initY){
 
 }
 
