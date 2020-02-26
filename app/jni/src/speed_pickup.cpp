@@ -7,7 +7,7 @@ const int SpeedPickup::EFFECT_TIME = 1000;
 SpeedPickup::SpeedPickup(Video &video,
                          int initX,
                          int initY) :
-        Pickup(video, "pickups/sprint.png", 0, 0, PICKUP_WIDTH, PICKUP_HEIGHT, initX, initY, &Colour::white){
+        Pickup(video, "speed_pickup", initX, initY){
 
 }
 
