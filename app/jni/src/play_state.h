@@ -21,6 +21,7 @@ static const int BUTTON_SPRITE_SIZE = 300;
 
 #include "image_button.h"
 #include "pause_menu.h"
+#include "post_game_menu.h"
 
 class PlayState : public State {
 public:
@@ -53,8 +54,8 @@ private:
     Text score = Text(48);
     std::vector<long long> fingerIDs;
 
-    bool deathAnimationComplete; //TODO remove?
     std::unique_ptr<DeathAnimation> deathAnimation;
+    std::unique_ptr<PostGameMenu> postGameMenu;
     int moveAreaHeight;
     std::unique_ptr<ImageButton> pauseButton;
     bool paused;

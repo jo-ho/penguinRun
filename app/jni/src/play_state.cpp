@@ -15,6 +15,7 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     background = std::unique_ptr<ScrollableBackground>(new ScrollableBackground("play_bg"));
     deathAnimation = std::unique_ptr<DeathAnimation>(new DeathAnimation(video));
     moveAreaHeight = video.getScreenSizeH() - (video.getScreenSizeH() / FLOOR_HEIGHT_FACTOR);
+
     pauseButton = std::unique_ptr<ImageButton>(new ImageButton(
             video,
             "paused_unpressed", "paused_pressed",
@@ -29,6 +30,13 @@ PlayState::PlayState(std::shared_ptr<StateMachine> stateMachine, Video &video) {
     pauseMenu->add(new ImageButton(
             video, "home_unpressed", "home_pressed",
             0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}));
+    postGameMenu = std::unique_ptr<PostGameMenu>(new PostGameMenu(video));
+    postGameMenu->add(new ImageButton(
+            video, "play_unpressed", "play_pressed",
+            0, 0, [stateMachine]() {stateMachine->change(PLAY, NULL);}));
+    postGameMenu->add(new ImageButton(
+            video, "home_unpressed", "home_pressed",
+            0, 0, [stateMachine]() {stateMachine->change(MAIN_MENU, NULL);}));
 }
 
 State::StateType PlayState::getStateType() {
@@ -38,12 +46,12 @@ State::StateType PlayState::getStateType() {
 void PlayState::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
-        pauseButton->handleEvent(event, PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
         if (event.type == SDL_QUIT) {
             stateMachine->stopRunning();
         }
         if (!paused) {
             if (player->getDamagedState() != DEAD) {
+                pauseButton->handleEvent(event, PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
                 handleInput(event);
                 if (event.type == SDL_USEREVENT) {
                     SDL_UserEvent userEvent = event.user;
@@ -55,6 +63,8 @@ void PlayState::handleEvents() {
                 } else if (event.type == SDL_APP_DIDENTERBACKGROUND) {
                     pickupManager->stopTimers();
                 }
+            } else {
+                if (deathAnimation->getNumCompletedLoops() == 1) postGameMenu->handleEvent(event);
             }
 
         } else {
@@ -72,13 +82,7 @@ void PlayState::update(int elapsedTime) {
             background->update(video.getScreenSizeW());
             pickupManager->update(moveAreaHeight, elapsedTime);
         } else {
-            if (!deathAnimationComplete) deathAnimation->updateSprite(elapsedTime);
-
-            if (deathAnimation->getNumCompletedLoops() == 1 ) {
-                deathAnimationComplete = true;
-                ScoreManager::Get()->addScore(player->getScore());
-                stateMachine->change(MAIN_MENU, NULL);
-            }
+            if (deathAnimation->getNumCompletedLoops() < 1) deathAnimation->updateSprite(elapsedTime);
         }
     }
 }
@@ -92,7 +96,10 @@ void PlayState::render() {
         player->render(video);
         pickupManager->render(video);
     } else {
-        if (!deathAnimationComplete) deathAnimation->renderSprite(video, player->getX(), player->getY());
+        if (deathAnimation->getNumCompletedLoops() < 1) deathAnimation->renderSprite(video, player->getX(), player->getY());
+        else {
+            postGameMenu->render(player->getScore());
+        }
     }
     if (paused) pauseMenu->render();
     video.present();
@@ -100,7 +107,6 @@ void PlayState::render() {
 
 void PlayState::onEnter(void * param) {
     pickupManager->resumeTimers();
-    deathAnimationComplete = false;
 }
 
 void PlayState::onExit() {

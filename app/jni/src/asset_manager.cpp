@@ -10,7 +10,7 @@ AssetManager * AssetManager::instance = nullptr;
 
 AssetManager::AssetManager(Video & video) {
     this->video = video;
-    addSprite("default", "default.png", 64,64);
+    addSprite("default", "default.png", PICKUP_SIZE, PICKUP_SIZE);
     addSprite("main_menu_bg", "gui/background1.png", STATE_BACKGROUND_W, STATE_BACKGROUND_H);
     addSprite("high_scores_bg", "gui/background2.png", STATE_BACKGROUND_W, STATE_BACKGROUND_H);
     addSprite("play_bg", "under.png", PLAY_BG_W, PLAY_BG_H);
@@ -37,11 +37,12 @@ AssetManager::AssetManager(Video & video) {
               PAUSE_BUTTON_SIZE, &Colour::black );
     addSprite("paused_pressed", "gui/buttons/click/settings.png", PAUSE_BUTTON_SIZE,
               PAUSE_BUTTON_SIZE, &Colour::black );
-    addSprite("score_pickup", "pickups/fried-fish.png", 64, 64, &Colour::white);
-    addSprite("shield_pickup", "pickups/shield.png", 64, 64, &Colour::white);
-    addSprite("death_pickup", "pickups/skull-crossed-bones.png", 64, 64, &Colour::white);
-    addSprite("slow_pickup", "pickups/snail.png", 64, 64, &Colour::white);
-    addSprite("speed_pickup", "pickups/sprint.png", 64, 64, &Colour::white);
+    addSprite("score_pickup", "pickups/fried-fish.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("shield_pickup", "pickups/shield.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("death_pickup", "pickups/skull-crossed-bones.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("slow_pickup", "pickups/snail.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("speed_pickup", "pickups/sprint.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("post_game_frame", "gui/frames/warning.png", FRAME_W, POST_GAME_FRAME_H);
 }
 
 void AssetManager::Init(Video &video) {

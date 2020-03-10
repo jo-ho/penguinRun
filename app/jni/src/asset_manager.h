@@ -14,6 +14,8 @@ static const int PLAY_BG_W = 1024;
 
 static const int PLAY_BG_H = 768;
 
+static const int PICKUP_SIZE = 64;
+
 #include <map>
 #include "sprite.h"
 
@@ -21,6 +23,8 @@ static const int PLAY_BG_H = 768;
 class AssetManager {
 public:
     static const int SHIELD_SIZE = 128;
+    static const int FRAME_W = 2102;
+    static const int POST_GAME_FRAME_H = 1561;
 
     static AssetManager * Get();
     static void Init(Video & video);
@@ -29,7 +33,7 @@ public:
 private:
     static const int STATE_BACKGROUND_W = 4866;
     static const int STATE_BACKGROUND_H = 3000;
-    static const int FRAME_W = 2102;
+
     static const int FRAME_H = 2121;
     static const int HIGHSCORES_HL_W = 2080;
     static const int HIGHSCORES_HL_H = 408;

@@ -14,6 +14,8 @@ void Text::render(Video  &video, const char * text, SDL_Color color, int destX, 
     SDL_Texture * texture = video.loadText(font, text, color);
     int w,h;
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+    this->w = w;
+    this->h = h;
     SDL_Rect destRect;
     destRect.x = destX;
     destRect.y = destY;

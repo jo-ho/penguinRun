@@ -2,13 +2,10 @@
 #define GAME1_HELP_STATE_H
 
 
-static const int PICKUP_SIZE = 64;
+
 
 static const int DESC_TEXT_SIZE = 32;
 
-static const int PENGUIN_WIDTH = 52;
-
-static const int PENGUIN_HEIGHT = 30;
 
 #include "state.h"
 #include "state_machine.h"
@@ -40,8 +37,6 @@ private:
     std::shared_ptr<StateMachine> stateMachine;
     Sprite * background;
     std::unique_ptr<ImageButton> backButton;
-    Text desc = Text(DESC_TEXT_SIZE);
-    Text title = Text(48);
 
 
 };

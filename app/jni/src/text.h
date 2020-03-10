@@ -9,6 +9,9 @@ public:
     Text(int size);
     ~Text();
     void render(Video & video, const char * text, SDL_Color color, int destX, int destY);
+
+    int w;
+    int h;
 private:
     TTF_Font * font;
 };
