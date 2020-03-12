@@ -16,7 +16,8 @@ public:
     void render(int w, int h);
     void setX(int x);
     void setY(int y);
-    SDL_Rect getButtonArea();
+    int getX();
+    int getY();
 
 
 private:
@@ -25,8 +26,6 @@ private:
     Video video;
     int x;
     int y;
-    int w;
-    int h;
     bool isPressed;
     std::function<void()> callback;
 };

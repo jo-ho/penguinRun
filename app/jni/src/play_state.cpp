@@ -61,6 +61,8 @@ void PlayState::handleEvents() {
                 } else if (event.type == SDL_APP_WILLENTERFOREGROUND) {
                     pickupManager->resumeTimers();
                 } else if (event.type == SDL_APP_DIDENTERBACKGROUND) {
+                    player->setMoveState(MoveState::STOPPED);
+
                     pickupManager->stopTimers();
                 }
             } else {
@@ -68,6 +70,7 @@ void PlayState::handleEvents() {
             }
 
         } else {
+            player->setMoveState(MoveState::STOPPED);
             pauseMenu->handleEvent(event);
         }
     }
@@ -126,7 +129,8 @@ void PlayState::handleInput(SDL_Event & event) {
         fingerIDs.push_back(event.tfinger.fingerId);
         float touchPosY = event.tfinger.y * video.getScreenSizeH();
         float touchPosX = event.tfinger.x * video.getScreenSizeW();
-        if (!Collision::PointInRect(touchPosX, touchPosY, pauseButton->getButtonArea())) {
+        SDL_Rect pauseButtonArea = {pauseButton->getX(), pauseButton->getY(), PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE};
+        if (!Collision::PointInRect(touchPosX, touchPosY, pauseButtonArea)) {
             if (touchPosY >= 0 && touchPosY <= video.getScreenSizeH() / 2) {
                 player->setMoveState(MoveState::MOVING_UP);
             } else {

@@ -10,8 +10,9 @@
 class Collision {
 public:
     static bool PointInRect(float x, float y, SDL_Rect rect) {
+
         return (x >= rect.x && x <= (rect.x + rect.w)) &&
-               (y >= rect.y && y <= (rect.y + rect.h));;
+               (y >= rect.y && y <= (rect.y + rect.h));
     }
 };
 

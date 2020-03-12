@@ -50,8 +50,12 @@ void ImageButton::setX(int x) {
 
 }
 
-SDL_Rect ImageButton::getButtonArea() {
-    return {x,y,w,h};
+int ImageButton::getX() {
+    return x;
+}
+
+int ImageButton::getY() {
+    return y;
 }
 
 
