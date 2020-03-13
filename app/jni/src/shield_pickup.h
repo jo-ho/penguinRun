@@ -7,9 +7,7 @@
 class ShieldPickup : public Pickup {
 public:
     const static int SPAWN_DELAY_MS;
-    ShieldPickup(Video & video,
-                int initX,
-                int initY);
+    ShieldPickup(int initX, int initY);
     void activateAction(std::unique_ptr<Player> &player);
 
 };

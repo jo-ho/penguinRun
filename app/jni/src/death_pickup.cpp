@@ -3,10 +3,8 @@
 
 const int DeathPickup::SPAWN_DELAY_MS = 1000;
 
-DeathPickup::DeathPickup(Video &video,
-                         int initX,
-                         int initY) :
-        Pickup(video, "death_pickup", initX, initY) {
+DeathPickup::DeathPickup(int initX, int initY) :
+        Pickup("death_pickup", initX, initY) {
 }
 
 void DeathPickup::activateAction(std::unique_ptr<Player> &player) {

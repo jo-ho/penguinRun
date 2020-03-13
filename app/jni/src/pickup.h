@@ -7,10 +7,7 @@
 
 class Pickup {
     public:
-        Pickup(Video &video,
-               const char * textureName,
-               int initX,
-               int initY);
+        Pickup(const char *textureName, int initX, int initY);
         void move(int screenHeight);
         void render(Video & video);
         SDL_Rect getCollider();

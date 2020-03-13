@@ -9,14 +9,14 @@ std::shared_ptr<Pickup>
 PickupFactory::getPickup(PickupFactory::PickupType pickupType, Video &video, int initX, int initY) {
     switch (pickupType) {
         case SCORE_PICKUP:
-            return std::make_shared<ScorePickup>(video, initX, initY);
+            return std::make_shared<ScorePickup>(initX, initY);
         case SLOW_PICKUP:
-            return std::make_shared<SlowPickup>(video, initX, initY);
+            return std::make_shared<SlowPickup>(initX, initY);
         case SPEED_PICKUP:
-            return std::make_shared<SpeedPickup>(video, initX, initY);
+            return std::make_shared<SpeedPickup>(initX, initY);
         case DEATH_PICKUP:
-            return std::make_shared<DeathPickup>(video, initX, initY);
+            return std::make_shared<DeathPickup>(initX, initY);
         case SHIELD_PICKUP:
-            return std::make_shared<ShieldPickup>(video, initX, initY);
+            return std::make_shared<ShieldPickup>(initX, initY);
     }
 }

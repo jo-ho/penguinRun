@@ -11,10 +11,7 @@ const static int VELOCITY_OFFSET = 5;
 
 const static int Y_VELOCITY_CHOICES = 3;
 
-Pickup::Pickup(Video &video,
-               const char * textureName,
-               int initX,
-               int initY) {
+Pickup::Pickup(const char *textureName, int initX, int initY) {
     // Range = [VELOCITY_MIN, VELOCITY_MIN + VELOCITY_OFFSET]
     velocityX = rand() % (VELOCITY_OFFSET + 1) + VELOCITY_MIN;
     int possibleVelY[] = {velocityX, 0, -velocityX};

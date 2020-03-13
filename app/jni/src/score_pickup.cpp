@@ -7,10 +7,8 @@ const int ScorePickup::SPAWN_DELAY_MS = 500;
 const int DEFAULT_SCORE = 20;
 
 
-ScorePickup::ScorePickup(Video &video,
-                         int initX,
-                         int initY) :
-        Pickup(video, "score_pickup", initX, initY) {
+ScorePickup::ScorePickup(int initX, int initY) :
+        Pickup("score_pickup", initX, initY) {
 
 }
 

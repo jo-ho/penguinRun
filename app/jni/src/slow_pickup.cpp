@@ -4,10 +4,8 @@
 const int SlowPickup::SPAWN_DELAY_MS = 2000;
 const int SlowPickup::EFFECT_TIME = 1000;
 
-SlowPickup::SlowPickup(Video &video,
-                       int initX,
-                       int initY) :
-        Pickup(video, "slow_pickup", initX, initY){
+SlowPickup::SlowPickup(int initX, int initY) :
+        Pickup("slow_pickup", initX, initY) {
 
 }
 

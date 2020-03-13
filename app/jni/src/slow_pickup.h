@@ -7,9 +7,7 @@ class SlowPickup : public Pickup {
     public:
         const static int SPAWN_DELAY_MS;
         const static int EFFECT_TIME;
-        SlowPickup(Video & video,
-                   int initX,
-                   int initY);
+        SlowPickup(int initX, int initY);
         void activateAction(std::unique_ptr<Player> &player);
 
     private:

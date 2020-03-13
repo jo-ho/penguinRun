@@ -9,9 +9,7 @@
 class ScorePickup : public Pickup {
     public:
         const static int SPAWN_DELAY_MS;
-        ScorePickup(Video& video,
-                       int initX,
-                       int initY);
+        ScorePickup(int initX, int initY);
         void activateAction(std::unique_ptr<Player> &player);
 
 
