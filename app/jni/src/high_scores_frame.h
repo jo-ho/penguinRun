@@ -39,9 +39,9 @@ private:
     Sprite * background;
     std::vector<int> scores;
     Sprite * headline;
-    Text firstScore = Text(32);
-    Text secondScore = Text(32);
-    Text thirdScore = Text(32);
+    Text firstScore = Text("akashi32");
+    Text secondScore = Text("akashi32");
+    Text thirdScore = Text("akashi32");
 
 
     int x, y, w, h;

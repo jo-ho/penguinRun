@@ -20,6 +20,8 @@ void FileManager::appendInt(const char *fileName, int value) {
     SDL_itoa(value, buffer, 10);
     if(SDL_RWwrite(rw, buffer, 1, SDL_strlen(buffer))) {
         SDL_Log("append");
+    } else {
+        SDL_Log("append fail");
     }
     const char * newLine = "\n";
     if(SDL_RWwrite(rw, newLine, 1, SDL_strlen(newLine))) {

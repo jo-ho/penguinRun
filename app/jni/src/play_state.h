@@ -51,7 +51,7 @@ private:
     std::unique_ptr<ScrollableBackground> background;
     std::unique_ptr<PickupManager>  pickupManager;
     std::unique_ptr<PauseMenu>  pauseMenu;
-    Text score = Text(48);
+    Text score = Text("akashi48");
     std::vector<long long> fingerIDs;
 
     std::unique_ptr<DeathAnimation> deathAnimation;

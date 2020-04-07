@@ -101,6 +101,7 @@ void PlayState::render() {
     } else {
         if (deathAnimation->getNumCompletedLoops() < 1) deathAnimation->renderSprite(video, player->getX(), player->getY());
         else {
+
             postGameMenu->render(player->getScore());
         }
     }

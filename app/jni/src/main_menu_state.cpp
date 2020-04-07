@@ -11,6 +11,7 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
     this->video = video;
 
     background = AssetManager::Get()->GetSprite("main_menu_bg");
+    title = std::unique_ptr<StaticText>(new StaticText(video, "akashi96", "Penguin Run", Colour::navy));
 
 
 
@@ -56,7 +57,7 @@ void MainMenuState::update(int elapsedTime) {
 void MainMenuState::render() {
     video.clear();
     background->renderStretchToBackground(video, 0, 0);
-    title.render(video, "Penguin Run", Colour::navy, video.getScreenSizeW() / 2 - title.w, video.getScreenSizeH() / 4);
+    title->render(video, video.getScreenSizeW() / 2 - title->w, video.getScreenSizeH() / 4);
     row->render();
     video.present();
 

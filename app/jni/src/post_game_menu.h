@@ -14,6 +14,8 @@ static const int GAME_OVER_OFFSET_Y = 66;
 #include "sprite.h"
 #include "image_button_row.h"
 #include "text.h"
+#include "static_text.h"
+#include "colour.h"
 
 class PostGameMenu {
 public:
@@ -27,9 +29,9 @@ private:
     Sprite * background;
     Video video;
     int x, y, w, h;
-    Text gameOver = Text(48);
-    Text finalScoreTitle = Text(36);
-    Text finalScore = Text(60);
+    std::unique_ptr<StaticText> gameOver;
+    std::unique_ptr<StaticText> finalScoreTitle;
+    Text finalScore = Text("akashi60");
     std::unique_ptr<ImageButtonRow> buttons;
 
 };

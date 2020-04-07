@@ -1,12 +1,12 @@
 #include "text.h"
+#include "asset_manager.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 
 
-const char * FONT_FILE = "akashi.ttf";
 
-Text::Text (int size) {
-    font = TTF_OpenFont(FONT_FILE, size);
+Text::Text (const char * fontName) {
+    font = AssetManager::Get()->GetFont(fontName);
 }
 
 
@@ -26,10 +26,6 @@ void Text::render(Video  &video, const char * text, SDL_Color color, int destX, 
 
 }
 
-Text::~Text() {
-    TTF_CloseFont(font);
-
-}
 
 
 

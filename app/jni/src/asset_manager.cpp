@@ -43,6 +43,12 @@ AssetManager::AssetManager(Video & video) {
     addSprite("slow_pickup", "pickups/snail.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
     addSprite("speed_pickup", "pickups/sprint.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
     addSprite("post_game_frame", "gui/frames/warning.png", FRAME_W, POST_GAME_FRAME_H);
+    addFont("akashi36", DEFAULT_FONT_FILE, 36);
+    addFont("akashi32", DEFAULT_FONT_FILE, 32);
+    addFont("akashi48", DEFAULT_FONT_FILE, 48);
+    addFont("akashi60", DEFAULT_FONT_FILE, 60);
+    addFont("akashi96", DEFAULT_FONT_FILE, 96);
+
 }
 
 void AssetManager::Init(Video &video) {
@@ -58,6 +64,9 @@ AssetManager::~AssetManager() {
     {
         delete itr->second;
     }
+    for (auto itr = fonts.begin(); itr != fonts.end(); itr++) {
+        TTF_CloseFont(itr->second);
+    }
     delete instance;
 }
 
@@ -70,6 +79,14 @@ Sprite *AssetManager::GetSprite(const char * name) {
     auto it = sprites.find(name);
     if (it == sprites.end()) return sprites["default"];
     return sprites[name];
+}
+
+void AssetManager::addFont(const char *name, const char *fileName, int size) {
+    fonts[name] = TTF_OpenFont(fileName, size);
+}
+
+TTF_Font *AssetManager::GetFont(const char *name) {
+    return fonts[name];
 }
 
 

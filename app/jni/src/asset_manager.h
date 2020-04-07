@@ -6,15 +6,6 @@
 #define GAME1_ASSET_MANAGER_H
 
 
-static const int HELP_FRAME_W = 1920;
-
-static const int HELP_FRAME_H = 1080;
-
-static const int PLAY_BG_W = 1024;
-
-static const int PLAY_BG_H = 768;
-
-static const int PICKUP_SIZE = 64;
 
 #include <map>
 #include "sprite.h"
@@ -29,6 +20,7 @@ public:
     static AssetManager * Get();
     static void Init(Video & video);
     Sprite * GetSprite(const char * name);
+    TTF_Font * GetFont(const char * name);
 
 private:
     static const int STATE_BACKGROUND_W = 4866;
@@ -43,14 +35,25 @@ private:
     static const int MENU_BUTTON_SIZE = 300;
     static const int BACK_BUTTON_SIZE = 701;
     static const int PAUSE_BUTTON_SIZE = 100;
+    static const int HELP_FRAME_W = 1920;
+    static const int HELP_FRAME_H = 1080;
+    static const int PLAY_BG_W = 1024;
+    static const int PLAY_BG_H = 768;
+    static const int PICKUP_SIZE = 64;
+
+
+
+    const char * DEFAULT_FONT_FILE = "akashi.ttf";
 
     static AssetManager * instance;
     std::map<const char *, Sprite *> sprites;
+    std::map<const char *, TTF_Font *> fonts;
     Video video;
     AssetManager(Video & video);
     ~AssetManager();
     void addSprite(const char * name, const char * fileName,
                    int w, int h, const SDL_Color * colorKey = nullptr);
+    void addFont(const char * name, const char * fileName, int size);
 
 };
 

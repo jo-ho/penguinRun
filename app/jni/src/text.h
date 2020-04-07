@@ -6,8 +6,7 @@
 
 class Text {
 public:
-    Text(int size);
-    ~Text();
+    Text(const char * fontName);
     void render(Video & video, const char * text, SDL_Color color, int destX, int destY);
 
     int w;
