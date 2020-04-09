@@ -51,6 +51,7 @@ void PlayState::handleEvents() {
         }
         if (!paused) {
             if (player->getDamagedState() != DEAD) {
+
                 pauseButton->handleEvent(event, PAUSE_BUTTON_SIZE, PAUSE_BUTTON_SIZE);
                 handleInput(event);
                 if (event.type == SDL_USEREVENT) {
@@ -66,6 +67,10 @@ void PlayState::handleEvents() {
                     pickupManager->stopTimers();
                 }
             } else {
+                if (!addedScore) {
+                    ScoreManager::Get()->addScore(player->getScore());
+                    addedScore = true;
+                }
                 if (deathAnimation->getNumCompletedLoops() == 1) postGameMenu->handleEvent(event);
             }
 
@@ -111,6 +116,8 @@ void PlayState::render() {
 
 void PlayState::onEnter(void * param) {
     pickupManager->resumeTimers();
+    addedScore = false;
+
 }
 
 void PlayState::onExit() {

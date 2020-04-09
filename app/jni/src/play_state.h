@@ -59,6 +59,7 @@ private:
     int moveAreaHeight;
     std::unique_ptr<ImageButton> pauseButton;
     bool paused;
+    bool addedScore;
 
 };
 
