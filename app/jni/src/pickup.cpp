@@ -49,7 +49,7 @@ int Pickup::getY() {
 }
 
 void Pickup::render(Video &video) {
-    sprite->renderSprite(video, x, y);
+    sprite->renderSprite(video, x, y, PICKUP_WIDTH, PICKUP_HEIGHT);
 }
 
 

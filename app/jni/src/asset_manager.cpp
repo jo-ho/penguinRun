@@ -17,7 +17,7 @@ AssetManager::AssetManager(Video & video) {
     addSprite("high_scores_frame", "gui/frames/hi-score-new.png", FRAME_W, FRAME_H, &Colour::black);
     addSprite("high_scores_hl", "gui/headlines/hi-score.png", HIGHSCORES_HL_W, HIGHSCORES_HL_H);
     addSprite("paused_frame", "gui/frames/paused.png", FRAME_W, FRAME_H);
-    addSprite("help_frame", "gui/frames/help.png", HELP_FRAME_W, HELP_FRAME_H);
+    addSprite("help_frame", "gui/frames/help-new.png", HELP_FRAME_W, HELP_FRAME_H);
     addSprite("paused_hl", "gui/headlines/paused.png", PAUSED_HL_W, PAUSED_HL_H);
     addSprite("shield", "spr_shield.png", SHIELD_SIZE, SHIELD_SIZE, &Colour::white);
     sprites["shield"]->setTextureAlphaMod(SHIELD_ALPHA);
@@ -37,11 +37,11 @@ AssetManager::AssetManager(Video & video) {
               PAUSE_BUTTON_SIZE, &Colour::black );
     addSprite("paused_pressed", "gui/buttons/click/settings.png", PAUSE_BUTTON_SIZE,
               PAUSE_BUTTON_SIZE, &Colour::black );
-    addSprite("score_pickup", "pickups/fried-fish.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("score_pickup", "pickups/fish.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
     addSprite("shield_pickup", "pickups/shield.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
-    addSprite("death_pickup", "pickups/skull-crossed-bones.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
-    addSprite("slow_pickup", "pickups/snail.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
-    addSprite("speed_pickup", "pickups/sprint.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("death_pickup", "pickups/death.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("slow_pickup", "pickups/slow.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
+    addSprite("speed_pickup", "pickups/speed.png", PICKUP_SIZE, PICKUP_SIZE, &Colour::white);
     addSprite("post_game_frame", "gui/frames/warning.png", FRAME_W, POST_GAME_FRAME_H);
     addFont("akashi36", DEFAULT_FONT_FILE, 36);
     addFont("akashi32", DEFAULT_FONT_FILE, 32);
