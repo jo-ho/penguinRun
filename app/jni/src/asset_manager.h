@@ -23,8 +23,8 @@ public:
     TTF_Font * GetFont(const char * name);
 
 private:
-    static const int STATE_BACKGROUND_W = 4866;
-    static const int STATE_BACKGROUND_H = 3000;
+    static const int STATE_BACKGROUND_W = 1946;
+    static const int STATE_BACKGROUND_H = 1200;
 
     static const int FRAME_H = 2121;
     static const int HIGHSCORES_HL_W = 2080;

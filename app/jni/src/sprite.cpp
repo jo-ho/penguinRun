@@ -25,7 +25,7 @@ Sprite::Sprite(Video &video,
 
 
 Sprite::~Sprite() {
-    if (!spriteTexture) {
+    if (spriteTexture) {
         SDL_DestroyTexture(spriteTexture);
     }
 }

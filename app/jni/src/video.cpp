@@ -61,18 +61,25 @@ void Video::present() {
 
 // Load image from file and convert to SDL_Texture
 SDL_Texture * Video::loadImage(const char * fileName, const SDL_Color * colorKey) {
-    SDL_Surface * tempSurface = IMG_Load(fileName);
-    if (!tempSurface) {
-        SDL_Log("IMG_Load error: %s", IMG_GetError());
-    }
+    SDL_Texture *newTexture = nullptr;
     if (colorKey) {
-        SDL_SetColorKey(tempSurface, SDL_TRUE, SDL_MapRGB(tempSurface->format, colorKey->r, colorKey->g, colorKey->b));
+        SDL_Surface *tempSurface = IMG_Load(fileName);
+        if (!tempSurface) {
+            SDL_Log("IMG_Load error: %s", IMG_GetError());
+        }
+
+        SDL_SetColorKey(tempSurface, SDL_TRUE,
+                        SDL_MapRGB(tempSurface->format, colorKey->r, colorKey->g, colorKey->b));
+
+        newTexture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+
+        SDL_FreeSurface(tempSurface);
+    } else {
+        newTexture = IMG_LoadTexture(renderer, fileName);
     }
-    SDL_Texture * newTexture = SDL_CreateTextureFromSurface(renderer, tempSurface);
     if (!newTexture) {
         SDL_Log("SDL_CreateTextureFromSurface error: %s", SDL_GetError());
     }
-    SDL_FreeSurface(tempSurface);
     return newTexture;
 
 }
