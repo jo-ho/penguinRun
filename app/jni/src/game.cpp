@@ -7,6 +7,7 @@
 #include "high_scores_state.h"
 #include "help_state.h"
 #include "asset_manager.h"
+#include "credits_state.h"
 
 Game::Game()  {
     srand (time(NULL));
@@ -34,6 +35,8 @@ void Game::addStates() {
     stateMachine->add(std::make_shared<PlayState>(stateMachine, video));
     stateMachine->add(std::make_shared<HighScoresState>(stateMachine, video));
     stateMachine->add(std::make_shared<HelpState>(stateMachine, video));
+
+    stateMachine->add(std::make_shared<CreditsState>(stateMachine, video));
     stateMachine->change(State::MAIN_MENU, NULL);
 }
 

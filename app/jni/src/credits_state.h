@@ -1,28 +1,26 @@
-#ifndef GAME1_HELP_STATE_H
-#define GAME1_HELP_STATE_H
+//
+// Created by Admin on 2020-04-24.
+//
 
-
-
-
-static const int DESC_TEXT_SIZE = 32;
+#ifndef GAME1_CREDITS_STATE_H
+#define GAME1_CREDITS_STATE_H
 
 
 #include "state.h"
-#include "state_machine.h"
 #include "video.h"
+#include "state_machine.h"
+#include "sprite.h"
 #include "image_button.h"
-#include "high_scores_frame.h"
 
-class HelpState : public State {
+class CreditsState : public State {
 public:
-    HelpState(std::shared_ptr<StateMachine> stateMachine, Video & video);
+    CreditsState(std::shared_ptr<StateMachine> stateMachine, Video & video);
 
     StateType getStateType() override;
 
     void handleEvents() override;
 
     void update(int elapsedTime) override;
-
     void render() override;
 
     void onEnter(void * param) override;
@@ -30,14 +28,14 @@ public:
     void onExit() override;
 
 private:
-
     Video video;
     std::shared_ptr<StateMachine> stateMachine;
-    Sprite * background;
     std::unique_ptr<ImageButton> backButton;
+    Sprite * background;
+
 
 
 };
 
 
-#endif //GAME1_HELP_STATE_H
+#endif //GAME1_CREDITS_STATE_H

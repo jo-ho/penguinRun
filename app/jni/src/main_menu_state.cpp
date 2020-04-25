@@ -30,6 +30,9 @@ MainMenuState::MainMenuState(std::shared_ptr<StateMachine> stateMachine, Video &
             video, "home_unpressed", "home_pressed",
             0, 0, [sm = stateMachine]() {sm->stopRunning();}));
 
+    creditsButton = std::unique_ptr<ImageButton>(new ImageButton(video, "credits_unpressed", "credits_pressed",
+            video.getScreenSizeW() - AssetManager::SMALL_BUTTON_SIZE, 0, [sm = stateMachine]() {sm->change(CREDITS, nullptr);}));
+
 }
 
 
@@ -45,6 +48,7 @@ void MainMenuState::handleEvents() {
             stateMachine->stopRunning();
         }
         row->handleEvent(event);
+        creditsButton->handleEvent(event, AssetManager::SMALL_BUTTON_SIZE, AssetManager::SMALL_BUTTON_SIZE);
 
     }
 
@@ -59,6 +63,7 @@ void MainMenuState::render() {
     background->renderStretchToBackground(video, 0, 0);
     title->render(video, video.getScreenSizeW() / 2 - title->w, video.getScreenSizeH() / 4);
     row->render();
+    creditsButton->render(AssetManager::SMALL_BUTTON_SIZE, AssetManager::SMALL_BUTTON_SIZE);
     video.present();
 
 }

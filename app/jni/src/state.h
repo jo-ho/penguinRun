@@ -4,7 +4,7 @@
 
 class State {
 public:
-    enum StateType{MAIN_MENU, PLAY, QUIT, EMPTY, HIGH_SCORES, HELP};
+    enum StateType{MAIN_MENU, PLAY, QUIT, EMPTY, HIGH_SCORES, HELP, CREDITS};
     virtual StateType getStateType() = 0;
     virtual void handleEvents() = 0;
     virtual void update(int elapsedTime) = 0;

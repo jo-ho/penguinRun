@@ -16,6 +16,7 @@ public:
     static const int SHIELD_SIZE = 128;
     static const int FRAME_W = 2102;
     static const int POST_GAME_FRAME_H = 1561;
+    static const int SMALL_BUTTON_SIZE = 100;
 
     static AssetManager * Get();
     static void Init(Video & video);
@@ -33,8 +34,7 @@ private:
     static const int PAUSED_HL_H = 374;
     static const int SHIELD_ALPHA = 127;
     static const int MENU_BUTTON_SIZE = 300;
-    static const int BACK_BUTTON_SIZE = 701;
-    static const int PAUSE_BUTTON_SIZE = 100;
+
     static const int HELP_FRAME_W = 1920;
     static const int HELP_FRAME_H = 1080;
     static const int PLAY_BG_W = 1024;
