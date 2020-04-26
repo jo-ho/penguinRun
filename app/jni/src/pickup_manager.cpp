@@ -34,9 +34,13 @@ void PickupManager::update(int screenHeight, int elapsedTime) {
 
     if (diffIncreaseTimer.getTimeElapsedMs() >= DIFF_INCREASE_TIME_MS) {
         diffIncreaseTimer.reset();
-        changeSpawnDelay(PickupFactory::DEATH_PICKUP, static_cast<const int>(
+        int delay = static_cast<const int>(
                 DeathPickup::SPAWN_DELAY_MS /
-                log10(DIFF_SCALING_FACTOR * diffIncreaseTimer.getResetCount())));
+                log10(DIFF_SCALING_FACTOR * diffIncreaseTimer.getResetCount()));
+        if (delay >= DIFF_CAP_MS) {
+            changeSpawnDelay(PickupFactory::DEATH_PICKUP, delay);
+        }
+
     }
 }
 
@@ -86,7 +90,7 @@ void PickupManager::resumeTimers(){
 }
 
 void PickupManager::changeSpawnDelay(PickupFactory::PickupType pickupType, const int delay) {
-
+    SDL_Log("%d", delay);
     SDL_RemoveTimer(timerIDs[pickupType]);
     timerIDs[pickupType] = SDL_AddTimer(delay, pushEventToQueue, (void *) pickupType);
 }
