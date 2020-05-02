@@ -15,7 +15,7 @@ FileManager::FileManager() {}
 void FileManager::appendInt(const char *fileName, int value) {
 
     SDL_RWops *rw = SDL_RWFromFile(fileName, "ab");
-    char buffer[sizeof(int)];
+    char buffer[10];
 
     SDL_itoa(value, buffer, 10);
     if(SDL_RWwrite(rw, buffer, 1, SDL_strlen(buffer))) {
