@@ -3,7 +3,7 @@
 #include "colour.h"
 
 
-const int ScorePickup::SPAWN_DELAY_MS = 500;
+const int ScorePickup::SPAWN_DELAY_MS = 1000;
 const int DEFAULT_SCORE = 20;
 
 

@@ -23,9 +23,9 @@ class PickupManager {
         void resumeTimers();
         void stopTimers();
     private:
-        const int DIFF_INCREASE_TIME_MS = 30000;
-        const int DIFF_SCALING_FACTOR = 10;
-        const int DIFF_CAP_MS = 500;
+        const int DIFF_INCREASE_TIME_MS = 15000;
+        const int DIFF_SCALING_FACTOR = 20;
+        const int DIFF_CAP_MS = 700;
         std::vector<std::shared_ptr<Pickup>> pickups;
         std::map<PickupFactory::PickupType, SDL_TimerID> timerIDs;
         Timer diffIncreaseTimer;

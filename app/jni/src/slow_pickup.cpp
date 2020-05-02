@@ -1,7 +1,7 @@
 #include "slow_pickup.h"
 #include "colour.h"
 
-const int SlowPickup::SPAWN_DELAY_MS = 2000;
+const int SlowPickup::SPAWN_DELAY_MS = 3000;
 const int SlowPickup::EFFECT_TIME = 1000;
 
 SlowPickup::SlowPickup(int initX, int initY) :

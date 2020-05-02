@@ -1,7 +1,7 @@
 #include "speed_pickup.h"
 #include "colour.h"
 
-const int SpeedPickup::SPAWN_DELAY_MS = 2000;
+const int SpeedPickup::SPAWN_DELAY_MS = 3000;
 const int SpeedPickup::EFFECT_TIME = 1000;
 
 SpeedPickup::SpeedPickup(int initX, int initY) :
